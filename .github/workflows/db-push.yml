@@ -1,0 +1,208 @@
+name: Supabase db push
+
+# **Chemin unique de changement de schéma** pour les deux environnements
+# (repris d’APP-FIX, ADR-029 option C ; ici AGENTS.md §4). `apply_migration` (MCP) n'est PLUS un chemin DDL : toute
+# évolution de schéma passe par un fichier sous `supabase/migrations/**` et par
+# ce workflow. C'est ce qui empêche la divergence d'horodatage qui avait gelé la
+# prod trois mois — voir l'étape « Repair » et `docs/HANDOFF.md` §2.
+#
+# Deux déclencheurs :
+#   * push sur `main` touchant `supabase/migrations/**` → applique en **prod**
+#     (chemin nominal de release) ;
+#   * déclenchement manuel → `mode` × `project`, cf. ci-dessous.
+#
+# ── Défauts sûrs ─────────────────────────────────────────────────────
+# `mode` vaut **`plan`** par défaut (dry-run, aucune écriture) et `project`
+# vaut **`preprod`** : viser la prod à la main demande de le choisir
+# explicitement. Le ref git est libre — on peut planifier depuis `pre-prod`
+# sans avoir mergé dans `main`.
+#
+#   Pré-vol préprod (lecture seule) :
+#     gh workflow run db-push.yml --ref pre-prod -f mode=plan -f project=preprod
+#   Réaligner l'historique d'un environnement :
+#     gh workflow run db-push.yml --ref pre-prod -f mode=repair -f project=preprod
+#   Appliquer à la main sur la prod :
+#     gh workflow run db-push.yml --ref main -f mode=apply -f project=prod
+#
+# ── Prérequis côté dépôt (Settings → Secrets and variables → Actions) ─
+#
+#   * SUPABASE_ACCESS_TOKEN         Personal Access Token Supabase
+#                                   (Dashboard → Account → Access Tokens).
+#   * SUPABASE_DB_PASSWORD          Password Postgres de la **prod**.
+#   * SUPABASE_DB_PASSWORD_PREPROD  Password Postgres de la **préprod**
+#                                   (Dashboard → Project Settings → Database).
+#
+# Les refs de projet sont codés dans le bloc `env` ci-dessous : ils sont
+# publics (ce sont les URLs `https://<ref>.supabase.co`) et les garder ici
+# évite qu'un ref et un mot de passe d'environnements différents se croisent.
+# L'étape « Link project » échoue explicitement si le mot de passe de la cible
+# n'est pas posé, plutôt que de laisser le CLI partir sur une erreur obscure.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/**'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'plan = dry-run seul, aucune écriture | repair = réaligne la table d’historique | apply = applique les migrations'
+        type: choice
+        required: true
+        default: plan
+        options:
+          - plan
+          - repair
+          - apply
+      project:
+        description: 'Environnement cible. Un push sur `main` vise TOUJOURS la prod, quel que soit ce champ.'
+        type: choice
+        required: true
+        default: preprod
+        options:
+          - preprod
+          - prod
+
+# Empêche deux runs concurrents de se marcher dessus (un db push en cours
+# tient un verrou sur schema_migrations).
+concurrency:
+  group: supabase-db-push
+  cancel-in-progress: false
+
+# Permissions minimales : lecture du repo, c'est tout.
+permissions:
+  contents: read
+
+# Un push sur `main` est le chemin nominal de release : il vise TOUJOURS la prod.
+# Un déclenchement manuel suit `inputs.project`, dont le défaut est `preprod` —
+# viser la prod à la main demande donc de le choisir explicitement.
+#
+# Le ref ET le mot de passe sont sélectionnés ensemble, ici et une seule fois :
+# les dissocier reviendrait à pouvoir présenter le mot de passe d'un
+# environnement au ref d'un autre.
+env:
+  CIBLE: ${{ github.event_name == 'push' && 'prod' || inputs.project }}
+  SUPABASE_PROJECT_REF: ${{ (github.event_name == 'push' || inputs.project == 'prod') && 'A-RENSEIGNER-PROD' || 'A-RENSEIGNER-PREPROD' }}
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_DB_PASSWORD: ${{ (github.event_name == 'push' || inputs.project == 'prod') && secrets.SUPABASE_DB_PASSWORD || secrets.SUPABASE_DB_PASSWORD_PREPROD }}
+  # Coupe pg-delta pour le CLI de CE workflow : la variable surcharge
+  # `[experimental.pgdelta] enabled = true` de `supabase/config.toml`, qui ne
+  # change pas (`db diff` et `db pull` gardent pg-delta sur le poste).
+  #
+  # Pourquoi : avec pg-delta actif, `db push` met en cache le catalogue de la
+  # base APRÈS un push réussi (image edge-runtime tirée, ~15 s). Sur un runner,
+  # ce fichier part avec la machine : le cache ne sert à rien. Avec le CLI
+  # 2.108.0, il échoue en plus (`pgdelta-target-ca.crt: ENOENT`) et le CLI
+  # imprime une trace alarmante, puis sort en 0. Le 2026-10-01, cette trace a
+  # aidé à noter rouge un run d'apply VERT (`36850058895`, HANDOFF §2).
+  #
+  # Mesuré en local (CLI 2.108.0, ce `config.toml`, Postgres jetable) : sans
+  # la variable, « Warning: failed to cache migrations catalog » puis code 0 ;
+  # avec, aucun avertissement, code 0. Une valeur non booléenne fait échouer le
+  # CLI sur `experimental.pgdelta.enabled` : la variable est bien lue.
+  SUPABASE_EXPERIMENTAL_PGDELTA_ENABLED: 'false'
+
+jobs:
+  push:
+    name: Migrations
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          # Épinglé (2026-08-07) : le CLI `latest` (2.109→2.112) régresse sur
+          # `getApiKeys` — SchemaError sur `inserted_at` d'une clé d'API, ce qui
+          # casse `supabase link` AVANT toute migration (reproduit en local).
+          # 2.108.0 est la dernière version connue saine. Revenir à `latest`
+          # quand l'upstream a corrigé la validation de date.
+          version: 2.108.0
+
+      - name: Link project
+        run: |
+          echo "cible : $CIBLE ($SUPABASE_PROJECT_REF)"
+          case "$SUPABASE_PROJECT_REF" in A-RENSEIGNER*)
+            echo "::error::ref du projet Supabase « $CIBLE » pas encore renseignée dans le bloc env de ce workflow (docs/BACKLOG.md)"
+            exit 1;;
+          esac
+          if [ -z "$SUPABASE_DB_PASSWORD" ]; then
+            echo "::error::mot de passe DB absent pour la cible « $CIBLE » — le secret de dépôt correspondant n'est pas posé (prod : SUPABASE_DB_PASSWORD, préprod : SUPABASE_DB_PASSWORD_PREPROD)"
+            exit 1
+          fi
+          supabase link --project-ref "$SUPABASE_PROJECT_REF"
+
+      # ── Réparation de l'historique de migrations (ADR-029) ──
+      #
+      # Contexte : `apply_migration` (MCP) estampille l'heure de l'appel, alors
+      # que `db push` reprend le préfixe du fichier. Une migration posée par MCP
+      # apparaît donc sous une version absente du dépôt, et `db push` refuse
+      # d'avancer. C'est ce qui a gelé la prod du 2026-05-11 au 2026-08-04.
+      #
+      # On ne suit PAS la suggestion du CLI (`--status reverted` sur les seuls
+      # fantômes, puis rejeu des fichiers) : elle rejoue du SQL, et ces fichiers
+      # ne sont pas idempotents — `20260518000000` fait `ALTER TABLE projects ADD
+      # COLUMN status` sans `IF NOT EXISTS`, `20260603140000` a 4 `CREATE POLICY`
+      # sans `DROP` préalable. Le rejeu échouerait, au pire à moitié.
+      #
+      # On réaligne donc dans les DEUX sens, et les deux commandes n'écrivent que
+      # dans `supabase_migrations.schema_migrations` — aucun DDL, aucune donnée.
+      # Les listes sont DÉRIVÉES de `migration list --linked` par
+      # `scripts/repair-migration-history.mjs` : la prod demandait 11 + 11
+      # versions, la préprod 76 + 35. Les écrire à la main serait une source
+      # d'erreur, et elles changent à chaque migration ajoutée.
+      #
+      # ⚠️ `--status applied` AFFIRME « ce schéma est déjà là ». Ne lancer ce mode
+      # que sur un environnement réellement à jour — sinon il est déclaré à jour
+      # sans l'être, et les migrations manquantes ne seront jamais appliquées.
+      # Passer `mode=plan` d'abord pour voir ce qui manque vraiment.
+      - name: Repair — réaligner la table d'historique (aucun DDL)
+        if: ${{ inputs.mode == 'repair' }}
+        run: |
+          echo "::group::migration list --linked (source des listes)"
+          supabase migration list --linked | tee liste.txt
+          echo "::endgroup::"
+
+          node scripts/repair-migration-history.mjs < liste.txt > listes.env
+          APPLIED=$(grep '^applied=' listes.env | cut -d= -f2-)
+          REVERTED=$(grep '^reverted=' listes.env | cut -d= -f2-)
+
+          if [ -n "$APPLIED" ]; then
+            echo "::group::repair --status applied"
+            supabase migration repair --linked --status applied $APPLIED
+            echo "::endgroup::"
+          else
+            echo "aucune version à déclarer appliquée"
+          fi
+
+          if [ -n "$REVERTED" ]; then
+            echo "::group::repair --status reverted"
+            supabase migration repair --linked --status reverted $REVERTED
+            echo "::endgroup::"
+          else
+            echo "aucun fantôme à retirer"
+          fi
+
+      # Toujours AVANT le dry-run : si le dry-run avorte sur un historique
+      # désaligné, cette table reste dans les logs et dit exactement où.
+      - name: Plan — historique local vs distant (lecture seule)
+        run: |
+          echo "::group::supabase migration list --linked"
+          supabase migration list --linked
+          echo "::endgroup::"
+
+      - name: Plan — dry-run (aucune écriture)
+        run: |
+          echo "::group::supabase db push --dry-run"
+          supabase db push --linked --dry-run
+          echo "::endgroup::"
+
+      # Fail-safe : un push sur `main` applique toujours ; un déclenchement
+      # manuel n'applique QUE si `mode=apply` a été demandé explicitement.
+      # Sur un push, `inputs.mode` est vide — la première clause décide.
+      - name: Apply migrations
+        if: ${{ github.event_name == 'push' || inputs.mode == 'apply' }}
+        run: |
+          supabase db push --linked

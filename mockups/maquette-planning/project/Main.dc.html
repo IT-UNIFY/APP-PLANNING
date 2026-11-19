@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sommaire – Planning, lot 1</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8A0031}a:hover{color:#6A0F2C}
+.cd:hover{border-color:#A3123F}
+a:focus-visible{outline:3px solid #A3123F;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 900px; background: #F6F7F9; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+  <dc-import name="Bandeau" role="Administrateur" hint-size="100%,72px"></dc-import>
+  <main style="max-width: 1200px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+    <div style="position: relative; overflow: hidden; background: #FEEFF1; border-radius: 14px; border: 1px solid #E1E5EB; padding: 20px 28px; display: flex; flex-direction: column; gap: 8px">
+      <div aria-hidden="true" style="position: absolute; right: 80px; top: -70px; width: 128px; height: 128px; border-radius: 50%; background: #D04D67; opacity: 0.3"></div>
+      <span style="position: relative; align-self: flex-start; font-size: 12px; font-weight: 700; color: #566170; border: 1.5px dashed #858F9E; border-radius: 999px; padding: 2px 10px">Maquette · illustration, non contractuelle · données d’exemple</span>
+      <h1 style="position: relative; margin: 0; font-size: 28px; font-weight: 800; color: #8A0031">Planning – lot 1, socle de consultation</h1>
+      <p style="position: relative; margin: 0; font-size: 14px; color: #566170; line-height: 1.6">Premier lot du Planning de l’ERP : lecture seule des séances saisies dans Aurion, importées par une requête écrite par l’EPSS. Rien ne repart vers Aurion. Le lot 1 se limite à ces quatre écrans ; tout le reste relève du lot 2 (Planning complet), qui a sa propre maquette ; le carnet de conception est commun aux deux.</p>
+    </div>
+
+    <section aria-label="Écrans" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
+      <a class="cd" href="L1-MonPlanning.dc.html" style="display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; border: 1.5px solid #E1E5EB; border-radius: 14px; padding: 16px; text-decoration: none; color: #1B2430"><span style="font-size: 12px; font-weight: 700; color: #566170">1re livraison · intervenant</span><strong style="font-size: 16px">Mon planning de l’intervenant</strong><span style="font-size: 13px; color: #566170">Écran fourni par le Planning, affiché dans l’espace intervenant sans changer d’outil. Semaine, mois, liste, détail.</span></a>
+      <a class="cd" href="L1-Interventions.dc.html" style="display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; border: 1.5px solid #E1E5EB; border-radius: 14px; padding: 16px; text-decoration: none; color: #1B2430"><span style="font-size: 12px; font-weight: 700; color: #566170">2e livraison · profils restreints</span><strong style="font-size: 16px">Interventions</strong><span style="font-size: 13px; color: #566170">Calendrier mois et semaine, liste avec filtres, tri, colonnes ; une ligne par intervenant ; identifiants.</span></a>
+      <a class="cd" href="L1-Acces.dc.html" style="display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; border: 1.5px solid #E1E5EB; border-radius: 14px; padding: 16px; text-decoration: none; color: #1B2430"><span style="font-size: 12px; font-weight: 700; color: #566170">2e livraison · administrateur</span><strong style="font-size: 16px">Paramètres : utilisateurs et accès</strong><span style="font-size: 13px; color: #566170">Accès gérés dans le Planning ; ajout depuis Microsoft 365 ; rôle ; retrait tracé.</span></a>
+      <a class="cd" href="L1-Import.dc.html" style="display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; border: 1.5px solid #E1E5EB; border-radius: 14px; padding: 16px; text-decoration: none; color: #1B2430"><span style="font-size: 12px; font-weight: 700; color: #566170">2e livraison · administrateur</span><strong style="font-size: 16px">Paramètres : import Aurion</strong><span style="font-size: 13px; color: #566170">État, import manuel, compteurs, anomalies et où corriger, historique, données reprises.</span></a>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+      <strong style="font-size: 15px">Documents liés</strong>
+      <a href="https://claude.ai/artifact/MHDtYossAju15FJ6q1Uujg" target="_blank" rel="noopener">Carnet de conception : Planning (commun au lot 1 et au lot 2) ↗</a>
+      <a href="https://claude.ai/artifact/MSdegAxoa4LRNm7wspfFKf" target="_blank" rel="noopener">Maquette du lot 2 : Planning complet ↗</a>
+      <a href="https://claude.ai/artifact/2wtsPaKXQrffYfKpThGLFs" target="_blank" rel="noopener">Maquette de l’outil Intervenant (Mon planning y est affiché) ↗</a>
+      <span style="font-size: 12px; color: #646F7D">Composants partagés de cette maquette : bandeau, menu principal (mode « lot1 »), menu des paramètres.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

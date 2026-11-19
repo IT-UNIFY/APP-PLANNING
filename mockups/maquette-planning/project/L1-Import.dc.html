@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Lot 1 – Import Aurion</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8A0031}a:hover{color:#6A0F2C}
+.row:hover{background:#FFF7F9}
+button:focus-visible,a:focus-visible{outline:3px solid #A3123F;outline-offset:1px}
+</style>
+</helmet>
+<div style="min-height: 1250px; background: #F6F7F9; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+  <div data-bandeau-fixe style="position: sticky; top: 0; z-index: 60"><dc-import name="Bandeau" role="Administrateur" hint-size="100%,72px"></dc-import></div>
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: flex-start; min-width: 0">
+    <dc-import name="Menu" active="parametres" mode="lot1" h="1178" hint-size="256px,1178px"></dc-import>
+    <div style="margin: 16px 0 0 12px; flex: none"><dc-import name="L1NavParam" current="import" hint-size="260px,420px"></dc-import></div>
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+      <div style="position: relative; overflow: hidden; background: #FEEFF1; margin: 16px 16px 0; border-radius: 14px; border: 1px solid #E1E5EB; padding: 16px 32px 20px; display: flex; flex-direction: column; gap: 6px">
+        <div aria-hidden="true" style="position: absolute; right: 80px; top: -70px; width: 128px; height: 128px; border-radius: 50%; background: #D04D67; opacity: 0.3"></div>
+        <nav aria-label="Fil d’Ariane" style="position: relative; font-size: 12px; font-weight: 600; color: #646F7D">Paramètres › Technique › Import Aurion</nav>
+        <h1 style="position: relative; margin: 0; font-size: 26px; font-weight: 800; color: #8A0031">Import Aurion</h1>
+        <span style="position: relative; font-size: 14px; color: #566170">Le Planning reçoit les séances d’Aurion ; l’outil Intervenant les lit dans le Planning (Mon planning, puis contrats). Rien ne repart vers Aurion. Les séances se corrigent dans Aurion. Première livraison : les DPAE gardent leur propre requête vers Aurion ; elles liront le Planning plus tard.</span>
+      </div>
+
+      <div style="margin: 12px 16px 0; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 14px 18px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center">
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 700; color: #566170">Connexion à Aurion</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 800; color: #1D6B3A"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #2E8B57"></span>Active</span></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 700; color: #566170">Dernier import</span><span style="font-size: 14px; font-weight: 800">{{lastTxt}}</span></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 700; color: #566170">Prochain import</span><span style="font-size: 14px; font-weight: 800">20/11/2026 à 6 h <span style="font-weight: 600; color: #566170">[chaque nuit : fréquence à confirmer]</span></span></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; font-weight: 700; color: #566170">Période importée</span><span style="font-size: 14px; font-weight: 800">Année 2026-2027 <span style="font-weight: 600; color: #566170">[et année suivante : à confirmer]</span></span></span>
+        <span style="flex: 1"></span>
+        <button type="button" onClick="{{test}}" style="min-height: 42px; padding: 0 16px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 14px Manrope, 'Segoe UI', sans-serif; color: #1B2430">Tester la connexion</button>
+        <button type="button" onClick="{{run}}" style="min-height: 42px; padding: 0 18px; border-radius: 10px; border: 0; background: #A3123F; color: #FFFFFF; cursor: pointer; font: 700 14px Manrope, 'Segoe UI', sans-serif">Lancer un import maintenant</button>
+        <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}"><span role="status" style="flex: 1 1 100%; font-size: 13px; font-weight: 700; color: #1D6B3A">{{toast}}</span></sc-if>
+      </div>
+
+      <div style="margin: 12px 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px">
+        <sc-for list="{{tiles}}" as="t" hint-placeholder-count="5"><div style="{{t.style}}"><span style="font-size: 26px; font-weight: 800; line-height: 1">{{t.n}}</span><span style="font-size: 13px; font-weight: 700">{{t.t}}</span><span style="font-size: 12px; color: #566170">{{t.h}}</span></div></sc-for>
+      </div>
+
+      <section style="margin: 12px 16px 24px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; overflow: hidden">
+        <div role="tablist" aria-label="Import" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px 0; border-bottom: 1px solid #E1E5EB">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button></sc-for>
+        </div>
+
+        <sc-if value="{{isAno}}" hint-placeholder-val="{{ true }}">
+          <div style="overflow-x: auto">
+            <table style="width: 100%; min-width: 960px; border-collapse: collapse; font-size: 13px">
+              <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 8px 14px; border-bottom: 1px solid #C9CFD8">Anomalie</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Séance</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Détail</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Effet</th><th scope="col" style="padding: 8px 14px; border-bottom: 1px solid #C9CFD8">Où corriger</th></tr></thead>
+              <tbody><sc-for list="{{anos}}" as="a" hint-placeholder-count="3"><tr class="row" style="border-top: 1px solid #E1E5EB; vertical-align: top"><td style="padding: 10px 14px"><span style="{{a.bStyle}}">{{a.type}}</span></td><td style="padding: 10px 8px"><strong>{{a.seance}}</strong><br><span style="font-size: 12px; color: #566170">{{a.promo}}</span></td><td style="padding: 10px 8px">{{a.det}}</td><td style="padding: 10px 8px; color: #566170">{{a.eff}}</td><td style="padding: 10px 14px; font-weight: 700">{{a.ou}}</td></tr></sc-for></tbody>
+            </table>
+          </div>
+          <p style="margin: 0; padding: 10px 14px; font-size: 12px; color: #646F7D; border-top: 1px solid #E1E5EB">Une séance en anomalie est quand même importée. L’anomalie disparaît au prochain import une fois corrigée à la source. L’administrateur est prévenu dans « Mes actions » [destinataires à confirmer].</p>
+        </sc-if>
+
+        <sc-if value="{{isHist}}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x: auto">
+            <table style="width: 100%; min-width: 900px; border-collapse: collapse; font-size: 13px">
+              <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 8px 14px; border-bottom: 1px solid #C9CFD8">Date</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Lancé par</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Durée</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Résultat</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Lues</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Nouvelles</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Modifiées</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Retirées</th><th scope="col" style="padding: 8px 14px; border-bottom: 1px solid #C9CFD8">Anomalies</th></tr></thead>
+              <tbody><sc-for list="{{hist}}" as="h" hint-placeholder-count="6"><tr class="row" style="border-top: 1px solid #E1E5EB"><td style="padding: 8px 14px; font-weight: 700; white-space: nowrap">{{h.d}}</td><td style="padding: 8px">{{h.by}}</td><td style="padding: 8px">{{h.dur}}</td><td style="padding: 8px"><span style="{{h.rStyle}}">{{h.r}}</span></td><td style="padding: 8px">{{h.lu}}</td><td style="padding: 8px">{{h.nv}}</td><td style="padding: 8px">{{h.md}}</td><td style="padding: 8px">{{h.rt}}</td><td style="padding: 8px 14px">{{h.an}}</td></tr></sc-for></tbody>
+            </table>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isData}}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; padding: 14px">
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <strong style="font-size: 14px">Repris d’Aurion, tel quel</strong>
+              <table style="width: 100%; border-collapse: collapse; font-size: 13px">
+                <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #C9CFD8">Donnée</th><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #C9CFD8">Remarque</th></tr></thead>
+                <tbody><sc-for list="{{fields}}" as="f" hint-placeholder-count="10"><tr style="border-top: 1px solid #E1E5EB"><td style="padding: 6px 8px; font-weight: 700">{{f.n}}</td><td style="padding: 6px 8px; color: #566170">{{f.r}}</td></tr></sc-for></tbody>
+              </table>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <strong style="font-size: 14px">Pas repris dans le lot 1</strong>
+              <span style="font-size: 13px; color: #566170; line-height: 1.6">Catalogue et maquette pédagogique, arborescence des groupes, capacité et équipement des salles, calendriers de parcours et périodes de stage (absents d’Aurion), calendrier institutionnel, inscrits. Ils arrivent avec l’outil Planning complet.</span>
+              <strong style="font-size: 14px; margin-top: 6px">Outils qui lisent ces données</strong>
+              <span style="font-size: 13px; color: #566170; line-height: 1.6">Outil Intervenant : Mon planning (espace intervenant), puis interventions pour les contrats et avenants ; DPAE par journée après leur bascule (pour l’instant, requête DPAE propre vers Aurion). D’autres outils (Stage…) pourront les lire en consultation à leur déploiement.</span>
+              <strong style="font-size: 14px; margin-top: 6px">Identifiants</strong>
+              <span style="font-size: 13px; color: #566170; line-height: 1.6">Chaque séance reçoit un identifiant propre au Planning, qui ne change jamais ; l’identifiant et le code Aurion sont gardés comme anciens codes et restent cherchables.</span>
+            </div>
+          </div>
+        </sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1250}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'ano', toast: '', last: '19/11/2026 à 6 h 02 · réussi en 1 min 48' };
+  }
+  renderVals() {
+    const st = this.state;
+    const B = { ok: ['#E9F7EE', '#1D6B3A', '#B5DEC2'], warn: ['#FFF1E2', '#915B02', '#EBCBA7'], err: ['#FFEFED', '#B02B27', '#F6C3BC'] };
+    const bs = (k) => 'display: inline-block; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 2px 8px; background: ' + B[k][0] + '; color: ' + B[k][1] + '; border: 1px solid ' + B[k][2] + ';';
+    const tile = (n, t, h, c) => ({ n, t, h, style: 'display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 14px; background: #FFFFFF; border: 1.5px solid ' + (c || '#E1E5EB') + ';' });
+    const TABS = [['ano', 'Anomalies (3)'], ['hist', 'Historique des imports'], ['data', 'Données reprises']];
+    return {
+      lastTxt: st.last,
+      tiles: [tile('4 812', 'Séances dans le Planning', 'Année 2026-2027'), tile('37', 'Nouvelles', 'Au dernier import'), tile('52', 'Modifiées', 'Date, horaires, salle ou intervenant'), tile('6', 'Retirées', 'Gardées avec la date du retrait'), tile('3', 'Anomalies', 'Séances importées, à corriger à la source', '#EBCBA7')],
+      tabs: TABS.map((t) => ({ label: t[1], on: st.tab === t[0] ? 'true' : 'false', pick: () => this.setState({ tab: t[0] }), style: 'min-height: 40px; padding: 0 14px; border: 0; border-bottom: 3px solid ' + (st.tab === t[0] ? '#A3123F' : 'transparent') + '; background: none; cursor: pointer; font: ' + (st.tab === t[0] ? '800' : '600') + ' 14px Manrope, \'Segoe UI\', sans-serif; color: ' + (st.tab === t[0] ? '#8A0031' : '#1B2430') + ';' })),
+      isAno: st.tab === 'ano', isHist: st.tab === 'hist', isData: st.tab === 'data',
+      anos: [
+        { type: 'Intervenant sans fiche', bStyle: bs('err'), seance: 'Jeu. 07/01/2027 · Droit de la famille 1/3', promo: 'ME 2028 · Promotion entière', det: 'ID fiche individu Aurion 48213 : aucune fiche dans l’outil Intervenant.', eff: 'Séance importée ; absente de « Mon planning » de la personne tant que la fiche n’existe pas.', ou: 'Outil Intervenant (demande de 1re intervention)' },
+        { type: 'Séance sans intervenant', bStyle: bs('warn'), seance: 'Mer. 25/11/2026 · Anglais niveau A 3/6', promo: 'ASS 2028 · Anglais A', det: 'Aucun intervenant renseigné dans Aurion.', eff: 'Séance importée ; absente des contrats et des DPAE.', ou: 'Aurion' },
+        { type: 'Salle inconnue', bStyle: bs('warn'), seance: 'Jeu. 26/11/2026 · Atelier d’écriture 2/5', promo: 'EJE 2029 · Groupe TD 3', det: 'Salle « S-ANNEXE 3 » absente de la liste des salles.', eff: 'Séance importée avec le nom de salle d’Aurion.', ou: 'Aurion [ou liste des salles : à confirmer]' }
+      ],
+      hist: [
+        ['19/11/2026 6 h 02', 'Automatique', '1 min 48', 'Réussi avec anomalies', 'warn', '4 812', '37', '52', '6', '3'],
+        ['18/11/2026 6 h 01', 'Automatique', '1 min 41', 'Réussi', 'ok', '4 775', '12', '20', '1', '0'],
+        ['17/11/2026 14 h 26', '[Administrateur]', '1 min 39', 'Réussi', 'ok', '4 763', '4', '9', '2', '0'],
+        ['17/11/2026 6 h 00', 'Automatique', '—', 'Échec : connexion refusée', 'err', '—', '—', '—', '—', '—'],
+        ['16/11/2026 6 h 02', 'Automatique', '1 min 45', 'Réussi', 'ok', '4 759', '8', '14', '0', '0']
+      ].map((h) => ({ d: h[0], by: h[1], dur: h[2], r: h[3], rStyle: bs(h[4]), lu: h[5], nv: h[6], md: h[7], rt: h[8], an: h[9] })),
+      fields: [
+        ['Identifiant de la séance', 'Gardé comme ancien code'], ['Date, heure de début et de fin', ''], ['Cours', 'Code Aurion et intitulé, sans catalogue'], ['Type d’activité', '[si Aurion le fournit]'], ['Promotion ou groupe', 'Tels que dans Aurion, sans arborescence'], ['Intervenants', 'Reliés par l’ID de la fiche individu Aurion'], ['Salle', 'Nom et site, sans capacité'], ['Modalité', 'Présentiel ou à distance [si disponible]'], ['État', 'Prévue, annulée, réalisée [si disponible]'], ['Date de mise à jour', 'Pour repérer ce qui a changé']
+      ].map((f) => ({ n: f[0], r: f[1] })),
+      test: () => this.setState({ toast: 'Connexion à Aurion vérifiée à l’instant (simulation de la maquette).' }),
+      run: () => this.setState({ toast: 'Import lancé : vous serez prévenu à la fin (simulation de la maquette).', last: '19/11/2026 à 14 h 41 · en cours…' }),
+      hasToast: !!st.toast, toast: st.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

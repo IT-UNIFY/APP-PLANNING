@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Navigation des paramètres du Planning (composant commun)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}"><nav aria-label="Paramètres" style="width: 260px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 10px; font-family: Manrope, 'Segoe UI', sans-serif; color: #1B2430; display: flex; flex-direction: column; gap: 4px">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 4px 4px 8px 8px"><a href="L1-Acces.dc.html" style="font-size: 20px; font-weight: 700; color: #1B2430; text-decoration: none">Paramètres</a><button type="button" onClick="{{toggle}}" aria-label="Réduire le menu des paramètres" title="Réduire le menu des paramètres" style="width: 32px; height: 32px; padding: 0; border: 1px solid #C9CFD8; border-radius: 8px; background: #FFFFFF; cursor: pointer; color: #566170; font-size: 16px; flex: none">‹</button></div>
+  <label style="display: block; margin: 0 4px 6px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher un réglage</span><input type="search" placeholder="Rechercher un réglage" style="width: 100%; box-sizing: border-box; min-height: 36px; border: 1.5px solid #858F9E; border-radius: 10px; padding: 0 10px; font: 600 13px Manrope, 'Segoe UI', sans-serif"></label>
+  <sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+    <details open style="border-radius: 10px">
+      <summary style="{{g.sumStyle}}">
+        <span aria-hidden="true" style="{{g.icoStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{g.icon}}"/></svg></span>
+        <span style="flex: 1">{{g.label}}</span>
+      </summary>
+      <ul style="list-style: none; margin: 2px 0 6px 23px; padding: 0 0 0 14px; border-left: 2px solid #E1E5EB; display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{g.items}}" as="i" hint-placeholder-count="2">
+          <li><a href="{{i.href}}" aria-current="{{i.cur}}" title="{{i.title}}" style="{{i.style}}">{{i.label}}</a></li>
+        </sc-for>
+      </ul>
+    </details>
+  </sc-for>
+  <p style="margin: 8px 8px 2px; font-size: 11px; line-height: 1.5; color: #646F7D">Lot 1 : seules ces rubriques existent. Les autres rubriques (dont l’historique des actions) arrivent au lot 2, dans ces mêmes groupes.</p>
+</nav></sc-if>
+<sc-if value="{{mini}}" hint-placeholder-val="{{ false }}"><nav aria-label="Paramètres (menu réduit)" style="width: 56px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 10px 0; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px">
+  <button type="button" onClick="{{toggle}}" aria-label="Ouvrir le menu des paramètres" title="Ouvrir le menu des paramètres" style="width: 32px; height: 32px; padding: 0; border: 1px solid #C9CFD8; border-radius: 8px; background: #FFFFFF; cursor: pointer; color: #566170; font-size: 16px; flex: none">›</button>
+  <sc-for list="{{groups}}" as="g" hint-placeholder-count="2"><a href="{{g.firstHref}}" title="{{g.label}}" aria-label="{{g.label}}" style="{{g.miniStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{g.icon}}"/></svg></a></sc-for>
+</nav></sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"current":{"editor":"text","default":"acces"},"$preview":{"width":260,"height":420}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const cur = this.props.current || '';
+    const G = [
+      ['Personnes et accès', 'M5 8a4 4 0 1 0 8 0a4 4 0 1 0-8 0M2 21c0-4 3-6 7-6s7 2 7 6', [['acces', 'Utilisateurs et accès', 'L1-Acces.dc.html', true]]],
+      ['Technique', 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z', [['import', 'Import Aurion', 'L1-Import.dc.html', true]]]
+    ];
+    const groups = G.map(([label, icon, items]) => {
+      const has = items.some((i) => i[0] === cur);
+      return { label, icon, firstHref: items[0][2],
+        miniStyle: 'width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; text-decoration: none; ' + (has ? 'background: #A3123F; color: #FFFFFF;' : 'background: #FEEFF1; color: #8A0031;'),
+        sumStyle: 'display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 8px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 700; list-style: none; background: ' + (has ? '#FEEFF1' : 'transparent') + '; color: ' + (has ? '#8A0031' : '#1B2430') + ';',
+        icoStyle: 'width: 28px; height: 28px; flex: none; border-radius: 8px; display: grid; place-items: center; background: ' + (has ? '#A3123F' : '#F6F7F9') + '; color: ' + (has ? '#FFFFFF' : '#566170') + ';',
+        items: items.map(([id, l, href, ready]) => { const on = id === cur;
+          return { label: l + (ready ? '' : ' [à dessiner]'), href, cur: on ? 'page' : 'false', title: ready ? l : l + ' : planche à dessiner',
+            style: 'display: flex; align-items: center; min-height: 36px; box-sizing: border-box; padding: 6px 10px; border-radius: ' + (on ? '0 8px 8px 0' : '8px') + '; text-decoration: none; font-size: 14px; font-weight: ' + (on ? '700' : '500') + '; color: ' + (on ? '#8A0031' : ready ? '#1B2430' : '#646F7D') + '; background: ' + (on ? '#FEEFF1' : 'transparent') + ';' + (on ? ' margin-left: -16px; padding-left: 24px; border-left: 2px solid #A3123F;' : '') }; }) };
+    });
+    const mini = !!(this.state && this.state.mini);
+    return { groups, mini, expanded: !mini, toggle: () => this.setState({ mini: !mini }) };
+  }
+}
+</script>
+</body>
+</html>

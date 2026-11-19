@@ -1,0 +1,40 @@
+# Dépendances
+node_modules/
+
+# Sortie de build
+dist/
+build/
+*.tsbuildinfo
+
+# Environnement / secrets — ne JAMAIS commiter
+.env
+.env.*
+!.env.example
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+
+# Éditeur / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Worktrees Claude Code (copies de travail séparées)
+.claude/worktrees/
+
+# Exceptions de permissions PROPRES AU POSTE. Les permissions génériques du
+# projet sont versionnées dans .claude/settings.json — cf. .claude/PERMISSIONS.md
+.claude/settings.local.json
+
+# Pont config worklog FixTracker : endpoint + clé anon + nom de la variable de
+# secret HMAC. Propre à l'environnement (préprod / prod).
+.claude/worklog.json
+
+# Sortie conservée du dernier échec de la porte pre-push (diagnostic local).
+.githooks/verify-dernier-echec.log
+
+# Journaux
+*.log
+npm-debug.log*

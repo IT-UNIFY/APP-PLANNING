@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Lot 1 – Interventions (calendrier et liste)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8A0031}a:hover{color:#6A0F2C}
+.row:hover{background:#FFF7F9}
+.ev:hover{filter:brightness(0.97)}
+.fo:hover{background:#FEEFF1}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #A3123F;outline-offset:1px}
+</style>
+</helmet>
+<div style="min-height: 1250px; background: #F6F7F9; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+  <div data-bandeau-fixe style="position: sticky; top: 0; z-index: 60"><dc-import name="Bandeau" role="Gestionnaire pédagogique" hint-size="100%,72px"></dc-import></div>
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: flex-start; min-width: 0">
+    <dc-import name="Menu" active="interv" mode="lot1" h="1178" hint-size="256px,1178px"></dc-import>
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+      <div style="position: relative; overflow: hidden; background: #FEEFF1; margin: 16px 16px 0; border-radius: 14px; border: 1px solid #E1E5EB; padding: 16px 32px 20px; display: flex; flex-direction: column; gap: 6px">
+        <div aria-hidden="true" style="position: absolute; right: 80px; top: -70px; width: 128px; height: 128px; border-radius: 50%; background: #D04D67; opacity: 0.3"></div>
+        <span style="position: relative; align-self: flex-start; font-size: 12px; font-weight: 700; color: #566170; border: 1.5px dashed #858F9E; border-radius: 999px; padding: 2px 10px">Lot 1 · consultation seule</span>
+        <h1 style="position: relative; margin: 0; font-size: 26px; font-weight: 800; color: #8A0031">Interventions</h1>
+        <span style="position: relative; font-size: 14px; color: #566170">Toutes les interventions importées d’Aurion, en calendrier ou en liste. Les filtres de la liste s’appliquent aussi au calendrier. Les séances se corrigent dans Aurion ; les contrats se préparent dans l’outil Intervenant.</span>
+      </div>
+
+      <div style="margin: 12px 16px 0; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+        <sc-if value="{{showNav}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 6px; align-items: center">
+            <button type="button" onClick="{{prev}}" aria-label="Période précédente" style="width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 800 16px Manrope, 'Segoe UI', sans-serif">‹</button>
+            <button type="button" onClick="{{today}}" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif">Aujourd’hui</button>
+            <button type="button" onClick="{{next}}" aria-label="Période suivante" style="width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 800 16px Manrope, 'Segoe UI', sans-serif">›</button>
+          </div>
+        </sc-if>
+        <strong style="font-size: 16px; flex: 1 1 220px">{{periodLabel}}</strong>
+        <label style="position: relative; display: block; width: 260px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher</span><input type="search" value="{{q}}" onInput="{{onQ}}" placeholder="Rechercher (cours, groupe, intervenant…)" style="width: 100%; box-sizing: border-box; min-height: 40px; border: 1.5px solid #858F9E; border-radius: 10px; padding: 0 12px; font: 600 13px Manrope, 'Segoe UI', sans-serif"></label>
+        <div role="radiogroup" aria-label="Affichage" style="display: flex; gap: 2px; background: #F6F7F9; border-radius: 10px; padding: 3px">
+          <sc-for list="{{views}}" as="v" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{v.on}}" onClick="{{v.pick}}" style="{{v.style}}">{{v.label}}</button></sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{hasChips}}" hint-placeholder-val="{{ false }}">
+        <div style="margin: 10px 16px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px">
+          <span style="font-weight: 700; color: #566170">Filtres actifs :</span>
+          <sc-for list="{{chips}}" as="c" hint-placeholder-count="2"><button type="button" onClick="{{c.clear}}" aria-label="{{c.aria}}" style="min-height: 30px; padding: 0 10px; border-radius: 999px; border: 1px solid #F3C6D0; background: #FEEFF1; color: #8A0031; cursor: pointer; font: 700 12px Manrope, 'Segoe UI', sans-serif">{{c.label}} ✕</button></sc-for>
+          <button type="button" onClick="{{clearAll}}" style="min-height: 30px; padding: 0 10px; border: 0; background: none; color: #8A0031; cursor: pointer; font: 700 12px Manrope, 'Segoe UI', sans-serif; text-decoration: underline">Effacer tous les filtres</button>
+        </div>
+      </sc-if>
+
+      <section aria-label="Interventions" style="margin: 12px 16px 24px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; overflow: visible; min-width: 0">
+
+        <sc-if value="{{isList}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #E1E5EB; position: relative">
+            <strong style="font-size: 14px; flex: 1 1 200px">{{countTxt}}</strong>
+            <button type="button" onClick="{{toggleCols}}" aria-expanded="{{colsOpen}}" style="min-height: 36px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif">Colonnes ▾</button>
+            <button type="button" style="min-height: 36px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif">Exporter (Excel)</button>
+            <sc-if value="{{colsOpen}}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; right: 14px; top: 52px; z-index: 30; width: 300px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 10px 28px rgba(27,36,48,0.18); padding: 10px; display: flex; flex-direction: column; gap: 4px">
+                <strong style="font-size: 13px; padding: 2px 4px 6px">Colonnes affichées et ordre</strong>
+                <sc-for list="{{colPanel}}" as="c" hint-placeholder-count="8">
+                  <div style="display: flex; align-items: center; gap: 6px; font-size: 13px">
+                    <label style="flex: 1; display: flex; gap: 8px; align-items: center; min-height: 32px"><input type="checkbox" checked="{{c.shown}}" onChange="{{c.toggle}}" style="width: 16px; height: 16px; accent-color: #A3123F">{{c.l}}</label>
+                    <button type="button" onClick="{{c.up}}" aria-label="{{c.upLabel}}" style="width: 30px; height: 30px; border-radius: 8px; border: 1px solid #C9CFD8; background: #FFFFFF; cursor: pointer">↑</button>
+                    <button type="button" onClick="{{c.down}}" aria-label="{{c.downLabel}}" style="width: 30px; height: 30px; border-radius: 8px; border: 1px solid #C9CFD8; background: #FFFFFF; cursor: pointer">↓</button>
+                  </div>
+                </sc-for>
+                <span style="font-size: 11px; color: #646F7D; padding: 6px 4px 0">En production, on déplace aussi une colonne en faisant glisser son en-tête. Le réglage est mémorisé pour chaque personne.</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 13px">
+              <thead><tr style="text-align: left; color: #566170; font-size: 12px">
+                <th scope="col" style="width: 34px; padding: 6px 0 6px 10px; border-bottom: 1px solid #C9CFD8"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Intervenants</span></th>
+                <sc-for list="{{heads}}" as="h" hint-placeholder-count="8">
+                  <th scope="col" style="position: relative; padding: 6px 8px; border-bottom: 1px solid #C9CFD8; white-space: nowrap; vertical-align: bottom">
+                    <button type="button" onClick="{{h.open}}" aria-expanded="{{h.isOpen}}" aria-label="{{h.aria}}" style="{{h.btnStyle}}">{{h.l}}<span aria-hidden="true">{{h.mark}}</span></button>
+                    <sc-if value="{{h.isOpen}}" hint-placeholder-val="{{ false }}">
+                      <div style="position: absolute; left: 4px; top: 36px; z-index: 40; width: 260px; background: #FFFFFF; color: #1B2430; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 10px 28px rgba(27,36,48,0.2); padding: 8px; display: flex; flex-direction: column; gap: 4px; font-weight: 600; white-space: normal">
+                        <button type="button" class="fo" onClick="{{h.sortAsc}}" style="text-align: left; min-height: 32px; padding: 0 8px; border: 0; border-radius: 8px; background: #FFFFFF; cursor: pointer; font: 600 13px Manrope, 'Segoe UI', sans-serif">Trier de A à Z</button>
+                        <button type="button" class="fo" onClick="{{h.sortDesc}}" style="text-align: left; min-height: 32px; padding: 0 8px; border: 0; border-radius: 8px; background: #FFFFFF; cursor: pointer; font: 600 13px Manrope, 'Segoe UI', sans-serif">Trier de Z à A</button>
+                        <div style="height: 1px; background: #E1E5EB; margin: 2px 0"></div>
+                        <input type="search" value="{{fq}}" onInput="{{onFq}}" placeholder="Rechercher une valeur" style="min-height: 32px; border: 1.5px solid #858F9E; border-radius: 8px; padding: 0 8px; font: 600 12px Manrope, 'Segoe UI', sans-serif">
+                        <label style="display: flex; gap: 8px; align-items: center; min-height: 30px; font-size: 13px; font-weight: 700"><input type="checkbox" checked="{{h.allOn}}" onChange="{{h.toggleAll}}" style="width: 16px; height: 16px; accent-color: #A3123F">Sélectionner tout</label>
+                        <div style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column">
+                          <sc-for list="{{h.vals}}" as="v" hint-placeholder-count="4"><label style="display: flex; gap: 8px; align-items: center; min-height: 30px; font-size: 13px"><input type="checkbox" checked="{{v.on}}" onChange="{{v.toggle}}" style="width: 16px; height: 16px; accent-color: #A3123F"><span style="flex: 1">{{v.v}}</span><span style="font-size: 11px; color: #646F7D">{{v.n}}</span></label></sc-for>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; gap: 8px; padding-top: 4px; border-top: 1px solid #E1E5EB">
+                          <button type="button" onClick="{{h.clear}}" style="min-height: 32px; padding: 0 8px; border: 0; background: none; color: #8A0031; cursor: pointer; font: 700 12px Manrope, 'Segoe UI', sans-serif">Effacer le filtre</button>
+                          <button type="button" onClick="{{closeF}}" style="min-height: 32px; padding: 0 12px; border-radius: 8px; border: 0; background: #A3123F; color: #FFFFFF; cursor: pointer; font: 700 12px Manrope, 'Segoe UI', sans-serif">Fermer</button>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </th>
+                </sc-for>
+              </tr></thead>
+              <tbody><sc-for list="{{rows}}" as="r" hint-placeholder-count="12"><tr class="row" style="{{r.trStyle}}"><td style="padding: 6px 0 6px 10px; vertical-align: top"><sc-if value="{{r.multi}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.togAria}}" title="{{r.togAria}}" style="width: 28px; height: 28px; border-radius: 8px; border: 1px solid #C9CFD8; background: #FFFFFF; cursor: pointer; font: 800 12px Manrope, 'Segoe UI', sans-serif; color: #8A0031">{{r.chev}}</button></sc-if></td><sc-for list="{{r.cells}}" as="c" hint-placeholder-count="8"><td style="{{c.style}}">{{c.v}}</td></sc-for></tr>
+                <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}"><tr style="background: #FFFBFC"><td></td><td colSpan="{{nCols}}" style="padding: 4px 14px 12px 8px">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 12px; background: #FFFFFF; border: 1px solid #F3C6D0; border-radius: 10px">
+                    <caption style="text-align: left; padding: 6px 2px; font-size: 12px; font-weight: 700; color: #8A0031">Intervenants de cette séance ({{r.idSea}}) : une ligne par intervenant, avec son propre identifiant</caption>
+                    <thead><tr style="text-align: left; color: #566170"><th scope="col" style="padding: 6px 10px; border-bottom: 1px solid #E1E5EB">ID affectation</th><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #E1E5EB">Intervenant</th><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #E1E5EB">Rôle sur la séance</th><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #E1E5EB">Statut</th><th scope="col" style="padding: 6px 8px; border-bottom: 1px solid #E1E5EB">Changement</th></tr></thead>
+                    <tbody><sc-for list="{{r.aff}}" as="a" hint-placeholder-count="2"><tr style="border-top: 1px solid #F1F2F4"><td style="padding: 6px 10px; color: #566170; font-family: monospace">{{a.id}}</td><td style="{{a.nStyle}}">{{a.n}}</td><td style="padding: 6px 8px">{{a.role}}</td><td style="padding: 6px 8px"><span style="{{a.stStyle}}">{{a.st}}</span></td><td style="padding: 6px 8px; color: #566170">{{a.chg}}</td></tr></sc-for></tbody>
+                  </table>
+                  <p style="margin: 6px 2px 0; font-size: 11px; color: #646F7D">Identifiants propres au Planning, qui ne changent jamais et ne sont jamais réutilisés ; on les cherche dans la recherche de l’écran. Format des identifiants [à valider : nomenclature des codes]. Statuts lus dans Aurion. Contrat, mode de rémunération et état de paie de chaque ligne : dans l’outil Intervenant, rattachés à cet identifiant (visibles ici plus tard, selon les droits).</p>
+                </td></tr></sc-if></sc-for></tbody>
+            </table>
+          </div>
+          <sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><div style="padding: 24px; text-align: center; font-size: 14px; color: #566170">Aucune intervention ne correspond aux filtres.</div></sc-if>
+        </sc-if>
+
+        <sc-if value="{{isWeek}}" hint-placeholder-val="{{ true }}">
+          <div style="overflow-x: auto">
+            <div style="min-width: 820px">
+              <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr)); border-bottom: 1px solid #E1E5EB">
+                <span></span>
+                <sc-for list="{{days}}" as="d" hint-placeholder-count="6"><span style="{{d.headStyle}}">{{d.label}}</span></sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr))">
+                <div style="position: relative; height: 616px"><sc-for list="{{hours}}" as="h" hint-placeholder-count="11"><span style="{{h.style}}">{{h.label}}</span></sc-for></div>
+                <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+                  <div style="{{d.colStyle}}">
+                    <sc-for list="{{d.evs}}" as="e" hint-placeholder-count="2"><div class="ev" title="{{e.tip}}" style="{{e.style}}"><strong style="{{e.titleStyle}}">{{e.t}}</strong><span style="font-size: 10px">{{e.time}}</span><span style="font-size: 10px">{{e.who}}</span></div></sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isMonth}}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-bottom: 1px solid #E1E5EB"><sc-for list="{{dow}}" as="w" hint-placeholder-count="7"><span style="padding: 8px; font-size: 12px; font-weight: 700; color: #566170; text-align: center">{{w}}</span></sc-for></div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr))">
+            <sc-for list="{{cells}}" as="c" hint-placeholder-count="35"><div style="{{c.style}}"><span style="{{c.numStyle}}">{{c.n}}</span><sc-for list="{{c.evs}}" as="e" hint-placeholder-count="1"><span title="{{e.tip}}" style="{{e.chip}}">{{e.short}}</span></sc-for><sc-if value="{{c.hasMore}}" hint-placeholder-val="{{ false }}"><span style="display: block; margin-top: 3px; font-size: 11px; font-weight: 700; color: #566170">{{c.more}}</span></sc-if></div></sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isCal}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 14px; border-top: 1px solid #E1E5EB; font-size: 12px; color: #566170">
+            <strong style="color: #1B2430">Légende</strong>
+            <sc-for list="{{legend}}" as="l" hint-placeholder-count="4"><span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="{{l.sw}}"></span>{{l.t}}</span></sc-for>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; border: 2px solid #C66A00"></span>Modifiée depuis moins de 7 jours</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: repeating-linear-gradient(135deg, #F1F2F4 0 4px, #DADDE2 4px 6px); border: 1px dashed #858F9E"></span>Retirée</span>
+            <span style="flex: 1"></span><span>{{calCount}}</span>
+          </div>
+        </sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1250}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'liste', wk: 1, q: '', excl: {}, open: null, fq: '', sort: { k: 'date', dir: 1 }, order: ['id', 'date', 'time', 'cours', 'pg', 'int', 'type', 'lieu', 'etat', 'aurion'], hidden: ['aurion'], colsOpen: false, opened: { 0: true, 16: true } };
+  }
+  renderVals() {
+    const st = this.state;
+    const PROMO = { 'ASS 2028': ['#F5EFFB', '#5E2F86', '#C9B3E3'], 'ES 2029': ['#EBF5FF', '#305E8B', '#B4D5F8'], 'ME 2028': ['#E9F7EE', '#1D6B3A', '#B5DEC2'], 'EJE 2029': ['#FFF4E0', '#8A5A00', '#EBCF9C'] };
+    const MON = { 46: 9, 47: 16, 48: 23 };
+    const DN = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'];
+    // [semaine, jour, début, fin, cours, code, promotion, groupe, intervenant, type, lieu, état]
+    const RAW = [
+      [46, 1, 9, 12.5, 'Analyse systémique 1/4', 'ASS_2028_S3_UE1_EC1_2', 'ASS 2028', 'Groupe TD 1', 'Marc Dubreuil', 'Cours', 'Cergy · Salle 204', ''],
+      [46, 2, 9, 12.5, 'Droit de la protection de l’enfance 2/5', 'ASS_2028_S3_UE2_EC1_1', 'ASS 2028', 'Promotion entière', 'Martine Arnaud', 'Cours', 'Cergy · Amphi A', ''],
+      [46, 3, 13.5, 17, 'Guidance ASI et ISIC 2/4', 'ASS_2028_S3_UE3_EC2_1', 'ASS 2028', 'Demi-groupe A', 'Marc Dubreuil', 'Guidance', 'Cergy · Salle 105', ''],
+      [46, 4, 9, 12.5, 'Atelier d’écriture 1/5', 'EJE_2029_S1_BC1_UE1_EC2_1', 'EJE 2029', 'Groupe TD 3', 'Claire Fontaine', 'Atelier', 'Cergy · Salle 210', ''],
+      [47, 0, 9, 12.5, 'Analyse systémique 2/4', 'ASS_2028_S3_UE1_EC1_2', 'ASS 2028', 'Groupe TD 2', 'Marc Dubreuil', 'Cours', 'Cergy · Salle 204', ''],
+      [47, 0, 13.5, 17, 'Analyse systémique 3/4', 'ASS_2028_S3_UE1_EC1_2', 'ASS 2028', 'Groupe TD 1', 'Marc Dubreuil', 'Cours', 'Cergy · Salle 204', ''],
+      [47, 1, 9, 12.5, 'Droit de la protection de l’enfance 3/5', 'ASS_2028_S3_UE2_EC1_1', 'ASS 2028', 'Promotion entière', 'Martine Arnaud', 'Cours', 'Cergy · Amphi A', ''],
+      [47, 1, 13.5, 17, 'Anglais niveau A 3/6', 'ASS_2028_S3_UE6_EC1_1', 'ASS 2028', 'Anglais A', '[sans intervenant]', 'Cours', 'Cergy · Salle 112', ''],
+      [47, 2, 9, 12.5, 'Guidance ASI et ISIC 3/4', 'ASS_2028_S3_UE3_EC2_1', 'ASS 2028', 'Demi-groupe A', 'Marc Dubreuil', 'Guidance', 'Cergy · Salle 112', 'mod'],
+      [47, 2, 13.5, 17, 'Psychologie du développement 2/4', 'EJE_2029_S1_BC1_UE2_EC1_1', 'EJE 2029', 'Promotion entière', 'Mehdi Benali', 'Cours', 'Cergy · Amphi B', ''],
+      [47, 3, 13.5, 17, 'Méthodologie de projet 1/3', 'ES_2029_S1_BC2_UE2_EC1_1', 'ES 2029', 'Promotion entière', 'Marc Dubreuil', 'Cours', 'Cergy · Amphi B', ''],
+      [47, 4, 9, 12.5, 'Analyse des pratiques 2/6', 'ME_2028_S3_DF1_UE1_EC3_1', 'ME 2028', 'Groupe APP 1', 'Marc Dubreuil', 'Analyse de la pratique', 'À distance', ''],
+      [47, 4, 9, 12.5, 'Analyse des pratiques 2/6', 'ME_2028_S3_DF1_UE1_EC3_1', 'ME 2028', 'Groupe APP 2', 'Sophie Laurent', 'Analyse de la pratique', 'Cergy · Salle 105', ''],
+      [47, 4, 13.5, 17, 'Analyse systémique 4/4', 'ASS_2028_S3_UE1_EC1_2', 'ASS 2028', 'Groupe TD 2', 'Marc Dubreuil', 'Cours', 'Cergy · Salle 204', 'ret'],
+      [48, 1, 9, 12.5, 'Méthodologie de projet 2/3', 'ES_2029_S1_BC2_UE2_EC1_1', 'ES 2029', 'Promotion entière', 'Marc Dubreuil', 'Cours', 'Cergy · Amphi B', ''],
+      [48, 2, 9, 12.5, 'Droit de la protection de l’enfance 4/5', 'ASS_2028_S3_UE2_EC1_1', 'ASS 2028', 'Promotion entière', 'Martine Arnaud', 'Cours', 'Cergy · Amphi A', ''],
+      [48, 3, 13.5, 17, 'Guidance ASI et ISIC 4/4', 'ASS_2028_S3_UE3_EC2_1', 'ASS 2028', 'Demi-groupe A', 'Marc Dubreuil', 'Guidance', 'Cergy · Salle 105', ''],
+      [48, 4, 9, 12.5, 'Atelier d’écriture 2/5', 'EJE_2029_S1_BC1_UE1_EC2_1', 'EJE 2029', 'Groupe TD 3', 'Claire Fontaine', 'Atelier', 'S-ANNEXE 3 [salle inconnue]', '']
+    ];
+    const AFF = {
+      0: [['Marc Dubreuil', 'Intervenant principal', 'Réalisé', 'ok', '—'], ['Julie Morel', 'Co-intervenante', 'Réalisé', 'ok', 'Ajoutée le 05/11']],
+      5: [['Marc Dubreuil', 'Intervenant principal', 'Prévu', 'ok', '—'], ['[Formatrice interne]', 'Soutien interne', 'Prévu', 'ok', 'Ajoutée le 12/11 · compté autrement au plan de charge']],
+      16: [['Marc Dubreuil', 'Intervenant principal', 'Annulé', 'err', 'Annulé le 18/11'], ['Sophie Laurent', 'Remplaçante', 'Prévu', 'ok', 'Ajoutée le 18/11 · remplace Marc Dubreuil']]
+    };
+    const pad = (n) => (n < 10 ? '0' : '') + n;
+    const hh = (x) => { const h = Math.floor(x); const m = Math.round((x - h) * 60); return h + ' h' + (m ? ' ' + pad(m) : ''); };
+    const ETAT = { '': 'Prévue', mod: 'Modifiée le 14/11', ret: 'Retirée le 17/11' };
+    RAW.forEach((r, i) => { if (AFF[i]) r[8] = AFF[i].filter((a) => a[2] !== 'Annulé').map((a) => a[0]).join(' + ') + (AFF[i].some((a) => a[2] === 'Annulé') ? ' (remplace ' + AFF[i].find((a) => a[2] === 'Annulé')[0] + ')' : ''); });
+    const EV = RAW.map((r, i) => ({ id: i, w: r[0], d: r[1], s: r[2], e: r[3], day: MON[r[0]] + r[1], promo: r[6], st: r[11],
+      v: { id: 'ITV-' + (104500 + i), aurion: String(548800 + i * 7), date: DN[r[1]] + ' ' + pad(MON[r[0]] + r[1]) + '/11', time: hh(r[2]) + ' – ' + hh(r[3]), cours: r[4], pg: r[6] + ' · ' + r[7], int: r[8], type: r[9], lieu: r[10], etat: ETAT[r[11]] },
+      key: { date: (MON[r[0]] + r[1]) * 100 + r[2], code: r[5] } }));
+    const COLS = { id: 'ID intervention', aurion: 'ID Aurion', date: 'Date', time: 'Horaires', cours: 'Cours', pg: 'Promotion · groupe', int: 'Intervenant', type: 'Type d’activité', lieu: 'Lieu', etat: 'État' };
+    const norm = (x) => (x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const q = norm(st.q).trim();
+    const excl = st.excl;
+    const passes = (ev, skip) => Object.keys(excl).every((k) => k === skip || excl[k].indexOf(ev.v[k]) < 0) && (!q || norm(Object.values(ev.v).join(' ') + ' ' + ev.key.code).indexOf(q) >= 0);
+    const filtered = EV.filter((ev) => passes(ev));
+    const setExcl = (k, arr) => { const o = Object.assign({}, excl); if (arr.length) o[k] = arr; else delete o[k]; this.setState({ excl: o }); };
+    const sortKey = (ev, k) => (k === 'date' ? ev.key.date : norm(ev.v[k]));
+    const sorted = filtered.slice().sort((a, b) => { const x = sortKey(a, st.sort.k), y = sortKey(b, st.sort.k); return (x < y ? -1 : x > y ? 1 : 0) * st.sort.dir || a.key.date - b.key.date; });
+    const shown = st.order.filter((k) => st.hidden.indexOf(k) < 0);
+    const fq = norm(st.fq);
+    const heads = shown.map((k) => {
+      const base = EV.filter((ev) => passes(ev, k));
+      const counts = {};
+      base.forEach((ev) => { counts[ev.v[k]] = (counts[ev.v[k]] || 0) + 1; });
+      EV.forEach((ev) => { if (!(ev.v[k] in counts)) counts[ev.v[k]] = 0; });
+      const ex = excl[k] || [];
+      const all = Object.keys(counts).sort((a, b) => (k === 'date' ? EV.find((e) => e.v.date === a).key.date - EV.find((e) => e.v.date === b).key.date : a.localeCompare(b, 'fr')));
+      const vals = all.filter((v) => !fq || norm(v).indexOf(fq) >= 0).map((v) => ({ v, n: String(counts[v]), on: ex.indexOf(v) < 0, toggle: () => setExcl(k, ex.indexOf(v) < 0 ? ex.concat([v]) : ex.filter((x) => x !== v)) }));
+      const isOpen = st.open === k;
+      const active = ex.length > 0, sortedHere = st.sort.k === k;
+      return { l: COLS[k], isOpen, aria: 'Trier et filtrer la colonne ' + COLS[k], mark: (active ? ' ⏷' : '') + (sortedHere ? (st.sort.dir > 0 ? ' ↑' : ' ↓') : ' ▾'),
+        btnStyle: 'display: inline-flex; gap: 4px; align-items: center; min-height: 30px; padding: 0 6px; border-radius: 8px; border: 0; cursor: pointer; font: 700 12px Manrope, \'Segoe UI\', sans-serif; color: ' + (active ? '#8A0031' : '#566170') + '; background: ' + (active || isOpen ? '#FEEFF1' : 'transparent') + ';',
+        open: () => this.setState({ open: isOpen ? null : k, fq: '' }),
+        sortAsc: () => this.setState({ sort: { k, dir: 1 }, open: null }), sortDesc: () => this.setState({ sort: { k, dir: -1 }, open: null }),
+        allOn: ex.length === 0, toggleAll: () => setExcl(k, ex.length ? [] : all.slice()), clear: () => setExcl(k, []), vals };
+    });
+    const B = { ok: ['#E9F7EE', '#1D6B3A', '#B5DEC2'], warn: ['#FFF1E2', '#915B02', '#EBCBA7'], err: ['#FFEFED', '#B02B27', '#F6C3BC'] };
+    const BS = { ok: ['#E9F7EE', '#1D6B3A', '#B5DEC2'], err: ['#FFEFED', '#B02B27', '#F6C3BC'] };
+    const opened = st.opened || {};
+    const rows = sorted.map((ev) => ({
+      idSea: ev.v.id, multi: !!AFF[ev.id], open: !!(AFF[ev.id] && opened[ev.id]),
+      chev: opened[ev.id] ? '▾' : '▸', togAria: (opened[ev.id] ? 'Masquer' : 'Afficher') + ' les ' + (AFF[ev.id] ? AFF[ev.id].length : 0) + ' intervenants de la séance',
+      toggle: () => { const o = Object.assign({}, opened); o[ev.id] = !o[ev.id]; this.setState({ opened: o }); },
+      aff: (AFF[ev.id] || []).map((a, k) => ({ n: a[0], role: a[1], st: a[2], chg: a[4], id: 'AFF-' + (208900 + ev.id * 3 + k), nStyle: 'padding: 6px 8px; font-weight: 700;' + (a[2] === 'Annulé' ? ' text-decoration: line-through; color: #566170;' : ''), stStyle: 'display: inline-block; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 8px; background: ' + BS[a[3]][0] + '; color: ' + BS[a[3]][1] + '; border: 1px solid ' + BS[a[3]][2] + ';' })),
+      trStyle: 'border-top: 1px solid #E1E5EB;' + (ev.st === 'ret' ? ' background: #FAFAFB; color: #566170;' : ''),
+      cells: shown.map((k) => {
+        let style = 'padding: 8px; vertical-align: top;';
+        if (k === 'date') style += ' font-weight: 700; white-space: nowrap;';
+        if (k === 'time') style += ' white-space: nowrap;';
+        if (k === 'id' || k === 'aurion') style += ' white-space: nowrap; font-family: monospace; font-size: 12px; color: #566170;' + (k === 'id' ? ' padding-left: 4px;' : '');
+        if (k === 'cours') style += ' font-weight: 700;' + (ev.st === 'ret' ? ' text-decoration: line-through;' : '');
+        if (k === 'int' && ev.v.int.charAt(0) === '[') style += ' color: #B02B27; font-weight: 700;';
+        if (k === 'etat') { const c = B[ev.st === 'ret' ? 'err' : ev.st === 'mod' ? 'warn' : 'ok']; style += ' white-space: nowrap;'; return { v: ev.v.etat, style: style + ' font-size: 11px; font-weight: 700; color: ' + c[1] + ';' }; }
+        if (k === 'pg') { const c = PROMO[ev.promo]; style += ' color: ' + c[1] + '; font-weight: 600;'; }
+        return { v: ev.v[k], style };
+      })
+    }));
+    const chips = Object.keys(excl).map((k) => ({ label: COLS[k] + ' : ' + excl[k].length + ' valeur' + (excl[k].length > 1 ? 's' : '') + ' masquée' + (excl[k].length > 1 ? 's' : ''), aria: 'Retirer le filtre ' + COLS[k], clear: () => setExcl(k, []) }));
+    if (st.q) chips.push({ label: 'Recherche : « ' + st.q + ' »', aria: 'Effacer la recherche', clear: () => this.setState({ q: '' }) });
+    const move = (k, d) => () => { const o = st.order.slice(); const i = o.indexOf(k), j = i + d; if (j < 0 || j >= o.length) return; o[i] = o[j]; o[j] = k; this.setState({ order: o }); };
+    const colPanel = st.order.map((k) => ({ l: COLS[k], shown: st.hidden.indexOf(k) < 0, toggle: () => this.setState({ hidden: st.hidden.indexOf(k) < 0 ? st.hidden.concat([k]) : st.hidden.filter((x) => x !== k) }), up: move(k, -1), down: move(k, 1), upLabel: 'Monter la colonne ' + COLS[k], downLabel: 'Descendre la colonne ' + COLS[k] }));
+
+    const PX = 56;
+    const WK = [46, 47, 48][st.wk];
+    const days = DN.map((n, i) => {
+      const isToday = WK === 47 && i === 3;
+      const list = filtered.filter((e) => e.w === WK && e.d === i);
+      const evs = list.map((e) => {
+        const same = list.filter((o) => o.s < e.e && e.s < o.e);
+        const idx = same.indexOf(e), cnt = same.length;
+        const c = PROMO[e.promo], ret = e.st === 'ret', mod = e.st === 'mod';
+        const w = 100 / cnt;
+        return { t: e.v.cours, time: e.v.time, who: e.v.pg + ' · ' + e.v.int, tip: e.v.cours + ' – ' + e.v.pg + ' – ' + e.v.int + ' – ' + e.v.lieu + ' – ' + e.v.etat,
+          titleStyle: 'font-size: 11px; line-height: 1.25;' + (ret ? ' text-decoration: line-through;' : ''),
+          style: 'position: absolute; top: ' + ((e.s - 8) * PX + 2) + 'px; height: ' + ((e.e - e.s) * PX - 4) + 'px; left: calc(' + (idx * w) + '% + 3px); width: calc(' + w + '% - 6px); box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; overflow: hidden; padding: 5px 6px; border-radius: 8px; color: ' + (ret ? '#566170' : c[1]) + '; background: ' + (ret ? 'repeating-linear-gradient(135deg, #F1F2F4 0 6px, #E4E6EA 6px 9px)' : c[0]) + '; border: ' + (ret ? '1px dashed #858F9E' : mod ? '2px solid #C66A00' : '1px solid ' + c[2]) + ';' };
+      });
+      return { label: n + ' ' + pad(MON[WK] + i) + '/11', evs,
+        headStyle: 'padding: 10px 8px; font-size: 13px; font-weight: 800; text-align: center; color: ' + (isToday ? '#FFFFFF' : '#1B2430') + '; background: ' + (isToday ? '#A3123F' : 'transparent') + ';',
+        colStyle: 'position: relative; height: ' + (11 * PX) + 'px; border-left: 1px solid #E1E5EB; background: ' + (isToday ? '#FFF7F9' : 'repeating-linear-gradient(180deg, #FFFFFF 0 ' + (PX - 1) + 'px, #EEF0F3 ' + (PX - 1) + 'px ' + PX + 'px)') + ';' };
+    });
+    const hours = Array.from({ length: 11 }, (_, i) => ({ label: (8 + i) + ' h', style: 'position: absolute; right: 8px; top: ' + (i * PX + 2) + 'px; font-size: 11px; color: #646F7D;' }));
+    const cells = [];
+    for (let i = 0; i < 35; i++) {
+      let day = 26 + i, m = 10;
+      if (day > 31) { day -= 31; m = 11; }
+      if (m === 11 && day > 30) { day -= 30; m = 12; }
+      const list = m === 11 ? filtered.filter((e) => e.day === day).sort((a, b) => a.s - b.s) : [];
+      const today = m === 11 && day === 19;
+      cells.push({ n: String(day), hasMore: list.length > 3, more: '+ ' + (list.length - 3) + ' autres',
+        evs: list.slice(0, 3).map((e) => { const c = PROMO[e.promo]; return { short: hh(e.s) + ' ' + e.v.cours.replace(/ \d+\/\d+$/, ''), tip: e.v.cours + ' – ' + e.v.pg + ' – ' + e.v.int, chip: 'display: block; margin-top: 3px; padding: 2px 6px; border-radius: 6px; font-size: 11px; font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: ' + (e.st === 'ret' ? '#566170' : c[1]) + '; background: ' + (e.st === 'ret' ? '#F1F2F4' : c[0]) + '; border: ' + (e.st === 'ret' ? '1px dashed #858F9E' : e.st === 'mod' ? '2px solid #C66A00' : '1px solid ' + c[2]) + ';' + (e.st === 'ret' ? ' text-decoration: line-through;' : '') }; }),
+        style: 'min-height: 100px; box-sizing: border-box; padding: 6px; border-right: 1px solid #E1E5EB; border-bottom: 1px solid #E1E5EB; background: ' + (m !== 11 ? '#F9FAFB' : '#FFFFFF') + ';',
+        numStyle: 'display: inline-grid; place-items: center; min-width: 22px; height: 22px; border-radius: 999px; font-size: 12px; font-weight: 700; color: ' + (today ? '#FFFFFF' : m !== 11 ? '#9AA2AE' : '#1B2430') + '; background: ' + (today ? '#A3123F' : 'transparent') + ';' });
+    }
+    const VIEWS = [['mois', 'Mois'], ['semaine', 'Semaine'], ['liste', 'Liste']];
+    const WL = ['Semaine 46 · du 9 au 14 novembre 2026', 'Semaine 47 · du 16 au 21 novembre 2026', 'Semaine 48 · du 23 au 28 novembre 2026'];
+    return {
+      views: VIEWS.map((v) => ({ label: v[1], on: st.view === v[0] ? 'true' : 'false', pick: () => this.setState({ view: v[0], open: null }), style: 'min-height: 34px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font: 700 13px Manrope, \'Segoe UI\', sans-serif; background: ' + (st.view === v[0] ? '#A3123F' : 'transparent') + '; color: ' + (st.view === v[0] ? '#FFFFFF' : '#1B2430') + ';' })),
+      isList: st.view === 'liste', isWeek: st.view === 'semaine', isMonth: st.view === 'mois', isCal: st.view !== 'liste', showNav: st.view !== 'liste',
+      periodLabel: st.view === 'semaine' ? WL[st.wk] : st.view === 'mois' ? 'Novembre 2026' : 'Semestre 1 · 2026-2027',
+      prev: () => this.setState({ wk: Math.max(0, st.wk - 1) }), next: () => this.setState({ wk: Math.min(2, st.wk + 1) }), today: () => this.setState({ wk: 1 }),
+      q: st.q, onQ: (e) => this.setState({ q: e.target.value }),
+      nCols: shown.length, heads, rows, noRows: rows.length === 0, countTxt: rows.length + ' interventions sur ' + EV.length,
+      fq: st.fq, onFq: (e) => this.setState({ fq: e.target.value }), closeF: () => this.setState({ open: null }),
+      chips, hasChips: chips.length > 0, clearAll: () => this.setState({ excl: {}, q: '' }),
+      colsOpen: st.colsOpen, toggleCols: () => this.setState({ colsOpen: !st.colsOpen }), colPanel,
+      days, hours, cells, dow: ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
+      legend: Object.keys(PROMO).map((k) => ({ t: k, sw: 'width: 14px; height: 14px; border-radius: 4px; background: ' + PROMO[k][0] + '; border: 1px solid ' + PROMO[k][2] + ';' })),
+      calCount: filtered.length + ' interventions affichées (filtres de la liste appliqués)'
+    };
+  }
+}
+</script>
+</body>
+</html>

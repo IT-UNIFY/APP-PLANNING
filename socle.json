@@ -1,0 +1,15 @@
+{
+  "//": "Manifeste du socle commun VENDORISÉ. Voir APP-TEMPLATE ADR-001 D16 (voie du vendoring étendu) et scripts/vendorer-socle.mjs. La liste est VIDE par défaut : un projet neuf ne vendorise que ce dont il a besoin, quand il en a besoin.",
+  "//pourquoi": "Le vendoring existe pour qu'AUCUNE construction n'ait besoin d'un jeton read:packages — ni le front dans son image Docker, ni le déploiement des Edge Functions. Le jeton ne sert plus qu'à `npm run socle:sync`, sur une machine de mainteneur.",
+  "//comment": "1. export GITHUB_PACKAGES_TOKEN=… ; 2. npm i -D @it-unify/boilerplate-kit@<version> ; 3. renseigner `version` et `sousChemins` ici ; 4. npm run socle:sync ; 5. npm uninstall @it-unify/boilerplate-kit. Ensuite `npm run verify` contrôle l'intégrité HORS LIGNE. 🔴 L'ÉTAPE 5 N'EST PAS OPTIONNELLE, et le squelette l'a oubliée jusqu'au 2026-09-10 : laisser le paquet en devDependency le ferait réinstaller à CHAQUE `npm ci` — donc redemander le jeton read:packages dans l'image Docker du front et partout ailleurs, ce que le vendoring existe précisément pour supprimer. Contrôle après coup : ni `package.json` ni `package-lock.json` ne doivent mentionner le paquet.",
+  "//dependances": "Le code vendorisé attend du projet : `jose` si `edge/mint-jwt` est pris (seule dépendance d'exécution du socle), et `@supabase/supabase-js` en TYPE seulement pour `edge/auth` et `m365-auth`. ⚠️ DEUX ENDROITS, PAS UN : ces spécificateurs sont NUS, donc Deno exige une entrée dans `supabase/functions/deno.json` (livrée d'avance par le squelette) — hors de `node_modules`, il n'en résout aucun tout seul, `import type` compris ; et le FRONT, qui atteint la même copie par `@socle/*`, les résout par `node_modules`, donc ils doivent aussi être dans les dépendances npm s'il les traverse. `npm run socle:sync` relève les spécificateurs nus des fichiers posés et nomme les entrées manquantes ; `npm run socle:verifier` refuse hors ligne si elles manquent. Voir APP-TEMPLATE B23.",
+  "//nom-des-sous-chemins": "`sousChemins` porte les noms de la carte `exports` du paquet (`edge/mint-jwt`, `client/erreur-edge`, `m365-auth`…), et NON des chemins de fichiers : le script les résout par cette carte. Le nom d'un sous-chemin est en tiret-minuscule, celui du fichier source en casse chameau, et pour deux des sept ils diffèrent — `edge/mint-jwt` atterrit en `_shared/socle/edge/mintJwt.ts`, car la copie calque `src/` pour ne pas casser les imports relatifs entre modules du socle.",
+  "version": "0.3.0",
+  "sousChemins": [
+    "m365-auth",
+    "edge/cors",
+    "edge/validation",
+    "edge/auth",
+    "client/erreur-edge"
+  ]
+}

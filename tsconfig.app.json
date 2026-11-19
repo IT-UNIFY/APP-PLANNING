@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* Alias du socle VENDORISÉ. Une seule copie vit sous
+       supabase/functions/_shared/socle/ — le bundler des Edge Functions ne
+       sort pas du projet Supabase, alors que le front, lui, importe de
+       n'importe où. C'est donc le côté souple qui s'adapte. Voir
+       scripts/vendorer-socle.mjs. */
+    "baseUrl": ".",
+    "paths": { "@socle/*": ["supabase/functions/_shared/socle/*"] },
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client"]
+  },
+  "include": ["src", "tests"]
+}

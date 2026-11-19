@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Lot 1 – Paramètres : utilisateurs et accès</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#8A0031}a:hover{color:#6A0F2C}
+.row:hover{background:#FFF7F9}
+.opt:hover{background:#FFF7F9}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #A3123F;outline-offset:1px}
+</style>
+</helmet>
+<div style="min-height: 1100px; background: #F6F7F9; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+  <div data-bandeau-fixe style="position: sticky; top: 0; z-index: 60"><dc-import name="Bandeau" role="Administrateur" hint-size="100%,72px"></dc-import></div>
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: flex-start; min-width: 0">
+    <dc-import name="Menu" active="parametres" mode="lot1" h="1028" hint-size="256px,1028px"></dc-import>
+    <div style="margin: 16px 0 0 12px; flex: none"><dc-import name="L1NavParam" current="acces" hint-size="260px,420px"></dc-import></div>
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+      <div style="position: relative; overflow: hidden; background: #FEEFF1; margin: 16px 16px 0 12px; border-radius: 14px; border: 1px solid #E1E5EB; padding: 16px 28px 20px; display: flex; flex-direction: column; gap: 6px">
+        <div aria-hidden="true" style="position: absolute; right: 80px; top: -70px; width: 128px; height: 128px; border-radius: 50%; background: #D04D67; opacity: 0.3"></div>
+        <nav aria-label="Fil d’Ariane" style="position: relative; font-size: 12px; font-weight: 600; color: #646F7D">Paramètres › Personnes et accès › Utilisateurs et accès</nav>
+        <h1 style="position: relative; margin: 0; font-size: 26px; font-weight: 800; color: #8A0031">Utilisateurs et accès</h1>
+        <span style="position: relative; font-size: 14px; color: #566170">Qui peut consulter le Planning et avec quel rôle. Les personnes s’ajoutent depuis l’annuaire Microsoft 365 de l’établissement.</span>
+      </div>
+
+      <div style="margin: 12px 16px 0 12px; display: flex; gap: 12px; align-items: flex-start; background: #EBF5FF; border: 1px solid #B4D5F8; border-radius: 14px; padding: 12px 16px; font-size: 13px; color: #1B2430">
+        <span aria-hidden="true" style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: #305E8B; color: #FFFFFF; display: grid; place-items: center; font-weight: 800; font-size: 13px">i</span>
+        <span>Les accès au Planning se gèrent ici : chaque outil gère ses propres droits. Si l’établissement dispose de l’outil SI et que les habilitations y sont en place, ces accès y sont repris une fois, et cette page passe en lecture avec un lien vers l’outil SI.</span>
+      </div>
+
+      <section aria-label="Rôles" style="margin: 12px 16px 0 12px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; overflow: hidden">
+        <div style="padding: 12px 16px; border-bottom: 1px solid #E1E5EB"><strong style="font-size: 15px">Rôles du lot 1</strong></div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px">
+          <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 8px 16px; border-bottom: 1px solid #C9CFD8">Rôle</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Voit</th><th scope="col" style="padding: 8px 16px; border-bottom: 1px solid #C9CFD8">Fait</th></tr></thead>
+          <tbody>
+            <tr style="border-top: 1px solid #E1E5EB; vertical-align: top"><td style="padding: 9px 16px; font-weight: 700">Administrateur du Planning</td><td style="padding: 9px 8px">Tout le lot 1</td><td style="padding: 9px 16px">Gère les accès, suit et lance l’import Aurion</td></tr>
+            <tr style="border-top: 1px solid #E1E5EB; vertical-align: top"><td style="padding: 9px 16px; font-weight: 700">Lecteur des interventions</td><td style="padding: 9px 8px">Toutes les interventions (calendrier et liste)</td><td style="padding: 9px 16px">Consulte, filtre, exporte ; ne modifie rien</td></tr>
+            <tr style="border-top: 1px solid #E1E5EB; vertical-align: top"><td style="padding: 9px 16px; font-weight: 700">Intervenant</td><td style="padding: 9px 8px">Son propre planning, dans l’espace intervenant</td><td style="padding: 9px 16px">Consulte ; aucun ajout ici : rôle donné par l’outil Intervenant</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-label="Personnes" style="margin: 12px 16px 0 12px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; overflow: visible; position: relative">
+        <div style="padding: 12px 16px; border-bottom: 1px solid #E1E5EB; display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+          <strong style="font-size: 15px; flex: 1 1 200px">Personnes qui ont un accès ({{nb}})</strong>
+          <button type="button" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif">Exporter (Excel)</button>
+          <button type="button" onClick="{{openAdd}}" aria-expanded="{{addOpen}}" style="min-height: 40px; padding: 0 16px; border-radius: 10px; border: 0; background: #A3123F; color: #FFFFFF; cursor: pointer; font: 700 14px Manrope, 'Segoe UI', sans-serif">+ Ajouter des personnes</button>
+        </div>
+
+        <sc-if value="{{addOpen}}" hint-placeholder-val="{{ false }}">
+          <div style="margin: 12px 16px; border: 1.5px solid #A3123F; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: #FFFBFC">
+            <strong style="font-size: 14px">Ajouter depuis Microsoft 365</strong>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; flex: 1 1 280px">Rechercher dans l’annuaire<input type="search" value="{{q}}" onInput="{{onQ}}" placeholder="Nom, prénom ou adresse @epss.fr (2 lettres au moins)" style="min-height: 40px; border: 1.5px solid #858F9E; border-radius: 10px; padding: 0 12px; font: 600 14px Manrope, 'Segoe UI', sans-serif"></label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Rôle donné<select onChange="{{onRole}}" style="min-height: 40px; border: 1.5px solid #858F9E; border-radius: 10px; padding: 0 10px; font: 600 14px Manrope, 'Segoe UI', sans-serif"><option value="lec">Lecteur des interventions</option><option value="adm">Administrateur du Planning</option></select></label>
+            </div>
+            <sc-if value="{{hasRes}}" hint-placeholder-val="{{ true }}">
+              <div role="group" aria-label="Personnes trouvées dans Microsoft 365" style="border: 1px solid #E1E5EB; border-radius: 10px; overflow: hidden; background: #FFFFFF">
+                <sc-for list="{{res}}" as="r" hint-placeholder-count="3"><label class="opt" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px; border-bottom: 1px solid #E1E5EB; font-size: 13px; cursor: pointer"><input type="checkbox" checked="{{r.on}}" disabled="{{r.has}}" onChange="{{r.toggle}}" style="width: 16px; height: 16px; accent-color: #A3123F"><span style="flex: 1"><strong>{{r.n}}</strong> · {{r.mail}}</span><span style="color: #566170">{{r.f}}</span><sc-if value="{{r.has}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: #566170">a déjà un accès</span></sc-if></label></sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{noRes}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #566170">{{noResTxt}}</span></sc-if>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+              <span style="flex: 1 1 260px; font-size: 12px; color: #646F7D">Fonction et service viennent de Microsoft 365 et ne se modifient pas ici. Seules les personnes avec un compte @epss.fr apparaissent.</span>
+              <button type="button" onClick="{{closeAdd}}" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif">Annuler</button>
+              <button type="button" onClick="{{add}}" disabled="{{noneSel}}" style="{{addStyle}}">{{addLabel}}</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 860px; border-collapse: collapse; font-size: 13px">
+            <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 8px 16px; border-bottom: 1px solid #C9CFD8">Personne ▾</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Fonction · service ▾</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Rôle ▾</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Ajouté le</th><th scope="col" style="padding: 8px; border-bottom: 1px solid #C9CFD8">Par</th><th scope="col" style="padding: 8px 16px; border-bottom: 1px solid #C9CFD8"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+            <tbody><sc-for list="{{people}}" as="p" hint-placeholder-count="6"><tr class="row" style="border-top: 1px solid #E1E5EB"><td style="padding: 8px 16px"><strong>{{p.n}}</strong><br><span style="font-size: 12px; color: #566170">{{p.mail}}</span></td><td style="padding: 8px">{{p.f}}</td><td style="padding: 8px"><select onChange="{{p.setRole}}" aria-label="{{p.roleAria}}" style="min-height: 34px; border: 1.5px solid #C9CFD8; border-radius: 8px; padding: 0 8px; font: 600 13px Manrope, 'Segoe UI', sans-serif"><option value="lec" selected="{{p.isLec}}">Lecteur des interventions</option><option value="adm" selected="{{p.isAdm}}">Administrateur du Planning</option></select></td><td style="padding: 8px">{{p.d}}</td><td style="padding: 8px; color: #566170">{{p.by}}</td><td style="padding: 8px 16px; text-align: right"><button type="button" onClick="{{p.remove}}" aria-label="{{p.rmAria}}" style="min-height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #F6C3BC; background: #FFFFFF; color: #B02B27; cursor: pointer; font: 700 12px Manrope, 'Segoe UI', sans-serif">Retirer l’accès</button></td></tr></sc-for></tbody>
+          </table>
+        </div>
+        <p style="margin: 0; padding: 10px 16px; font-size: 12px; color: #646F7D; border-top: 1px solid #E1E5EB">Filtres et tri dans chaque colonne, comme dans Excel. Retirer un accès ne supprime rien : l’ajout, le changement de rôle et le retrait restent dans l’historique des actions. Un départ déclaré dans l’outil SI retire l’accès [à brancher quand l’outil SI gérera les départs].</p>
+      </section>
+
+      <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}"><div role="status" style="margin: 12px 16px 0 12px; font-size: 13px; font-weight: 700; color: #1D6B3A; background: #E9F7EE; border: 1px solid #B5DEC2; border-radius: 10px; padding: 10px 14px">{{toast}}</div></sc-if>
+      <div style="height: 24px"></div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      people: [
+        { id: 'a1', n: '[Prénom NOM]', mail: '[adresse]@epss.fr', f: 'Chargée du SI et de la qualité', r: 'adm', d: '19/11/2026', by: '—' },
+        { id: 'a2', n: '[Prénom NOM]', mail: '[adresse]@epss.fr', f: 'Gestionnaire RH · Ressources humaines', r: 'lec', d: '19/11/2026', by: '[Administrateur]' },
+        { id: 'a3', n: 'Sophie Andrieu', mail: 's.andrieu@epss.fr', f: 'Assistante de formation · Pôle 6', r: 'lec', d: '19/11/2026', by: '[Administrateur]' },
+        { id: 'a4', n: '[Prénom NOM]', mail: '[adresse]@epss.fr', f: 'Assistante de formation · Pôle 3-4', r: 'lec', d: '19/11/2026', by: '[Administrateur]' },
+        { id: 'a5', n: '[Prénom NOM]', mail: '[adresse]@epss.fr', f: 'Directrice administrative · Direction', r: 'lec', d: '19/11/2026', by: '[Administrateur]' }
+      ],
+      addOpen: true, q: 'mar', sel: [], role: 'lec', toast: ''
+    };
+  }
+  renderVals() {
+    const st = this.state;
+    const DIR = [
+      { id: 'm1', n: 'Martine Arnaud', mail: 'm.arnaud@epss.fr', f: 'Responsable de formation · Pôle 6' },
+      { id: 'm2', n: 'Marc Lefèvre', mail: 'm.lefevre@epss.fr', f: 'Responsable de pôle · Pôle 3-4' },
+      { id: 'm3', n: 'Marion Petit', mail: 'm.petit@epss.fr', f: 'Assistante de direction · Direction' },
+      { id: 'm4', n: 'Sophie Andrieu', mail: 's.andrieu@epss.fr', f: 'Assistante de formation · Pôle 6' },
+      { id: 'm5', n: 'Karim Haddad', mail: 'k.haddad@epss.fr', f: 'Gestionnaire RH · Ressources humaines' }
+    ];
+    const norm = (x) => (x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const q = norm(st.q).trim();
+    const mails = st.people.map((p) => p.mail);
+    const found = q.length < 2 ? [] : DIR.filter((d) => norm(d.n + ' ' + d.mail).indexOf(q) >= 0);
+    const res = found.map((d) => { const has = mails.indexOf(d.mail) >= 0; const on = st.sel.indexOf(d.id) >= 0;
+      return { n: d.n, mail: d.mail, f: d.f, has, on: on || has, toggle: () => this.setState({ sel: on ? st.sel.filter((x) => x !== d.id) : st.sel.concat([d.id]) }) }; });
+    const nSel = st.sel.length;
+    const ROLE = { lec: 'Lecteur des interventions', adm: 'Administrateur du Planning' };
+    const people = st.people.map((p) => ({ n: p.n, mail: p.mail, f: p.f, d: p.d, by: p.by, isLec: p.r === 'lec', isAdm: p.r === 'adm',
+      roleAria: 'Rôle de ' + p.n, rmAria: 'Retirer l’accès de ' + p.n,
+      setRole: (e) => this.setState({ people: st.people.map((x) => (x.id === p.id ? Object.assign({}, x, { r: e.target.value }) : x)), toast: 'Rôle de ' + p.n + ' modifié : ' + ROLE[e.target.value] + '.' }),
+      remove: () => this.setState({ people: st.people.filter((x) => x.id !== p.id), toast: 'Accès de ' + p.n + ' retiré. La trace reste dans l’historique des actions.' }) }));
+    return {
+      nb: st.people.length, people,
+      addOpen: st.addOpen, openAdd: () => this.setState({ addOpen: !st.addOpen }), closeAdd: () => this.setState({ addOpen: false, sel: [], q: '' }),
+      q: st.q, onQ: (e) => this.setState({ q: e.target.value }), onRole: (e) => this.setState({ role: e.target.value }),
+      res, hasRes: res.length > 0, noRes: res.length === 0, noResTxt: q.length < 2 ? 'Tapez au moins 2 lettres pour chercher dans Microsoft 365.' : 'Personne trouvée dans Microsoft 365 avec cette recherche.',
+      noneSel: nSel === 0,
+      addLabel: nSel ? 'Ajouter ' + nSel + ' personne' + (nSel > 1 ? 's' : '') + ' · ' + ROLE[st.role] : 'Ajouter',
+      addStyle: 'min-height: 40px; padding: 0 16px; border-radius: 10px; border: 0; font: 700 14px Manrope, \'Segoe UI\', sans-serif; cursor: ' + (nSel ? 'pointer' : 'not-allowed') + '; background: ' + (nSel ? '#A3123F' : '#C9CFD8') + '; color: #FFFFFF;',
+      add: () => { const add = DIR.filter((d) => st.sel.indexOf(d.id) >= 0).map((d) => ({ id: d.id, n: d.n, mail: d.mail, f: d.f, r: st.role, d: '19/11/2026', by: 'Vous' }));
+        this.setState({ people: st.people.concat(add), sel: [], q: '', addOpen: false, toast: add.length + ' personne' + (add.length > 1 ? 's ajoutées' : ' ajoutée') + ' : ' + ROLE[st.role] + '. Accès ouvert à leur prochaine connexion avec leur compte Microsoft 365.' }); },
+      hasToast: !!st.toast, toast: st.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

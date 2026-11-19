@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Outil Planning de l'ERP EPSS — lot 1 : consultation des séances importées d'Aurion." />
+    <title>APP-PLANNING</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Amorce du thème AVANT le rendu, pour éviter le flash clair/sombre.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored ? stored === 'dark' : prefersDark) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (_) {
+          /* localStorage indisponible : on garde le défaut. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
