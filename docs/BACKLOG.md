@@ -9,6 +9,9 @@
 - **Projet Supabase à créer** (préprod + prod), refs à reporter dans `.env.example`, `.github/workflows/db-push.yml`, `docs/HANDOFF.md`. Sans lui : ni auth, ni migrations, ni import.
 - **Secrets du workflow `db-push.yml`** : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_DB_PASSWORD`, `SUPABASE_DB_PASSWORD_PREPROD`. Sans eux le workflow échoue à l'étape « Link project ».
 - **Socle : le squelette annonce `boilerplate-kit@0.2.0`**, qui ne publie pas `src/` et ne se vendorise pas. Corrigé ici en 0.3.0 ; à remonter à APP-TEMPLATE (`template/socle.json`).
+- **ADR-001 à accepter** : mesurer le coût d'un projet Supabase de plus (offre et nombre de projets de l'organisation). Bloque la création du projet Supabase.
+- **ADR-001, modèle des affectations** : « proposé, à valider » dans le carnet de conception ; à faire valider avant la première migration (D2, D5, D6 en dépendent).
+- **ADR-001 D7** : extraire le client Aurion de GDC dans TEMPLATE-EPSS avant d'écrire l'import du Planning.
 - **Charte `@it-unify/ui-epss` pas encore consommée** : attendre la PR de la coque (TEMPLATE-EPSS) et la publication.
 
 ## Instabilités de tests constatées

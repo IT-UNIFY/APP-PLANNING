@@ -81,6 +81,12 @@ document.**
   `docs/brief-session-cloud-coque.md`.
 - APP-PLANNING est en Tailwind 4, GDC en Tailwind 3 : `ui-epss` doit servir les
   deux (ajouté au brief).
+- Données : un projet Supabase propre au Planning, lu par GDC via un schéma
+  `api_v1` en lecture seule, sans copie chez le lecteur ; « Mon planning »
+  fourni par le Planning en paquet React monté dans GDC (ADR-001, **proposé** :
+  coût et modèle des affectations à valider). Source qui fait foi sur le
+  fonctionnel : le carnet de conception,
+  https://claude.ai/artifact/MHDtYossAju15FJ6q1Uujg.
 - Politique de liaison M365 : `refuser` (choix de l'utilisateur, 2026-11-19).
 - CORS edge-kit : liste explicite seulement (`MOTIF_ORGANISATION=aucun`) ; pas
   de sous-domaine défini à ce jour.

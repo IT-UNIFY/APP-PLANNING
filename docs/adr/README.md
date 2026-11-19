@@ -6,7 +6,7 @@ pas ici — et ce projet la référence.
 
 | ADR | Titre | Statut |
 | --- | --- | --- |
-| — | <!-- premier ADR à venir --> | — |
+| [ADR-001](ADR-001-donnees-planning-et-modules-erp.md) | Données du Planning : une base propre, une API de lecture pour les autres modules | proposé |
 
 ## Convention
 
