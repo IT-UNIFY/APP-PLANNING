@@ -58,8 +58,9 @@ aucun partage de connexion n'est nécessaire.
 
 Projet unique pour le lot 1 : `prod` et `preprod` visent tous deux `yvuutsniduqqinkowqkc`,
 avec le secret `SUPABASE_DB_PASSWORD` (posé le 2026-11-19).
-⚠️ Pas encore opérationnel : le secret `SUPABASE_ACCESS_TOKEN` (jeton
-personnel Supabase) n'est pas posé (`docs/BACKLOG.md`).
+Le secret `SUPABASE_ACCESS_TOKEN` est posé aussi (2026-11-19).
+⚠️ GitHub ne lance à la main (`workflow_dispatch`) qu'un workflow présent sur
+`main` : le premier `mode=plan` se fait après le merge de la PR qui l'apporte.
 
 ## 4 bis. 🔴 Après tout `drop`+`create` de fonction SQL, relire les droits
 

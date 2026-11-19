@@ -6,7 +6,7 @@
 
 ## Dettes
 
-- **Secret `SUPABASE_ACCESS_TOKEN`** du workflow `db-push.yml` (jeton personnel Supabase, à poser par l'utilisateur). `SUPABASE_DB_PASSWORD` est posé. Sans ce jeton, le workflow échoue à l'étape « Link project ».
+- **Prouver `db-push.yml`** : les deux secrets sont posés et le jeton est valide (API Supabase, 2026-11-19), mais le workflow n'a jamais tourné. GitHub ne le lance à la main qu'une fois sur `main` : après le merge de la PR #1, `gh workflow run db-push.yml -f mode=plan -f project=preprod`.
 - **Pas de préprod séparée** : un seul projet Supabase pour le lot 1. À revoir avant l'ouverture aux utilisateurs (11/01/2027).
 - **Socle : le squelette annonce `boilerplate-kit@0.2.0`**, qui ne publie pas `src/` et ne se vendorise pas. Corrigé ici en 0.3.0 ; à remonter à APP-TEMPLATE (`template/socle.json`).
 - **ADR-001 à accepter** : mesurer le coût d'un projet Supabase de plus (offre et nombre de projets de l'organisation). Le projet du lot 1 existe déjà (décision de l'utilisateur, 2026-11-19).

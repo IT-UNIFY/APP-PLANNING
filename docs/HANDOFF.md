@@ -71,8 +71,8 @@ document.**
 
 - Migrations appliquées : aucune.
 - Fonctions déployées : aucune.
-- Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN`,
-  `SUPABASE_DB_PASSWORD` (✅ posé) ; Edge Functions
+- Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN` et
+  `SUPABASE_DB_PASSWORD` (✅ posés tous les deux) ; Edge Functions
   `ALLOWED_ORIGINS` (edge-kit, sans motif de sous-domaine) et ceux de
   `docs/PREREQUIS-m365-auth.md`.
 
@@ -95,10 +95,11 @@ document.**
 
 ## 7. L'étape suivante
 
-1. Poser le secret `SUPABASE_ACCESS_TOKEN`, puis lancer
-   `gh workflow run db-push.yml -f mode=plan` pour prouver le chemin de
-   migration (aucune migration encore : le run doit finir vert sans rien
-   appliquer).
+1. Après le merge de la PR #1, lancer
+   `gh workflow run db-push.yml -f mode=plan -f project=preprod` pour prouver
+   le chemin de migration (aucune migration encore : le run doit finir vert
+   sans rien appliquer). Les deux secrets sont posés ; le jeton a été vérifié
+   par l'API Supabase, pas encore par le workflow.
 2. Quand la PR de la coque est mergée dans TEMPLATE-EPSS et `ui-epss` publié :
    l'installer, poser `data-module="planning"` sur `<html>`, monter la coque.
 3. Premier écran du lot 1 : « Mon planning de l'intervenant »
