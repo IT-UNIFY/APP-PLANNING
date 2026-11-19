@@ -1,0 +1,124 @@
+#!/bin/sh
+# Porte de vérification LOCALE — elle remplace la CI GitHub.
+#
+# POURQUOI ELLE EXISTE. L'org est au forfait GitHub gratuit : 2 000 minutes
+# d'Actions par mois, partagées entre ~22 dépôts privés, facturées à la minute
+# entamée par job et par exécution. Le pool a été épuisé en juillet 2026. Sur
+# un dépôt à un seul contributeur, un contrôle distant n'ajoute aucune valeur
+# de revue — seulement du coût. Cf. `AGENTS.md` § « Porte de vérification ».
+#
+# ⚠️ REMETTRE UNE CI GITHUB quand un second contributeur pousse sur ce dépôt,
+# ou quand la revue doit avoir lieu ailleurs que sur le poste de l'auteur.
+# Ce hook ne vérifie PAS le résultat de la fusion — seulement la branche
+# poussée — et `git push --no-verify` le contourne. À deux, ces deux trous
+# cessent d'être théoriques.
+#
+# ACTIVATION. Automatique via le `prepare` du `package.json`, qui exécute
+# `git config core.hooksPath .githooks` au `npm install`. Si vous installez
+# avec `npm ci --ignore-scripts`, le `prepare` est sauté et ce hook NE
+# S'EXÉCUTE PAS. Dans ce cas, à lancer une fois à la main :
+#
+#     git config core.hooksPath .githooks
+#
+# Un hook jamais activé échoue silencieusement — c'est le pire défaut d'une
+# porte de vérification.
+#
+# CE QUE CHAQUE COMMANDE GARDE. Elles sont dans `npm run verify` :
+#   lint      — règles ESLint (imports morts, hooks React, `any`, `console`).
+#   typecheck — tsc sur `src` ET `tests`.
+#   test      — la suite Vitest.
+#   build     — le vrai build Vite. Il attrape ce que tsc laisse passer
+#               (résolution d'imports, assets, options de bundling), et il
+#               reflète ce que fait le déploiement.
+#
+# Si ce dépôt a des Edge Functions en Deno, AJOUTER `check:edge` au `verify` :
+# Vitest transpile les modules Edge SANS vérifier leurs types. Une commande
+# absente se RETIRE du `verify` — elle ne se transforme jamais en `|| true`.
+set -e
+
+# ── 1. Saut de la suppression de référence ───────────────────────────────────
+# Git passe sur stdin une ligne par référence poussée :
+#   <ref locale> <oid local> <ref distante> <oid distant>
+# Une SUPPRESSION (`git push --delete`) a un oid local tout à zéro et ne pousse
+# aucun code : vérifier n'aurait aucun sens (supprimer une branche fusionnée
+# lancerait build + toute la suite pour rien).
+tout_suppressions=1
+a_lu_une_ligne=0
+
+while read -r _ref_locale oid_local _ref_distante _oid_distant; do
+  a_lu_une_ligne=1
+  if [ -z "$oid_local" ]; then
+    # Ligne illisible : on ne sait pas ce qui est poussé. Défaut SÛR — on
+    # vérifie. Ne jamais sauter une porte sur une information manquante.
+    tout_suppressions=0
+  else
+    case "$oid_local" in
+      *[!0]*) tout_suppressions=0 ;;
+    esac
+  fi
+done
+
+# FAIL-SAFE : zéro ligne lue = on ne sait pas ce qui est poussé, donc on
+# vérifie. Même principe que ci-dessus.
+if [ "$a_lu_une_ligne" -eq 1 ] && [ "$tout_suppressions" -eq 1 ]; then
+  echo "pre-push : suppression de référence seule, aucun code poussé — vérification sautée."
+  exit 0
+fi
+
+# ── 2. Vérification, avec sa sortie CONSERVÉE ────────────────────────────────
+# La sortie est gardée en plus d'être affichée. Motif mesuré sur APP-FIX le
+# 2026-08-26 : la porte a refusé deux pushes sur un arbre par ailleurs vert,
+# sa sortie avait défilé, et il a fallu rejouer toute la suite pour retrouver
+# le test coupable. Une porte dont l'échec n'est pas diagnosable pousse à
+# `--no-verify`.
+#
+# Le `tee` garde l'affichage en direct — une suite de plusieurs minutes en
+# silence serait pire. `sh` n'a pas `PIPESTATUS`, d'où le code de sortie écrit
+# dans un fichier À L'INTÉRIEUR du groupe : c'est le seul moyen POSIX d'avoir
+# les deux.
+JOURNAL_VERIF=".githooks/verify-dernier-echec.log"
+CODE_VERIF=$(mktemp)
+
+echo "pre-push : npm run verify (lint + typecheck + test + build)…"
+
+# 🔴 `set +e` N'EST PAS DÉCORATIF, et la cause n'est PAS le lanceur de hooks.
+# La cause est `errexit` — activé ici par le `set -e` de la ligne 38, et
+# activable aussi par un lanceur qui invoque le hook via `sh -e`.
+#
+# Sans ce `set +e`, l'échec de `npm run verify` tue le sous-shell du groupe
+# AVANT `echo "$?"`. Le fichier de code reste vide, et `exit ""` fait sortir
+# dash sur « Illegal number », en écrasant le diagnostic par une erreur de
+# script. Mesuré sur APP-FIX le 2026-08-31 : le push était bien refusé — la
+# porte restait sûre — mais son message était inutilisable.
+#
+# ⚠️ Pour reproduire, il FAUT errexit : `sh -e .githooks/pre-push` échoue,
+# `sh .githooks/pre-push` passe. Trois reproductions sans `-e` avaient
+# innocenté à tort le montage.
+set +e
+{ npm run verify 2>&1; echo "$?" > "$CODE_VERIF"; } | tee "$JOURNAL_VERIF"
+code=$(cat "$CODE_VERIF")
+set -e
+rm -f "$CODE_VERIF"
+
+# FAIL-SAFE : un code illisible (fichier vide, sous-shell tué, disque plein)
+# vaut ÉCHEC, jamais succès, et surtout pas un plantage.
+case "$code" in
+  '' | *[!0-9]*)
+    echo "pre-push : code de sortie de la vérification ILLISIBLE — refus par défaut."
+    code=1
+    ;;
+esac
+
+if [ "$code" != "0" ]; then
+  echo ""
+  echo "pre-push : ÉCHEC (code $code). Sortie complète conservée dans :"
+  echo "  $JOURNAL_VERIF"
+  echo ""
+  echo "Si la suite repasse au vert sans qu'une ligne change, c'est une"
+  echo "instabilité sous charge et non une régression : relever le NOM du test"
+  echo "dans ce fichier avant de relancer, et le consigner au BACKLOG."
+  exit "$code"
+fi
+
+rm -f "$JOURNAL_VERIF"
+echo "pre-push : tout est vert."

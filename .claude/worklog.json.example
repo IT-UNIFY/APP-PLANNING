@@ -1,0 +1,6 @@
+{
+  "endpoint": "https://<votre-projet>.supabase.co/functions/v1/append-task-worklog",
+  "apikey": "<anon-key-publique-du-projet>",
+  "secret_env": "AGENT_INGEST_SECRET",
+  "_note": "Template du pont config worklog legacy . Copier vers .claude/worklog.json (gitignoré) et renseigner. `endpoint` + `apikey` = URL Edge Function + anon key du projet Supabase (l'anon key est publique par design, RLS = sécurité). `secret_env` nomme la variable du .env qui porte le bearer secret. Voie worklog PRIMAIRE = le MCP FixTracker (tools start/stop_worklog) — voir le README du serveur MCP FixTracker. Ce pont .md/rollup reste optionnel."
+}

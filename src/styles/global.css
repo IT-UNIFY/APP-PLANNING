@@ -1,0 +1,12 @@
+/* Tailwind CSS 4 — configuration CSS-first. Il n'y a pas de
+   `tailwind.config.js` : le thème se déclare ici, avec `@theme`. */
+@import 'tailwindcss';
+
+/* Mode sombre piloté par la classe `dark` posée sur <html> par l'amorce de
+   `index.html`, et non par la seule media query : l'utilisateur doit pouvoir
+   choisir autre chose que la préférence de son système. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Couleurs et polices du projet à déclarer ici. */
+}

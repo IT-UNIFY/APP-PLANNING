@@ -1,0 +1,38 @@
+{
+  "//": "GÉNÉRÉ par scripts/vendorer-socle.mjs. Empreintes sha256 (16 car.) de l'arbre vendorisé. `npm run verify` échoue si elles ne correspondent plus — protection contre une édition locale, SANS réseau ni jeton.",
+  "paquet": "@it-unify/boilerplate-kit",
+  "version": "0.3.0",
+  "sousChemins": [
+    "m365-auth",
+    "edge/cors",
+    "edge/validation",
+    "edge/auth",
+    "client/erreur-edge"
+  ],
+  "genereLe": "2026-11-19",
+  "//importsRequis": "Spécificateurs NUS importés par l'arbre vendorisé, relevés à la synchronisation, avec l'entrée de carte d'imports que chacun exige. Figés ici pour que le contrôle hors ligne puisse les réclamer SANS réinstaller le paquet — donc sans jeton. Hors de `node_modules`, Deno n'en résout aucun tout seul, `import type` compris. Voir APP-TEMPLATE B23.",
+  "importsRequis": {
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2"
+  },
+  "fichiers": {
+    "client/erreurEdge.ts": "c039bbfc4b607b15",
+    "edge/auth.ts": "fe2eb8a4199f5cc3",
+    "edge/cors.ts": "e024a8393b31c011",
+    "edge/validation.ts": "51668dd8a95ff710",
+    "m365-auth/connexion.ts": "633817c29e977d8d",
+    "m365-auth/construireUrlAuthM365.ts": "040ab01a99d1e793",
+    "m365-auth/echange.ts": "7dd38034c449e7d6",
+    "m365-auth/entra.ts": "b887c7afd56509e2",
+    "m365-auth/etat.ts": "37cd866b2aa99913",
+    "m365-auth/etatRetour.ts": "f825d6b969bffcda",
+    "m365-auth/graph.ts": "6d0b56a5f4ef9e1b",
+    "m365-auth/identifiants.ts": "fdadb86a975ee262",
+    "m365-auth/index.ts": "12d8295e034743be",
+    "m365-auth/lienMagique.ts": "9a1abf543848daa5",
+    "m365-auth/locataireM365.ts": "80e329bd9cb5ca5b",
+    "m365-auth/nonceM365.ts": "62c314dc56f96d0c",
+    "m365-auth/terminerConnexionM365.ts": "c34c3df25f486295",
+    "m365-auth/validation.ts": "3e51ef5cb6e32fed",
+    "m365-auth/validationRappel.ts": "97324e7c88a1b4f1"
+  }
+}

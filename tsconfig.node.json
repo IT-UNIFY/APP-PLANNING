@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "//include": "🔴 `vitest.config.ts` A ÉTÉ AJOUTÉ LE 2026-09-10, et son absence coûtait cher : il n'était couvert par AUCUN tsconfig, donc jamais type-vérifié. C'est ce trou qui a laissé passer un `import.meta.url` dans `vite.config.ts` — la forme correcte était pourtant documentée dans `vitest.config.ts`, mais rien ne pouvait la faire respecter. Un fichier de configuration hors de toute porte est un fichier où les pièges se réinstallent.",
+  "include": ["vite.config.ts", "vitest.config.ts", "vite-config-shims.d.ts"]
+}

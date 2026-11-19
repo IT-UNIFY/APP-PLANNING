@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bandeau du module Planning</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.bt:focus-visible,.sr:focus-visible,.bl:focus-visible{outline:3px solid #FFFFFF;outline-offset:2px}
+.mi:hover{background:#FEEFF1}
+</style>
+</helmet>
+<header style="background: #8A0031; color: #FFFFFF; font-family: Manrope, 'Segoe UI', sans-serif; min-height: 72px; box-sizing: border-box; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px">
+  <a href="MesActions.dc.html" data-logo-etab aria-label="CY EPSS : retour à l’accueil de l’outil" title="Retour à l’accueil de l’outil" style="display: inline-flex; align-items: center; gap: 6px; flex: none; color: #FFFFFF; text-decoration: none; padding: 2px 4px; border-radius: 6px"><span aria-hidden="true" style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFFFFF; display: grid; place-items: center; font: 800 10px Manrope, 'Segoe UI', sans-serif">CY</span><span aria-hidden="true" style="font: 800 18px Manrope, 'Segoe UI', sans-serif; letter-spacing: -0.5px">epss</span></a><span aria-hidden="true" style="width: 1px; height: 32px; background: rgba(255,255,255,0.55); flex: none"></span>
+
+  <div style="display: flex; align-items: center; gap: 12px; flex: none">
+    <svg width="40" height="40" viewBox="0 0 64 64" role="img" aria-label="Logo du module Planning" style="flex: none; display: block; border: 2px solid #FFFFFF; border-radius: 12px; box-sizing: content-box">
+      <clipPath id="cl-bandeau-planning"><rect width="64" height="64" rx="14"/></clipPath>
+      <g clip-path="url(#cl-bandeau-planning)"><rect width="64" height="64" fill="#A3123F"/><circle cx="58" cy="6" r="22" fill="#D04D67"/></g>
+      <g transform="translate(18 18) scale(1.1667)" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M8 14h3M13 14h3"/></g>
+    </svg>
+    <div style="display: flex; flex-direction: column; line-height: 1.2">
+      <span style="font-size: 17px; font-weight: 800">Planning</span>
+      <span style="font-size: 12px; font-weight: 500; color: #FBDDE4">[Nom de l’ERP]</span>
+    </div>
+  </div> <details name="bandeau" style="position: relative; flex: none; z-index: 70">
+    <summary aria-label="Mes outils" title="Mes outils" style="list-style: none; cursor: pointer; display: flex; width: 28px; height: 28px; box-sizing: border-box; border-radius: 8px; border: 1px solid rgba(255,255,255,0.7); background: rgba(255,255,255,0.12); color: #FFFFFF; align-items: center; justify-content: center; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div style="position: absolute; left: 0; top: calc(100% + 10px); width: 340px; max-width: 90vw; background: #FFFFFF; color: #1B2430; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 14px 34px rgba(31, 36, 35, 0.18); overflow: hidden; z-index: 80">
+      <div style="padding: 12px 16px 2px; font-size: 15px; font-weight: 700">Mes outils</div>
+      <div style="padding: 10px 16px 4px; font-size: 11px; font-weight: 700; color: #646F7D">Parcours de l’apprenant</div>
+      <div style="padding: 0 12px 6px; display: flex; flex-direction: column; gap: 6px">
+        <a class="mi" href="https://claude.ai/artifact/Ancb413ZVLqjNuoRc7cYNp" target="outil-stage" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #E1E5EB; border-radius: 10px; text-decoration: none; color: #1B2430"><span style="width: 36px; height: 36px; border-radius: 9px; background: #A372F5; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v11H3zM9 8V5h6v3M3 13h18"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">Stage</span><span aria-label="3 actions à traiter" style="min-width: 20px; height: 20px; border-radius: 10px; background: #915B02; color: #FFFFFF; font-size: 11px; font-weight: 700; display: grid; place-items: center; padding: 0 5px; box-sizing: border-box">3</span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+      </div>
+      <div style="padding: 10px 16px 4px; font-size: 11px; font-weight: 700; color: #646F7D">Organisation</div>
+      <div style="padding: 0 12px 6px; display: flex; flex-direction: column; gap: 6px">
+        <a class="mi" href="https://claude.ai/artifact/GCuNEVkPfbScBecxPeb1PM" target="outil-crm" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #E1E5EB; border-radius: 10px; text-decoration: none; color: #1B2430"><span style="width: 36px; height: 36px; border-radius: 9px; background: #6A0F2C; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM4 7h2M4 11h2M4 15h2M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9 17c.5-2 1.7-3 3-3s2.5 1 3 3"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">CRM</span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 2px solid #A3123F; border-radius: 10px"><span style="width: 36px; height: 36px; border-radius: 9px; background: #A3123F; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M8 14h3M13 14h3"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">Planning</span><span style="font-size: 12px; font-weight: 500; color: #566170">Vous êtes ici</span></div>
+        <a class="mi" href="https://claude.ai/artifact/2wtsPaKXQrffYfKpThGLFs" target="outil-intervenant" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #E1E5EB; border-radius: 10px; text-decoration: none; color: #1B2430"><span style="width: 36px; height: 36px; border-radius: 9px; background: #985403; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0M2 20c0-3 2.5-5 6-5s6 2 6 5M16 5a3 3 0 0 1 0 6M22 20c0-2.5-1.5-4.2-4-4.8"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">Intervenant</span><span aria-label="2 actions à traiter" style="min-width: 20px; height: 20px; border-radius: 10px; background: #915B02; color: #FFFFFF; font-size: 11px; font-weight: 700; display: grid; place-items: center; padding: 0 5px; box-sizing: border-box">2</span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+      </div>
+      <div style="padding: 10px 16px 4px; font-size: 11px; font-weight: 700; color: #646F7D">Qualité</div>
+      <div style="padding: 0 12px 6px; display: flex; flex-direction: column; gap: 6px">
+        <a class="mi" href="https://claude.ai/artifact/KjBLmz7DtkLkytzKS3tKHh" target="outil-enquetes" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #E1E5EB; border-radius: 10px; text-decoration: none; color: #1B2430"><span style="width: 36px; height: 36px; border-radius: 9px; background: #2189F9; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9zM7 5H5v16h14V5h-2M9 12h6M9 16h6"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">Enquêtes</span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+      </div>
+      <div style="padding: 10px 16px 4px; font-size: 11px; font-weight: 700; color: #646F7D">Veille et support</div>
+      <div style="padding: 0 12px 6px; display: flex; flex-direction: column; gap: 6px">
+        <a class="mi" href="https://claude.ai/artifact/Fw7ojKqS9mNaBuKdhqPhkR" target="outil-si" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #E1E5EB; border-radius: 10px; text-decoration: none; color: #1B2430"><span style="width: 36px; height: 36px; border-radius: 9px; background: #047A4B; display: grid; place-items: center; flex: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v6H4zM4 13h16v6H4zM8 8h.01M8 16h.01"/></svg></span><span style="flex: 1; font-size: 14px; font-weight: 700">Outil SI</span><span aria-label="1 action urgente" style="min-width: 20px; height: 20px; border-radius: 10px; background: #B02B27; color: #FFFFFF; font-size: 11px; font-weight: 700; display: grid; place-items: center; padding: 0 5px; box-sizing: border-box">1</span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+      </div>
+      <div style="padding: 10px 16px; border-top: 1px solid #E1E5EB; font-size: 12px; color: #566170">Seuls les outils auxquels vous avez accès apparaissent. Chaque clic ouvre l’outil dans un nouvel onglet.</div>
+    </div>
+  </details>
+
+  <div style="flex: 1 1 280px; display: flex; justify-content: center; min-width: 0">
+    <label style="position: relative; display: block; width: 100%; max-width: 520px">
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Recherche globale</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#566170" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 14px; top: 13px"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4"/></svg>
+      <input class="sr" type="search" value="{{q}}" onInput="{{onQ}}" placeholder="Rechercher une promotion, un cours, un intervenant… (Ctrl K)" style="width: 100%; box-sizing: border-box; height: 44px; border: 0; border-radius: 12px; padding: 0 16px 0 42px; font: 500 14px Manrope, 'Segoe UI', sans-serif; color: #1B2430; background: #FFFFFF">
+      <sc-if value="{{open}}" hint-placeholder-val="{{ false }}">
+        <div role="listbox" aria-label="Résultats" style="position: absolute; top: 50px; left: 0; right: 0; z-index: 50; background: #FFFFFF; color: #1B2430; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 8px 28px rgba(27, 36, 48, 0.25); overflow: hidden">
+          <sc-for list="{{results}}" as="r" hint-placeholder-count="3">
+            <a role="option" href="{{r.href}}" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; box-sizing: border-box; padding: 6px 14px; text-decoration: none; color: #1B2430; border-bottom: 1px solid #E1E5EB; font-size: 14px"><strong>{{r.name}}</strong><span style="font-size: 12px; color: #566170">{{r.sub}}</span></a>
+          </sc-for>
+          <sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 14px; font-size: 13px; color: #566170">Aucun résultat. La recherche porte sur toutes les années.</div></sc-if>
+        </div>
+      </sc-if>
+    </label>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; flex: none">
+    <a class="bl" href="Main.dc.html" style="font-size: 12px; font-weight: 700; color: #FFFFFF; text-decoration: none; border: 1.5px solid #FBDDE4; border-radius: 999px; padding: 6px 12px">Sommaire de la maquette</a>
+    <sc-if value="{{hasVoir}}" hint-placeholder-val="{{ false }}"><label title="Maquette seulement : retiré en production" style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #FFFFFF; border: 1.5px dashed #FBDDE4; border-radius: 999px; padding: 3px 4px 3px 12px">Voir comme<select onChange="{{pickVoir}}" aria-label="Voir comme (maquette)" style="height: 30px; border: 0; border-radius: 999px; padding: 0 8px; font: 700 12px Manrope, 'Segoe UI', sans-serif; color: #8A0031; background: #FFFFFF; cursor: pointer"><sc-for list="{{voirOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.k}}" selected="{{o.on}}">{{o.label}}</option></sc-for></select></label></sc-if>
+    <span style="font-size: 12px; font-weight: 700; color: #FFFFFF; border: 1.5px dashed #FBDDE4; border-radius: 999px; padding: 6px 12px">Données d’exemple</span>
+    <details name="bandeau" style="position: relative; flex: none; z-index: 60">
+      <summary class="bt" aria-label="Notifications, 6 non lues" style="position: relative; width: 40px; height: 40px; border-radius: 10px; background: #FFFFFF; display: grid; place-items: center; cursor: pointer; list-style: none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A0031" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9zM10 20a2 2 0 0 0 4 0"/></svg>
+        <span style="position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 5px; border-radius: 999px; background: #B02B27; color: #FFFFFF; font-size: 12px; font-weight: 800; display: grid; place-items: center">6</span>
+      </summary>
+      <div style="position: absolute; right: 0; top: calc(100% + 10px); width: 360px; max-width: 90vw; background: #FFFFFF; color: #1B2430; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 14px 34px rgba(31, 36, 35, 0.18); overflow: hidden; z-index: 80">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px"><b style="font-size: 15px">Notifications</b><span style="font-size: 12px; color: #566170">6 en tout</span></div>
+        <div style="padding: 4px 16px 2px; font-size: 11px; font-weight: 700; color: #646F7D">Dans cet outil · aujourd’hui</div>
+        <a class="mi" href="Construction.dc.html" style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 16px; border-top: 1px solid #ECEEF2; text-decoration: none; color: #1B2430"><span style="width: 8px; height: 8px; border-radius: 50%; background: #0373DC; margin-top: 6px; flex: none"></span><span style="flex: 1; min-width: 0"><b style="display: block; font-size: 14px">Marc Dubreuil a répondu à votre demande</b><span style="font-size: 12px; color: #566170">Disponible le 17/11, pas le 19/11</span></span><span style="font-size: 12px; color: #566170; flex: none">9 h 12</span></a>
+        <a class="mi" href="Calendrier.dc.html" style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 16px; border-top: 1px solid #ECEEF2; text-decoration: none; color: #1B2430"><span style="width: 8px; height: 8px; border-radius: 50%; background: #0373DC; margin-top: 6px; flex: none"></span><span style="flex: 1; min-width: 0"><b style="display: block; font-size: 14px">Événement proposé : portes ouvertes</b><span style="font-size: 12px; color: #566170">Par le service communication</span></span><span style="font-size: 12px; color: #566170; flex: none">8 h 40</span></a>
+        <div style="padding: 10px 16px 2px; font-size: 11px; font-weight: 700; color: #646F7D; border-top: 1px solid #E1E5EB">Ailleurs dans l’ERP : à traiter</div>
+        <a class="mi" href="https://claude.ai/artifact/2wtsPaKXQrffYfKpThGLFs" target="outil-intervenant" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #ECEEF2; text-decoration: none; color: #1B2430"><span style="width: 30px; height: 30px; border-radius: 9px; background: #985403; display: grid; place-items: center; flex: none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0M2 20c0-3 2.5-5 6-5s6 2 6 5"/></svg></span><span style="flex: 1; min-width: 0"><b style="display: block; font-size: 14px">Intervenant</b><span style="font-size: 12px; font-weight: 600; color: #915B02">2 actions à traiter</span></span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+        <a class="mi" href="https://claude.ai/artifact/Fw7ojKqS9mNaBuKdhqPhkR" target="outil-si" rel="noopener" title="S’ouvre dans un nouvel onglet" style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #ECEEF2; text-decoration: none; color: #1B2430"><span style="width: 30px; height: 30px; border-radius: 9px; background: #047A4B; display: grid; place-items: center; flex: none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v6H4zM4 13h16v6H4z"/></svg></span><span style="flex: 1; min-width: 0"><b style="display: block; font-size: 14px">Outil SI</b><span style="font-size: 12px; font-weight: 600; color: #B02B27">1 action urgente</span></span><span aria-hidden="true" style="color: #646F7D">↗</span></a>
+        <div style="display: flex; justify-content: space-between; padding: 10px 16px; border-top: 1px solid #E1E5EB; font-size: 12px; font-weight: 600"><span style="color: #8A0031">Tout marquer comme lu</span><span style="color: #566170">Préférences</span></div>
+      </div>
+    </details>
+    <button class="bt" type="button" aria-label="Aide" style="width: 40px; height: 40px; border: 0; border-radius: 10px; background: #FFFFFF; color: #8A0031; font: 800 18px Manrope, 'Segoe UI', sans-serif; cursor: pointer; padding: 0">?</button>
+    <span aria-hidden="true" style="width: 1px; height: 34px; background: rgba(255, 255, 255, 0.55); flex: none"></span>
+    <details name="bandeau" style="position: relative; flex: none; z-index: 60">
+      <summary class="bt" aria-label="Mon compte : [Prénom NOM], {{role}}" style="list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #FFFFFF">
+        <span style="width: 40px; height: 40px; border-radius: 50%; box-sizing: border-box; background: #A3123F; border: 2px solid #FFFFFF; color: #FFFFFF; font-size: 19px; line-height: 1; font-weight: 800; display: grid; place-items: center">PN</span>
+        <span style="display: flex; flex-direction: column; line-height: 1.25">
+          <span style="font-size: 13px; font-weight: 700">[Prénom NOM]</span>
+          <span style="font-size: 12px; color: #FBDDE4">{{role}}</span>
+        </span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div style="position: absolute; right: 0; top: calc(100% + 10px); width: 310px; background: #FFFFFF; color: #1B2430; border: 1px solid #E1E5EB; border-radius: 12px; box-shadow: 0 14px 34px rgba(31, 36, 35, 0.18); overflow: hidden; z-index: 80">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #F9FAFB; border-bottom: 1px solid #E1E5EB"><span style="width: 40px; height: 40px; border-radius: 50%; box-sizing: border-box; background: #A3123F; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px #E1E5EB; color: #FFFFFF; display: grid; place-items: center; font-size: 19px; font-weight: 800; flex: none">PN</span><span style="line-height: 1.25"><b style="display: block; font-size: 15px">[Prénom NOM]</b><span style="font-size: 12px; color: #566170">{{role}}</span></span></div>
+        <div style="padding: 10px 16px; display: flex; flex-direction: column; gap: 2px"><b style="font-size: 14px">Mon profil</b><span style="font-size: 12px; color: #566170">Identité et coordonnées, en lecture</span><a href="https://myaccount.microsoft.com" target="_blank" rel="noopener" style="margin-top: 4px; font-size: 12px; font-weight: 700; color: #8A0031">Modifier sur mon compte Microsoft 365 ↗</a></div>
+        <button type="button" style="display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 10px 16px; border: 0; background: none; cursor: pointer; text-align: left; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif"><b style="font-size: 14px">Mes accès</b><span style="font-size: 12px; color: #566170">Profil général, rôle par outil, exceptions</span></button>
+        <button type="button" style="display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 10px 16px; border: 0; background: none; cursor: pointer; text-align: left; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif"><b style="font-size: 14px">Mes préférences</b><span style="font-size: 12px; color: #566170">Notifications, abonnement à mon planning, affichage</span></button>
+        <button type="button" style="display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 10px 16px; border: 0; background: none; cursor: pointer; text-align: left; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif"><b style="font-size: 14px">Voir comme</b><span style="font-size: 12px; color: #566170">Administrateurs : contrôler ce que voit un autre profil</span></button>
+        <div style="height: 1px; background: #E1E5EB"></div>
+        <button type="button" style="width: 100%; padding: 10px 16px; border: 0; background: none; cursor: pointer; text-align: left; color: #B02B27; font: 700 14px Manrope, 'Segoe UI', sans-serif">Se déconnecter</button>
+      </div>
+    </details>
+  </div>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"role":{"editor":null,"default":"Formateur"},"voir":{"editor":null,"default":null},"vue":{"editor":null,"default":null},"onVoir":{"editor":null,"default":null},"$preview":{"width":1440,"height":72}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { q: '' };
+  }
+  renderVals() {
+    const role = this.props.role ?? 'Formateur';
+    const norm = (x) => (x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const ALL = [
+      ['ASS 2e année', 'Promotion 2025-2028', 'Catalogue.dc.html'], ['ASS 1re année', 'Promotion 2026-2029', 'Catalogue.dc.html'],
+      ['EJE 1re année', 'Promotion 2026-2029', 'Catalogue.dc.html'], ['Droit de la protection de l’enfance', 'Cours · ASS 2e année', 'Catalogue.dc.html'],
+      ['Analyse des pratiques professionnelles', 'Cours · ASS 2e année', 'Catalogue.dc.html'], ['Marc Dubreuil', 'Intervenant', 'Construction.dc.html'],
+      ['Sophie Andrieu', 'Formatrice', 'Construction.dc.html'], ['Portes ouvertes', 'Événement · 14/11/2026', 'Calendrier.dc.html']
+    ];
+    const q = norm(this.state.q).trim();
+    const results = q.length < 2 ? [] : ALL.filter((r) => norm(r[0] + ' ' + r[1]).indexOf(q) >= 0).slice(0, 6).map((r) => ({ name: r[0], sub: r[1], href: r[2] }));
+    const voir = Array.isArray(this.props.voir) ? this.props.voir : [];
+    const vue = this.props.vue;
+    const onVoir = this.props.onVoir;
+    return { hasVoir: voir.length > 0, voirOpts: voir.map((o) => ({ k: o.k, label: o.label, on: o.k === vue })), pickVoir: (e) => { if (typeof onVoir === 'function') onVoir(e.target.value); }, role, q: this.state.q, onQ: (e) => this.setState({ q: e.target.value }), open: q.length >= 2, results, noMatch: q.length >= 2 && results.length === 0 };
+  }
+}
+</script>
+</body>
+</html>

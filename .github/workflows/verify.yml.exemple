@@ -1,0 +1,111 @@
+# Porte de vérification distante — LIVRÉE INERTE, À ACTIVER SCIEMMENT.
+#
+# 🔴 CE FICHIER NE S'EXÉCUTE PAS. Son extension est `.exemple` : GitHub ignore
+# tout ce qui n'est pas `.yml`/`.yaml` dans `.github/workflows/`. Pour
+# l'activer :
+#
+#     git mv .github/workflows/verify.yml.exemple .github/workflows/verify.yml
+#
+# ═══════════════════════════════════════════════════════════════════════
+# POURQUOI INERTE PAR DÉFAUT — ce n'est pas une hésitation
+# ═══════════════════════════════════════════════════════════════════════
+#
+# L'org IT-UNIFY est au forfait GRATUIT : **2 000 minutes d'Actions par mois**,
+# partagées entre ~22 dépôts privés, facturées **à la minute entamée, par JOB
+# et par EXÉCUTION**. Le pool a été épuisé en juillet 2026. Livrer une CI
+# ACTIVE dans le squelette multiplierait ce coût par le nombre de projets
+# instanciés, et pour la plupart d'entre eux sans contrepartie : à un seul
+# contributeur, un contrôle distant n'apporte aucune valeur de revue — la
+# porte locale `pre-push` fait déjà tourner la même commande.
+#
+# ⭐ LE DÉCLENCHEUR EST NOMMÉ, PAS LAISSÉ AU FLAIR. Activez ce workflow quand
+# — et seulement quand :
+#
+#   · un **deuxième contributeur** pousse réellement sur ce dépôt ; ou
+#   · la revue doit avoir lieu **ailleurs que sur la machine de l'auteur**.
+#
+# C'est la règle de la convention globale (CLAUDE.md, « Verification gate »),
+# et l'arbitrage d'APP-TEMPLATE ADR-001 **D14**, rendu le 2026-09-10.
+#
+# 🔴 CE QUE LA PORTE LOCALE NE COUVRE PAS, et que ceci ferme :
+#   1. `git push --no-verify` la contourne — un collègue peut l'ignorer ;
+#   2. **rien ne vérifie le RÉSULTAT DE LA FUSION**, seulement la branche
+#      poussée. C'est le déclencheur `pull_request` qui le ferme : GitHub y
+#      construit le commit de fusion ;
+#   3. `npm ci --ignore-scripts` saute le `prepare` qui active la porte —
+#      elle n'est alors jamais posée, **en silence**.
+#
+# ═══════════════════════════════════════════════════════════════════════
+# LES QUATRE ÉCONOMIES, à ne pas défaire en « améliorant » le fichier
+# ═══════════════════════════════════════════════════════════════════════
+#
+#   · `paths-ignore` — un push purement documentaire n'exécute RIEN. Un dépôt
+#     du parc modifie journal, backlog, handoff et relevé de temps à presque
+#     chaque jalon : c'est l'économie la plus rentable.
+#   · **UN SEUL JOB.** La facturation est par job : découper
+#     « lint / test / build » serait plus lisible et **deux à trois fois plus
+#     cher**, pour la même information.
+#   · `concurrency` + `cancel-in-progress` — une correction poussée juste
+#     après laisserait sinon l'exécution précédente brûler des minutes pour un
+#     résultat que personne ne lira.
+#   · `ubuntu-latest` — multiplicateur ×1. Windows ×2, macOS ×10.
+#
+# ⚠️ PIÈGE SI VOUS LE RENDEZ OBLIGATOIRE (branch protection) : avec
+# `paths-ignore`, une PR purement documentaire n'exécute pas le workflow, donc
+# le contrôle requis reste éternellement « en attente » et la PR ne peut plus
+# être fusionnée. Retirer `paths-ignore`, ou ajouter un job de repli.
+
+name: verify
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # UN SEUL JOB — voir « les quatre économies ». Ne pas le découper.
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      # 🔴 DENO EST OBLIGATOIRE, et son absence n'est pas rattrapable.
+      # `npm run verify` enchaîne `check:edge` et `test:edge`, qui refusent de
+      # passer au vert sans Deno plutôt que de sauter le code Edge en silence.
+      # Sans cette étape, la CI échoue — c'est voulu, mais autant le savoir.
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - run: npm ci
+
+      # ⚠️ AUCUN JETON `read:packages`. Depuis le vendoring (ADR-001 D16), rien
+      # ne vient du registre privé à la construction : le code du socle est
+      # dans le dépôt, et `socle:verifier` contrôle son intégrité HORS LIGNE.
+      # Si cette étape échoue en `401 unauthenticated`, la cause n'est PAS un
+      # jeton manquant — c'est qu'une dépendance `@it-unify/*` est revenue dans
+      # `package.json`. La retirer (`npm uninstall`), ne pas ajouter un secret.
+      #
+      # LA MÊME COMMANDE QUE LA PORTE LOCALE, délibérément : deux définitions
+      # de « vert » finissent toujours par diverger.
+      - run: npm run verify

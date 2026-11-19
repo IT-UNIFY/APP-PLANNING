@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Menu principal du module Planning</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.mi:hover{background:#F6F7F9}
+.mi:focus-visible{outline:3px solid #A3123F;outline-offset:-3px}
+</style>
+</helmet>
+<nav aria-label="Menu principal" style="{{navStyle}}">
+  <div style="{{arrowRow}}"><sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}"><span style="font: 700 12px Manrope, 'Segoe UI', sans-serif; color: #646F7D; padding-left: 6px">Menu</span></sc-if><button type="button" onClick="{{toggleExp}}" aria-expanded="{{expanded}}" aria-label="{{expLabel}}" title="{{expLabel}}" style="width: 30px; height: 30px; border-radius: 8px; border: 1px solid #C9CFD8; background: #FFFFFF; color: #566170; display: grid; place-items: center; cursor: pointer; padding: 0; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{expPath}}"></path></svg></button></div>
+  <sc-for list="{{items}}" as="it" hint-placeholder-count="14">
+    <sc-if value="{{it.isGroup}}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+        <div style="{{it.gStyle}}">{{it.label}}</div>
+      </sc-if>
+      <sc-if value="{{collapsed}}" hint-placeholder-val="{{ false }}">
+        <div style="height: 1px; background: #E1E5EB; margin: 10px 8px"></div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{it.isItem}}" hint-placeholder-val="{{ true }}">
+      <a class="mi" href="{{it.href}}" title="{{it.title}}" style="{{it.style}}">
+        <span style="{{it.boxStyle}}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{it.stroke}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{it.d}}"/></svg>
+        </span>
+        <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+          <span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{it.label}}</span>
+        </sc-if>
+        <sc-if value="{{it.hasCount}}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+            <span style="min-width: 24px; height: 22px; box-sizing: border-box; padding: 0 7px; border-radius: 999px; background: #FEEFF1; color: #8A0031; font-size: 12px; font-weight: 800; display: grid; place-items: center">{{it.count}}</span>
+          </sc-if>
+        </sc-if>
+      </a>
+    </sc-if>
+  </sc-for>
+  <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+    <p style="margin: 12px 10px 0; font-size: 11px; line-height: 1.5; color: #646F7D">Le menu est replié sur les icônes par défaut ; votre choix de le garder déplié est mémorisé. Maquette : toutes les entrées sont visibles quel que soit le profil.</p>
+  </sc-if>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"text","default":"catalogue"},"collapsed":{"editor":"boolean","default":false},"deplie":{"editor":"boolean","default":false},"droits":{"editor":"enum","options":["complets","limites"],"default":"complets"},"mode":{"editor":"enum","options":["salaries","intervenant","apprenant","lot1"],"default":"salaries"},"h":{"editor":"int","default":900},"$preview":{"width":256,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { exp: null };
+  }
+  renderVals() {
+    const active = this.props.active ?? 'catalogue';
+    // « collapsed » n’est plus imposé par l’écran : le menu est replié par défaut, l’utilisateur choisit de le déplier.
+    const forced = false;
+    let saved = null;
+    try { const v = window.localStorage.getItem('planning-menu-deplie'); if (v === '1' || v === '0') saved = v === '1'; } catch (e) { saved = null; }
+    const exp = this.state && this.state.exp !== null && this.state.exp !== undefined ? this.state.exp : saved !== null ? saved : (this.props.deplie === false || this.props.deplie === 'false' ? false : true);
+    const collapsed = forced || !exp;
+    const h = this.props.h ?? 900;
+    const ICON = {
+      actions: 'M9 6h11M9 12h11M9 18h11M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5',
+      catalogue: 'M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z',
+      construction: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M9 15l2 2 4-4',
+      demandes: 'M4 6h16v12H4zM4 7l8 6 8-6',
+      institutionnel: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M12 13l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z',
+      alternance: 'M3 12h4l3-7 4 14 3-7h4',
+      salles: 'M4 21V5l8-2 8 2v16M9 21v-5h6v5M9 9h.01M15 9h.01M9 12h.01M15 12h.01',
+      charge: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
+      budget: 'M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6',
+      recents: 'M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM12 8v4l3 2',
+      parametres: 'M4 7h10M18 7h2M4 17h2M10 17h10M16 4v6M8 14v6',
+      sommaire: 'M5 4h14v16H5zM9 8h6M9 12h6M9 16h3',
+      plannings: 'M3 5h18v14H3zM3 9h18M8 13h3M13 13h3M8 16h3',
+      preparation: 'M4 6h2M4 12h2M4 18h2M9 6h11M9 12h11M9 18h11',
+      dispos: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M9 14l6 4M15 14l-6 4',
+      reservations: 'M4 7h16v13H4zM8 3v4M16 3v4M8 13l3 3 5-5',
+      certif: 'M12 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM9 13l-2 8 5-3 5 3-2-8',
+      evenements: 'M8 7a3 3 0 1 0 0 .01M16 7a3 3 0 1 0 0 .01M3 20c0-3 2.2-5 5-5s5 2 5 5M11 20c0-3 2.2-5 5-5s5 2 5 5',
+      jurys: 'M4 20h16M6 20v-6h4v6M14 20v-9h4v9M5 9l7-5 7 5',
+      sondage: 'M4 5h16v15H4zM4 9h16M8 13l2 2 4-4M8 3v4M16 3v4',
+      import: 'M12 3v12M7 10l5 5 5-5M4 21h16',
+      interv: 'M8 7a3 3 0 1 0 0 .01M3 20c0-3 2.2-5 5-5s5 2 5 5M14 8h7M14 12h7M14 16h5',
+      acces: 'M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6zM9 12l2 2 4-4'
+    };
+    const mode = this.props.mode ?? 'salaries';
+    const rawAppr = [
+      { k: 'actions', label: 'Mes actions', href: 'MesActions.dc.html', count: 2 },
+      { k: 'plannings', label: 'Mon planning', href: 'Plannings.dc.html' },
+      { k: 'certif', label: 'Mes épreuves et certifications', href: 'Certifications.dc.html' },
+      { g: 'Maquette (retiré en production)', maq: true },
+      { k: 'sommaire', label: 'Sommaire de la maquette', href: 'Main.dc.html' }
+    ];
+    const rawInt = [
+      { k: 'actions', label: 'Mes actions', href: 'MesActions.dc.html', count: 3 },
+      { k: 'plannings', label: 'Mon planning', href: 'Plannings.dc.html' },
+      { k: 'dispos', label: 'Mes disponibilités', href: 'Disponibilites.dc.html', count: 2 },
+      { g: 'Maquette (retiré en production)', maq: true },
+      { k: 'sommaire', label: 'Sommaire de la maquette', href: 'Main.dc.html' }
+    ];
+    const rawLot1 = [
+      { g: 'Plannings' },
+      { k: 'interv', label: 'Interventions', href: 'L1-Interventions.dc.html' }
+    ].concat(this.props.droits === 'limites' ? [] : [
+      { g: 'Paramètres' },
+      { k: 'parametres', label: 'Paramètres', href: 'L1-Acces.dc.html', count: 3 }
+    ]).concat([
+      { g: 'Maquette (retiré en production)', maq: true },
+      { k: 'sommaire', label: 'Sommaire de la maquette', href: 'Main.dc.html' }
+    ]);
+    const droits = this.props.droits ?? 'complets';
+    const rawSal = [
+      { k: 'actions', label: 'Mes actions', href: 'MesActions.dc.html', count: 6 },
+      { g: 'Plannings' },
+      { k: 'plannings', label: 'Consulter les plannings', href: 'Plannings.dc.html' },
+      { k: 'institutionnel', label: 'Calendrier institutionnel', href: 'Calendrier.dc.html' },
+      { g: 'Formations' },
+      { k: 'catalogue', label: 'Catalogue des formations', href: 'Formations.dc.html' },
+      { k: 'alternance', label: 'Promotions', href: 'Promotions.dc.html' },
+      { k: 'preparation', label: 'Programmation des promotions', href: 'Preparation.dc.html' },
+      { k: 'dispos', label: 'Disponibilités des intervenants', href: 'Disponibilites.dc.html', count: 4 },
+      { g: 'Oraux et examens' },
+      { k: 'certif', label: 'Épreuves et certifications', href: 'Certifications.dc.html' },
+      { k: 'jurys', label: 'Oraux et jurys', href: 'Jurys.dc.html', count: 3 },
+      { g: 'Vie de l’établissement' },
+      { k: 'evenements', label: 'Réunions et événements', href: 'Evenements.dc.html' },
+      { k: 'sondage', label: 'Sondages de date', href: 'SondageDate.dc.html', count: 1 },
+      { g: 'Logistique' },
+      { k: 'salles', label: 'Salles et ressources', href: 'Salles.dc.html', count: 8 },
+      { k: 'reservations', label: 'Réservations et locations', href: 'Reservations.dc.html', count: 5 }
+    ].concat(droits === 'limites' ? [] : [
+      { g: 'Analyser · selon les droits' },
+      { k: 'charge', label: 'Plans de charge', href: 'Budget.dc.html' },
+      { k: 'budget', label: 'Budgets et volumes', href: 'Volumes.dc.html' }
+    ]).concat([
+      { g: 'Consultés récemment' },
+      { k: 'recents', label: 'ASS 2028', href: 'PromoFiche.dc.html' },
+      { k: 'recents', label: 'Tronc commun 2029', href: 'Catalogue.dc.html' },
+      { g: 'Paramètres' },
+      { k: 'parametres', label: 'Paramètres', href: 'Parametres.dc.html' },
+      { g: 'Maquette (retiré en production)', maq: true },
+      { k: 'sommaire', label: 'Sommaire de la maquette', href: 'Main.dc.html' }
+    ]);
+    const raw = mode === 'lot1' ? rawLot1 : mode === 'intervenant' ? rawInt : mode === 'apprenant' ? rawAppr : rawSal;
+    const items = raw.map((r) => {
+      if (r.g) return { isGroup: true, isItem: false, label: r.g, gStyle: 'font-size: 12px; font-weight: 700; color: #646F7D; padding: 16px 12px 6px;' + (r.maq ? ' border-top: 1.5px dashed #858F9E; margin-top: 8px;' : '') };
+      const on = r.k === active;
+      const style = 'display: flex; align-items: center; gap: 12px; box-sizing: border-box; min-height: 44px; padding: 6px 10px; border-radius: 10px; text-decoration: none; font: ' + (on ? '800' : '600') + ' 14px Manrope, \'Segoe UI\', sans-serif; color: ' + (on ? '#8A0031' : '#1B2430') + '; background: ' + (on ? '#FEEFF1' : 'transparent') + ';' + (collapsed ? ' justify-content: center;' : '');
+      const boxStyle = 'width: 32px; height: 32px; border-radius: 10px; flex: none; display: grid; place-items: center; background: ' + (on ? '#A3123F' : 'transparent') + ';';
+      return { isGroup: false, isItem: true, label: r.label, title: r.todo ? r.label + ' (écran à dessiner)' : r.label, href: r.href, d: ICON[r.k], stroke: on ? '#FFFFFF' : '#566170', style, boxStyle, hasCount: !!r.count, count: r.count || 0 };
+    });
+    const w = collapsed ? 72 : 256;
+    const navStyle = 'width: ' + w + 'px; box-sizing: border-box; margin: 16px 0 16px 16px; padding: 10px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; display: flex; flex-direction: column; gap: 2px; font-family: Manrope, \'Segoe UI\', sans-serif; flex: none;';
+    return { items, expanded: !collapsed, collapsed, navStyle, toggleExp: () => { try { window.localStorage.setItem('planning-menu-deplie', collapsed ? '1' : '0'); } catch (e) { /* stockage indisponible */ } this.setState({ exp: collapsed }); }, expLabel: collapsed ? 'Ouvrir le menu' : 'Réduire le menu', expPath: collapsed ? 'M13 17l5-5-5-5M6 17l5-5-5-5' : 'M11 17l-5-5 5-5M18 17l-5-5 5-5', arrowRow: 'display: flex; align-items: center; justify-content: ' + (collapsed ? 'center' : 'space-between') + '; padding: 2px 2px 8px; margin-bottom: 4px; border-bottom: 1px solid #E1E5EB;', expIcon: collapsed ? '»' : '«',
+      expStyle: 'display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; padding: 4px 10px; margin-bottom: 6px; border: 0; border-bottom: 1px solid #E1E5EB; border-radius: 10px 10px 0 0; background: none; cursor: pointer; font: 700 13px Manrope, \'Segoe UI\', sans-serif; color: #566170;' + (collapsed ? ' justify-content: center;' : '') };
+  }
+}
+</script>
+</body>
+</html>

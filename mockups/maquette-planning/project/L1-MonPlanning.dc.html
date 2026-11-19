@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Lot 1 – Mon planning (intervenant)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#7C4401}a:hover{color:#804602}
+.ev:hover{filter:brightness(0.97)}
+.mi:hover{background:#F6F7F9}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #985403;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 1100px; background: #F6F7F9; color: #1B2430; font-family: Manrope, 'Segoe UI', sans-serif; display: flex; flex-direction: column">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: #804602; color: #FFFFFF; min-height: 72px; box-sizing: border-box; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px">
+    <span style="display: inline-flex; align-items: center; gap: 6px; flex: none"><span aria-hidden="true" style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FFFFFF; display: grid; place-items: center; font: 800 10px Manrope, 'Segoe UI', sans-serif">CY</span><span style="font: 800 18px Manrope, 'Segoe UI', sans-serif; letter-spacing: -0.5px">epss</span></span>
+    <span aria-hidden="true" style="width: 1px; height: 32px; background: rgba(255,255,255,0.55)"></span>
+    <span style="display: flex; flex-direction: column; line-height: 1.2"><span style="font-size: 17px; font-weight: 800">Mon espace intervenant</span><span style="font-size: 12px; color: #FDE3CC">[Nom de l’ERP]</span></span>
+    <span style="flex: 1"></span>
+    <span style="font-size: 12px; font-weight: 700; border: 1.5px dashed #FDE3CC; border-radius: 999px; padding: 6px 12px">Données d’exemple</span>
+    <span style="font-size: 12px; font-weight: 700; border: 1.5px dashed #FDE3CC; border-radius: 999px; padding: 6px 12px" title="Maquette seulement">Bandeau et menu de l’outil Intervenant, redessinés ici pour le contexte</span>
+    <span style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 50%; background: #985403; border: 2px solid #FFFFFF; display: grid; place-items: center; font-weight: 800">MD</span><span style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-size: 13px; font-weight: 700">Marc Dubreuil</span><span style="font-size: 12px; color: #FDE3CC">Intervenant</span></span></span>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; align-items: flex-start; min-width: 0">
+    <nav aria-label="Menu de l’espace intervenant" style="width: 232px; box-sizing: border-box; margin: 16px 0 16px 16px; padding: 10px; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; display: flex; flex-direction: column; gap: 2px; flex: none">
+      <sc-for list="{{menu}}" as="m" hint-placeholder-count="6"><a class="mi" href="https://claude.ai/artifact/2wtsPaKXQrffYfKpThGLFs" target="outil-intervenant" rel="noopener" aria-current="{{m.cur}}" style="{{m.style}}">{{m.label}}</a></sc-for>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+      <div style="position: relative; overflow: hidden; background: #FEF1E6; margin: 16px 16px 0; border-radius: 14px; border: 1px solid #E1E5EB; padding: 16px 32px 18px; display: flex; flex-direction: column; gap: 6px">
+        <div aria-hidden="true" style="position: absolute; right: 80px; top: -70px; width: 128px; height: 128px; border-radius: 50%; background: #C37F43; opacity: 0.35"></div>
+        <span style="position: relative; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #8A0031; background: #FFFFFF; border: 1px solid #F3C6D0; border-radius: 999px; padding: 3px 10px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 3px; background: #A3123F"></span>Écran fourni par l’outil Planning</span>
+        <h1 style="position: relative; margin: 0; font-size: 28px; line-height: 1.2; font-weight: 800; color: #7C4401">Mon planning</h1>
+        <p style="position: relative; margin: 0; font-size: 14px; color: #566170">Vos interventions, en lecture seule. Pour toute erreur, contactez la gestionnaire pédagogique de la promotion : les séances se corrigent dans Aurion.</p>
+      </div>
+
+      <section aria-label="Résumé" style="margin: 12px 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 700; color: #566170">Prochaine intervention</span><span style="font-size: 20px; font-weight: 800; color: #7C4401">Ven. 20/11 · 9 h</span><span style="font-size: 12px; color: #646F7D">Analyse des pratiques 2/6 · à distance</span></div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 700; color: #566170">Cette semaine</span><span style="font-size: 20px; font-weight: 800; color: #7C4401">5 séances · 17 h 30</span><span style="font-size: 12px; color: #646F7D">dont 1 modifiée, 1 retirée</span></div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 700; color: #566170">Prévu sur l’année 2026-2027</span><span style="font-size: 20px; font-weight: 800; color: #7C4401">84 h</span><span style="font-size: 12px; color: #646F7D">24 séances · 3 promotions</span></div>
+      </section>
+
+      <div style="margin: 12px 16px 0; background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+        <div style="display: flex; gap: 6px; align-items: center">
+          <button type="button" onClick="{{prev}}" aria-label="Période précédente" style="width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 800 16px Manrope, 'Segoe UI', sans-serif; color: #1B2430">‹</button>
+          <button type="button" onClick="{{today}}" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif; color: #1B2430">Aujourd’hui</button>
+          <button type="button" onClick="{{next}}" aria-label="Période suivante" style="width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid #858F9E; background: #FFFFFF; cursor: pointer; font: 800 16px Manrope, 'Segoe UI', sans-serif; color: #1B2430">›</button>
+        </div>
+        <strong style="font-size: 16px; flex: 1 1 220px">{{periodLabel}}</strong>
+        <div role="radiogroup" aria-label="Affichage" style="display: flex; gap: 2px; background: #F6F7F9; border-radius: 10px; padding: 3px">
+          <sc-for list="{{views}}" as="v" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{v.on}}" onClick="{{v.pick}}" style="{{v.style}}">{{v.label}}</button></sc-for>
+        </div>
+        <button type="button" style="min-height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #985403; background: #FFFFFF; cursor: pointer; font: 700 13px Manrope, 'Segoe UI', sans-serif; color: #7C4401">Imprimer (PDF)</button>
+      </div>
+
+      <div style="margin: 12px 16px 0; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; align-items: start">
+        <section aria-label="Planning" style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; overflow: hidden; min-width: 0">
+
+          <sc-if value="{{isWeek}}" hint-placeholder-val="{{ true }}">
+            <div style="overflow-x: auto">
+              <div style="min-width: 760px">
+                <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr)); border-bottom: 1px solid #E1E5EB">
+                  <span></span>
+                  <sc-for list="{{days}}" as="d" hint-placeholder-count="6"><span style="{{d.headStyle}}">{{d.label}}</span></sc-for>
+                </div>
+                <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr))">
+                  <div style="position: relative; height: 616px">
+                    <sc-for list="{{hours}}" as="h" hint-placeholder-count="11"><span style="{{h.style}}">{{h.label}}</span></sc-for>
+                  </div>
+                  <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+                    <div style="{{d.colStyle}}">
+                      <sc-for list="{{d.evs}}" as="e" hint-placeholder-count="2">
+                        <button type="button" class="ev" onClick="{{e.pick}}" aria-label="{{e.aria}}" style="{{e.style}}">
+                          <strong style="{{e.titleStyle}}">{{e.t}}</strong>
+                          <span style="font-size: 11px">{{e.time}}</span>
+                          <span style="font-size: 11px">{{e.where}}</span>
+                          <sc-if value="{{e.hasFlag}}" hint-placeholder-val="{{ false }}"><span style="{{e.flagStyle}}">{{e.flag}}</span></sc-if>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{isMonth}}" hint-placeholder-val="{{ false }}">
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-bottom: 1px solid #E1E5EB">
+              <sc-for list="{{dow}}" as="w" hint-placeholder-count="7"><span style="padding: 8px; font-size: 12px; font-weight: 700; color: #566170; text-align: center">{{w}}</span></sc-for>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr))">
+              <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+                <div style="{{c.style}}">
+                  <span style="{{c.numStyle}}">{{c.n}}</span>
+                  <sc-for list="{{c.evs}}" as="e" hint-placeholder-count="1"><button type="button" class="ev" onClick="{{e.pick}}" style="{{e.chip}}">{{e.short}}</button></sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{isList}}" hint-placeholder-val="{{ false }}">
+            <div style="overflow-x: auto">
+              <table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13px">
+                <thead><tr style="text-align: left; color: #566170; font-size: 12px"><th scope="col" style="padding: 10px 14px; border-bottom: 1px solid #C9CFD8">Date</th><th scope="col" style="padding: 10px 8px; border-bottom: 1px solid #C9CFD8">Horaires</th><th scope="col" style="padding: 10px 8px; border-bottom: 1px solid #C9CFD8">Intervention</th><th scope="col" style="padding: 10px 8px; border-bottom: 1px solid #C9CFD8">Promotion · groupe</th><th scope="col" style="padding: 10px 8px; border-bottom: 1px solid #C9CFD8">Lieu</th><th scope="col" style="padding: 10px 14px; border-bottom: 1px solid #C9CFD8">État</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{listRows}}" as="r" hint-placeholder-count="8">
+                    <tr style="border-top: 1px solid #E1E5EB"><td style="padding: 9px 14px; font-weight: 700; white-space: nowrap">{{r.date}}</td><td style="padding: 9px 8px; white-space: nowrap">{{r.time}}</td><td style="padding: 9px 8px"><button type="button" onClick="{{r.pick}}" style="{{r.linkStyle}}">{{r.t}}</button></td><td style="padding: 9px 8px"><span style="{{r.promoStyle}}">{{r.pg}}</span></td><td style="padding: 9px 8px">{{r.where}}</td><td style="padding: 9px 14px"><span style="{{r.stStyle}}">{{r.st}}</span></td></tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </sc-if>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 14px; border-top: 1px solid #E1E5EB; font-size: 12px; color: #566170">
+            <strong style="color: #1B2430">Légende</strong>
+            <sc-for list="{{legend}}" as="l" hint-placeholder-count="3"><span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="{{l.sw}}"></span>{{l.t}}</span></sc-for>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #FFFFFF; border: 2px solid #C66A00"></span>Modifiée depuis moins de 7 jours</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: repeating-linear-gradient(135deg, #F1F2F4 0 4px, #DADDE2 4px 6px); border: 1px dashed #858F9E"></span>Retirée du planning</span>
+          </div>
+        </section>
+
+        <aside aria-label="Détail de l’intervention" style="background: #FFFFFF; border: 1px solid #E1E5EB; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 88px">
+          <sc-if value="{{noSel}}" hint-placeholder-val="{{ false }}">
+            <strong style="font-size: 15px">Détail d’une intervention</strong>
+            <span style="font-size: 13px; color: #566170">Cliquez sur une intervention pour voir son cours, sa promotion, son lieu et ses éventuelles modifications.</span>
+          </sc-if>
+          <sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+            <span style="{{sel.promoStyle}}">{{sel.p}}</span>
+            <strong style="font-size: 17px; line-height: 1.3">{{sel.t}}</strong>
+            <sc-if value="{{sel.isRet}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 700; color: #B02B27; background: #FFEFED; border: 1px solid #F6C3BC; border-radius: 10px; padding: 8px 10px">{{sel.retTxt}}</span></sc-if>
+            <sc-if value="{{sel.isMod}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 700; color: #915B02; background: #FFF1E2; border: 1px solid #EBCBA7; border-radius: 10px; padding: 8px 10px">{{sel.modTxt}}</span></sc-if>
+            <dl style="margin: 0; display: grid; grid-template-columns: 104px 1fr; gap: 8px 10px; font-size: 13px">
+              <dt style="color: #566170; font-weight: 600">Date</dt><dd style="margin: 0; font-weight: 700">{{sel.date}}</dd>
+              <dt style="color: #566170; font-weight: 600">Horaires</dt><dd style="margin: 0">{{sel.time}}</dd>
+              <dt style="color: #566170; font-weight: 600">Cours</dt><dd style="margin: 0">{{sel.cours}}<br><span style="font-size: 12px; color: #646F7D">{{sel.code}}</span></dd>
+              <dt style="color: #566170; font-weight: 600">Groupe</dt><dd style="margin: 0">{{sel.g}}</dd>
+              <dt style="color: #566170; font-weight: 600">Type</dt><dd style="margin: 0">{{sel.type}}</dd>
+              <dt style="color: #566170; font-weight: 600">Lieu</dt><dd style="margin: 0">{{sel.where}}</dd>
+              <dt style="color: #566170; font-weight: 600">Mis à jour</dt><dd style="margin: 0">{{sel.maj}}</dd>
+            </dl>
+            <span style="font-size: 12px; color: #646F7D; border-top: 1px solid #E1E5EB; padding-top: 10px">Lecture seule. Lien de visio, supports et liste des apprenants : prévus avec l’outil Planning complet.</span>
+          </sc-if>
+        </aside>
+      </div>
+
+      <p style="margin: 12px 16px 24px; font-size: 12px; color: #646F7D">Données lues dans l’outil Planning, alimenté par Aurion. Dernière mise à jour : 19/11/2026 à 6 h 02 [fréquence de l’import à confirmer]. Abonnement à l’agenda Outlook : prévu au lot 2.</p>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'semaine', wk: 1, sel: 's7' };
+  }
+  renderVals() {
+    const st = this.state;
+    const PROMO = {
+      'ASS 2028': { bg: '#F5EFFB', fg: '#5E2F86', bd: '#C9B3E3' },
+      'ES 2029': { bg: '#EBF5FF', fg: '#305E8B', bd: '#B4D5F8' },
+      'ME 2028': { bg: '#E9F7EE', fg: '#1D6B3A', bd: '#B5DEC2' }
+    };
+    const WEEKS = [
+      { n: 46, mon: 9, label: 'Semaine 46 · du 9 au 14 novembre 2026' },
+      { n: 47, mon: 16, label: 'Semaine 47 · du 16 au 21 novembre 2026' },
+      { n: 48, mon: 23, label: 'Semaine 48 · du 23 au 28 novembre 2026' }
+    ];
+    const EV = [
+      { id: 's1', w: 46, d: 1, s: 9, e: 12.5, t: 'Analyse systémique 1/4', code: 'ASS_2028_S3_UE1_EC1_2', p: 'ASS 2028', g: 'Groupe TD 1', type: 'Cours', where: 'Cergy · Salle 204', maj: '02/10/2026' },
+      { id: 's2', w: 46, d: 3, s: 13.5, e: 17, t: 'Guidance ASI et ISIC 2/4', code: 'ASS_2028_S3_UE3_EC2_1', p: 'ASS 2028', g: 'Demi-groupe A', type: 'Guidance', where: 'Cergy · Salle 105', maj: '02/10/2026' },
+      { id: 's3', w: 47, d: 0, s: 9, e: 12.5, t: 'Analyse systémique 2/4', code: 'ASS_2028_S3_UE1_EC1_2', p: 'ASS 2028', g: 'Groupe TD 2', type: 'Cours', where: 'Cergy · Salle 204', maj: '02/10/2026' },
+      { id: 's4', w: 47, d: 0, s: 13.5, e: 17, t: 'Analyse systémique 3/4', code: 'ASS_2028_S3_UE1_EC1_2', p: 'ASS 2028', g: 'Groupe TD 1', type: 'Cours', where: 'Cergy · Salle 204', maj: '02/10/2026' },
+      { id: 's5', w: 47, d: 2, s: 9, e: 12.5, t: 'Guidance ASI et ISIC 3/4', code: 'ASS_2028_S3_UE3_EC2_1', p: 'ASS 2028', g: 'Demi-groupe A', type: 'Guidance', where: 'Cergy · Salle 112', maj: '14/11/2026', mod: 'Modifiée le 14/11 : salle 105 → salle 112' },
+      { id: 's6', w: 47, d: 3, s: 13.5, e: 17, t: 'Méthodologie de projet 1/3', code: 'ES_2029_S1_BC2_UE2_EC1_1', p: 'ES 2029', g: 'Promotion entière', type: 'Cours', where: 'Cergy · Amphi B', maj: '05/10/2026' },
+      { id: 's7', w: 47, d: 4, s: 9, e: 12.5, t: 'Analyse des pratiques 2/6', code: 'ME_2028_S3_DF1_UE1_EC3_1', p: 'ME 2028', g: 'Groupe APP 1', type: 'Analyse de la pratique', where: 'À distance', maj: '05/10/2026' },
+      { id: 's8', w: 47, d: 4, s: 13.5, e: 17, t: 'Analyse systémique 4/4', code: 'ASS_2028_S3_UE1_EC1_2', p: 'ASS 2028', g: 'Groupe TD 2', type: 'Cours', where: 'Cergy · Salle 204', maj: '17/11/2026', ret: 'Retirée du planning le 17/11/2026' },
+      { id: 's9', w: 48, d: 1, s: 9, e: 12.5, t: 'Méthodologie de projet 2/3', code: 'ES_2029_S1_BC2_UE2_EC1_1', p: 'ES 2029', g: 'Promotion entière', type: 'Cours', where: 'Cergy · Amphi B', maj: '05/10/2026' },
+      { id: 's10', w: 48, d: 3, s: 13.5, e: 17, t: 'Guidance ASI et ISIC 4/4', code: 'ASS_2028_S3_UE3_EC2_1', p: 'ASS 2028', g: 'Demi-groupe A', type: 'Guidance', where: 'Cergy · Salle 105', maj: '02/10/2026' },
+      { id: 's11', w: 48, d: 4, s: 9, e: 12.5, t: 'Analyse des pratiques 3/6', code: 'ME_2028_S3_DF1_UE1_EC3_1', p: 'ME 2028', g: 'Groupe APP 1', type: 'Analyse de la pratique', where: 'À distance', maj: '05/10/2026' }
+    ];
+    const DN = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'];
+    const DL = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    const pad = (n) => (n < 10 ? '0' : '') + n;
+    const hh = (x) => { const h = Math.floor(x); const m = Math.round((x - h) * 60); return h + ' h' + (m ? ' ' + pad(m) : ''); };
+    const monOf = (w) => WEEKS.find((k) => k.n === w).mon;
+    const dateShort = (ev) => DN[ev.d] + ' ' + pad(monOf(ev.w) + ev.d) + '/11';
+    const dateLong = (ev) => DL[ev.d] + ' ' + (monOf(ev.w) + ev.d) + ' novembre 2026';
+    const pill = (p) => { const c = PROMO[p]; return 'align-self: flex-start; display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px; background: ' + c.bg + '; color: ' + c.fg + '; border: 1px solid ' + c.bd + ';'; };
+    const pick = (id) => () => this.setState({ sel: id });
+    const PX = 56;
+    const wk = WEEKS[st.wk];
+    const days = DN.map((n, i) => {
+      const dnum = wk.mon + i;
+      const isToday = wk.n === 47 && i === 3;
+      const evs = EV.filter((e) => e.w === wk.n && e.d === i).map((e) => {
+        const c = PROMO[e.p];
+        const ret = !!e.ret, mod = !!e.mod, on = st.sel === e.id;
+        const top = (e.s - 8) * PX + 2, h = (e.e - e.s) * PX - 4;
+        const bg = ret ? 'repeating-linear-gradient(135deg, #F1F2F4 0 6px, #E4E6EA 6px 9px)' : c.bg;
+        const border = ret ? '1px dashed #858F9E' : mod ? '2px solid #C66A00' : '1px solid ' + c.bd;
+        return {
+          t: e.t, time: hh(e.s) + ' – ' + hh(e.e), where: e.where + ' · ' + e.g, pick: pick(e.id),
+          aria: e.t + ', ' + dateLong(e) + ', ' + hh(e.s) + ' – ' + hh(e.e) + (ret ? ', retirée' : mod ? ', modifiée' : ''),
+          hasFlag: ret || mod, flag: ret ? 'Retirée le 17/11' : 'Modifiée : salle',
+          flagStyle: 'align-self: flex-start; font-size: 10px; font-weight: 800; border-radius: 999px; padding: 1px 6px; background: #FFFFFF; color: ' + (ret ? '#B02B27' : '#915B02') + '; border: 1px solid ' + (ret ? '#F6C3BC' : '#EBCBA7') + ';',
+          titleStyle: 'font-size: 12px; line-height: 1.25;' + (ret ? ' text-decoration: line-through;' : ''),
+          style: 'position: absolute; left: 4px; right: 4px; top: ' + top + 'px; height: ' + h + 'px; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; text-align: left; overflow: hidden; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-family: Manrope, \'Segoe UI\', sans-serif; color: ' + (ret ? '#566170' : c.fg) + '; background: ' + bg + '; border: ' + border + ';' + (on ? ' box-shadow: 0 0 0 3px #985403;' : '')
+        };
+      });
+      return {
+        label: n + ' ' + pad(dnum) + '/11', evs,
+        headStyle: 'padding: 10px 8px; font-size: 13px; font-weight: 800; text-align: center; color: ' + (isToday ? '#FFFFFF' : '#1B2430') + '; background: ' + (isToday ? '#985403' : 'transparent') + ';',
+        colStyle: 'position: relative; height: ' + (11 * PX) + 'px; border-left: 1px solid #E1E5EB; background: ' + (isToday ? '#FFFAF5' : 'repeating-linear-gradient(180deg, #FFFFFF 0 ' + (PX - 1) + 'px, #EEF0F3 ' + (PX - 1) + 'px ' + PX + 'px)') + ';'
+      };
+    });
+    const hours = Array.from({ length: 11 }, (_, i) => ({ label: (8 + i) + ' h', style: 'position: absolute; right: 8px; top: ' + (i * PX + 2) + 'px; font-size: 11px; color: #646F7D;' }));
+
+    const MONTH = [];
+    const firstMon = { d: 26, m: 10 };
+    for (let i = 0; i < 35; i++) {
+      let day = firstMon.d + i, m = 10;
+      if (day > 31) { day -= 31; m = 11; }
+      if (m === 11 && day > 30) { day -= 30; m = 12; }
+      const dow = i % 7;
+      const evs = m !== 11 || dow > 5 ? [] : EV.filter((e) => monOf(e.w) + e.d === day).map((e) => {
+        const c = PROMO[e.p];
+        return { pick: () => this.setState({ sel: e.id }), short: hh(e.s) + ' ' + e.t.replace(/ \d+\/\d+$/, ''), chip: 'display: block; width: 100%; text-align: left; margin-top: 3px; padding: 2px 6px; border-radius: 6px; cursor: pointer; font: 600 11px Manrope, \'Segoe UI\', sans-serif; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: ' + (e.ret ? '#566170' : c.fg) + '; background: ' + (e.ret ? '#F1F2F4' : c.bg) + '; border: ' + (e.ret ? '1px dashed #858F9E' : e.mod ? '2px solid #C66A00' : '1px solid ' + c.bd) + ';' + (e.ret ? ' text-decoration: line-through;' : '') };
+      });
+      const today = m === 11 && day === 19;
+      MONTH.push({ n: String(day), evs, style: 'min-height: 96px; box-sizing: border-box; padding: 6px; border-right: 1px solid #E1E5EB; border-bottom: 1px solid #E1E5EB; background: ' + (m !== 11 ? '#F9FAFB' : dow === 6 ? '#FAFAFB' : '#FFFFFF') + ';', numStyle: 'display: inline-grid; place-items: center; min-width: 22px; height: 22px; border-radius: 999px; font-size: 12px; font-weight: 700; color: ' + (today ? '#FFFFFF' : m !== 11 ? '#9AA2AE' : '#1B2430') + '; background: ' + (today ? '#985403' : 'transparent') + ';' });
+    }
+
+    const B = { ok: ['#E9F7EE', '#1D6B3A', '#B5DEC2'], warn: ['#FFF1E2', '#915B02', '#EBCBA7'], err: ['#FFEFED', '#B02B27', '#F6C3BC'] };
+    const bs = (k) => 'display: inline-block; white-space: nowrap; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 2px 8px; background: ' + B[k][0] + '; color: ' + B[k][1] + '; border: 1px solid ' + B[k][2] + ';';
+    const listRows = EV.map((e) => ({ date: dateShort(e), time: hh(e.s) + ' – ' + hh(e.e), t: e.t, pick: pick(e.id), linkStyle: 'border: 0; background: none; padding: 0; cursor: pointer; text-align: left; font: 700 13px Manrope, \'Segoe UI\', sans-serif; color: #1B2430; text-decoration: underline;' + (e.ret ? ' text-decoration: line-through;' : ''), pg: e.p + ' · ' + e.g, promoStyle: pill(e.p).replace('align-self: flex-start; ', ''), where: e.where, st: e.ret ? 'Retirée le 17/11' : e.mod ? 'Modifiée le 14/11' : 'Prévue', stStyle: bs(e.ret ? 'err' : e.mod ? 'warn' : 'ok') }));
+
+    const s = EV.find((e) => e.id === st.sel);
+    const sel = s ? { p: s.p, promoStyle: pill(s.p), t: s.t, date: dateLong(s).replace(/^./, (c) => c.toUpperCase()), time: hh(s.s) + ' – ' + hh(s.e), cours: s.t.replace(/ \d+\/\d+$/, ''), code: s.code, g: s.g, type: s.type, where: s.where, maj: s.maj, isRet: !!s.ret, retTxt: s.ret || '', isMod: !!s.mod, modTxt: s.mod || '' } : {};
+
+    const VIEWS = [['semaine', 'Semaine'], ['mois', 'Mois'], ['liste', 'Liste']];
+    return {
+      menu: [['Mon espace', false], ['Mes compétences', false], ['Mes documents', false], ['Ma situation', false], ['Mon planning', true], ['Mes questionnaires', false]].map((m) => ({ label: m[0], cur: m[1] ? 'page' : 'false', style: 'display: flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 6px 12px; border-radius: 10px; text-decoration: none; font: ' + (m[1] ? '800' : '600') + ' 14px Manrope, \'Segoe UI\', sans-serif; color: ' + (m[1] ? '#7C4401' : '#1B2430') + '; background: ' + (m[1] ? '#FEF1E6' : 'transparent') + ';' })),
+      views: VIEWS.map((v) => ({ label: v[1], on: st.view === v[0] ? 'true' : 'false', pick: () => this.setState({ view: v[0] }), style: 'min-height: 34px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font: 700 13px Manrope, \'Segoe UI\', sans-serif; background: ' + (st.view === v[0] ? '#985403' : 'transparent') + '; color: ' + (st.view === v[0] ? '#FFFFFF' : '#1B2430') + ';' })),
+      isWeek: st.view === 'semaine', isMonth: st.view === 'mois', isList: st.view === 'liste',
+      periodLabel: st.view === 'semaine' ? wk.label : 'Novembre 2026',
+      prev: () => this.setState({ wk: Math.max(0, st.wk - 1) }), next: () => this.setState({ wk: Math.min(2, st.wk + 1) }), today: () => this.setState({ wk: 1 }),
+      days, hours, dow: ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'], cells: MONTH, listRows,
+      legend: Object.keys(PROMO).map((k) => ({ t: k, sw: 'width: 14px; height: 14px; border-radius: 4px; background: ' + PROMO[k].bg + '; border: 1px solid ' + PROMO[k].bd + ';' })),
+      hasSel: !!s, noSel: !s, sel
+    };
+  }
+}
+</script>
+</body>
+</html>

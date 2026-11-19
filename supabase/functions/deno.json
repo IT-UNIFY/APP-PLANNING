@@ -1,0 +1,18 @@
+{
+  "//": "CARTE D'IMPORTS DES EDGE FUNCTIONS. Ce fichier est donné à Deno par les trois chemins qui comptent, et c'est pour cela qu'il n'y en a qu'un : `npm run check:edge` (scripts/check-edge-types.mjs), `npm run test:edge` (scripts/test-edge.mjs) et le déploiement. Une carte pour vérifier et une autre pour déployer ferait vérifier autre chose que ce qui part.",
+
+  "//pourquoi-livre-vide-ne-suffit-pas": "🔴 MESURÉ LE 2026-09-09 (APP-TEMPLATE, B23). Le squelette ne livrait AUCUN `deno.json`. Un projet neuf qui vendorise `m365-auth` ou `edge/auth` tombait alors sur : « Failed resolving types. Could not resolve \"@supabase/supabase-js\", but found it in a package.json. » Le message accuse le paquet ; la cause est l'absence d'entrée de carte. Hors `node_modules` — et le vendoring copie précisément hors de `node_modules` — Deno exige une entrée pour tout spécificateur NU, y compris importé en `import type` seulement.",
+
+  "imports": {
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2",
+    "jose": "npm:jose@5"
+  },
+
+  "//imports": "Les deux entrées ci-dessus sont celles qu'attend le socle VENDORISÉ, et elles sont livrées d'avance parce qu'une entrée inutilisée ne coûte rien alors qu'une entrée manquante coûte une demi-heure : `@supabase/supabase-js` pour `_shared/socle/m365-auth` et `_shared/socle/edge/auth` (en TYPE seulement, mais Deno résout quand même), `jose` pour `_shared/socle/edge/mint-jwt` (seule dépendance d'EXÉCUTION du socle). Les deux paquets sont PUBLICS : aucun jeton, donc pas de `.npmrc` à poser à côté de ce fichier. `npm run socle:sync` renomme les entrées exactes qui manqueraient si un sous-chemin en amenait d'autres.",
+
+  "//ajouter-une-entree": "Une dépendance npm propre au projet s'ajoute ici, jamais dans le fichier qui l'importe : la version ne vit qu'à un endroit. ⚠️ Un sous-chemin de paquet se mappe UN PAR UN et non par préfixe — Deno refuse une entrée préfixe pointant sur un spécificateur `npm:` (« could not be URL-parsed relative to the URL prefix »). Mesuré chez APP-MSP le 2026-09-09.",
+
+  "minimumDependencyAge": 0,
+
+  "//minimumDependencyAge": "Deno 2 refuse par défaut toute version npm publiée depuis moins de 24 h. La valeur est un NOMBRE DE MINUTES, et 0 lève la limite. Sans elle, une version publiée le jour même ne se déploie pas — correctif urgent compris. Sans objet tant que le projet ne consomme QUE du socle vendorisé (le vendoring ne passe plus par le registre), mais indispensable dès qu'une entrée `npm:` de cette carte pointe sur un paquet dont on maîtrise les publications. Posée d'avance pour la même raison que les deux entrées ci-dessus."
+}

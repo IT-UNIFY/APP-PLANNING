@@ -1,0 +1,7 @@
+{
+  "_note": "Copier vers .claude/settings.local.json (gitignoré). Réservé aux exceptions PROPRES À VOTRE POSTE et aux scripts nommés de ce dépôt. Les permissions génériques sont déjà dans le settings.json versionné — cf. .claude/PERMISSIONS.md.",
+  "permissions": {
+    "allow": []
+  },
+  "enabledMcpjsonServers": ["supabase"]
+}
