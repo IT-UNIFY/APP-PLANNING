@@ -29,7 +29,7 @@ name: Supabase db push
 #   * SUPABASE_ACCESS_TOKEN         Personal Access Token Supabase
 #                                   (Dashboard → Account → Access Tokens).
 #   * SUPABASE_DB_PASSWORD          Password Postgres de la **prod**.
-#   * SUPABASE_DB_PASSWORD_PREPROD  Password Postgres de la **préprod**
+#   * SUPABASE_DB_PASSWORD_PREPROD  (pas encore : projet unique, voir `env`)
 #                                   (Dashboard → Project Settings → Database).
 #
 # Les refs de projet sont codés dans le bloc `env` ci-dessous : ils sont
@@ -82,9 +82,13 @@ permissions:
 # environnement au ref d'un autre.
 env:
   CIBLE: ${{ github.event_name == 'push' && 'prod' || inputs.project }}
-  SUPABASE_PROJECT_REF: ${{ (github.event_name == 'push' || inputs.project == 'prod') && 'A-RENSEIGNER-PROD' || 'A-RENSEIGNER-PREPROD' }}
+  # APP-PLANNING n'a qu'UN projet Supabase pour le lot 1 (décision du
+  # 2026-11-19) : `prod` et `preprod` visent le même ref et le même mot de
+  # passe. Le jour où une préprod existe, rétablir ici les deux branches
+  # (ref + secret SUPABASE_DB_PASSWORD_PREPROD), comme chez APP-FIX.
+  SUPABASE_PROJECT_REF: yvuutsniduqqinkowqkc
   SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-  SUPABASE_DB_PASSWORD: ${{ (github.event_name == 'push' || inputs.project == 'prod') && secrets.SUPABASE_DB_PASSWORD || secrets.SUPABASE_DB_PASSWORD_PREPROD }}
+  SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
   # Coupe pg-delta pour le CLI de CE workflow : la variable surcharge
   # `[experimental.pgdelta] enabled = true` de `supabase/config.toml`, qui ne
   # change pas (`db diff` et `db pull` gardent pg-delta sur le poste).
@@ -129,7 +133,7 @@ jobs:
             exit 1;;
           esac
           if [ -z "$SUPABASE_DB_PASSWORD" ]; then
-            echo "::error::mot de passe DB absent pour la cible « $CIBLE » — le secret de dépôt correspondant n'est pas posé (prod : SUPABASE_DB_PASSWORD, préprod : SUPABASE_DB_PASSWORD_PREPROD)"
+            echo "::error::mot de passe DB absent pour la cible « $CIBLE » — le secret de dépôt correspondant n'est pas posé (SUPABASE_DB_PASSWORD)"
             exit 1
           fi
           supabase link --project-ref "$SUPABASE_PROJECT_REF"

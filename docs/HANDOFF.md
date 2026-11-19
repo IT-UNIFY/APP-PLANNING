@@ -18,8 +18,8 @@ sous `docs/adr/`.
   Le port DB s'ouvre depuis le runner : pas de partage de connexion. Tout
   autre accès direct à la base depuis le poste (port 5432 / 6543) est bloqué
   sur le réseau normal.
-- **Projet Supabase** : pas encore créé (`A-RENSEIGNER` dans `.env.example`,
-  `socle.json`, `db-push.yml`).
+- **Projet Supabase** : `yvuutsniduqqinkowqkc`, projet unique du lot 1. Il n'y
+  a pas de préprod séparée : `prod` et `preprod` du workflow visent le même ref.
 - **Socle vendorisé** : `supabase/functions/_shared/socle/` vient de
   `@it-unify/boilerplate-kit@0.3.0`. Le squelette annonçait `0.2.0`, mais cette
   version ne publie pas `src/` et ne peut pas être vendorisée. La copie a été
@@ -47,7 +47,9 @@ git config core.hooksPath .githooks
 - **Backend** : Supabase (Postgres + Auth + Storage + Edge Functions Deno).
 - **Client Supabase** : un seul, `src/lib/supabase.ts`.
 
-Projet Supabase : `A-RENSEIGNER`.
+Projet Supabase : `yvuutsniduqqinkowqkc` (eu-west-1, Postgres 17, créé le 2026-11-19). URL et
+clé publique dans le `.env` gitignoré ; mot de passe DB dans le `.env` et en
+secret GitHub Actions.
 
 Comptes de test : identifiants dans le `.env` gitignoré. **Jamais dans ce
 document.**
@@ -70,7 +72,7 @@ document.**
 - Migrations appliquées : aucune.
 - Fonctions déployées : aucune.
 - Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN`,
-  `SUPABASE_DB_PASSWORD`, `SUPABASE_DB_PASSWORD_PREPROD` ; Edge Functions
+  `SUPABASE_DB_PASSWORD` (✅ posé) ; Edge Functions
   `ALLOWED_ORIGINS` (edge-kit, sans motif de sous-domaine) et ceux de
   `docs/PREREQUIS-m365-auth.md`.
 
@@ -93,8 +95,10 @@ document.**
 
 ## 7. L'étape suivante
 
-1. Créer le projet Supabase (préprod + prod) et reporter les refs dans
-   `.env.example`, `.github/workflows/db-push.yml` et ce document.
+1. Poser le secret `SUPABASE_ACCESS_TOKEN`, puis lancer
+   `gh workflow run db-push.yml -f mode=plan` pour prouver le chemin de
+   migration (aucune migration encore : le run doit finir vert sans rien
+   appliquer).
 2. Quand la PR de la coque est mergée dans TEMPLATE-EPSS et `ui-epss` publié :
    l'installer, poser `data-module="planning"` sur `<html>`, monter la coque.
 3. Premier écran du lot 1 : « Mon planning de l'intervenant »

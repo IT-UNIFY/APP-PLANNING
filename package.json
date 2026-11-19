@@ -16,7 +16,7 @@
     "verify": "npm run lint && npm run typecheck && npm run socle:verifier && npm test && npm run check:edge && npm run test:edge && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "gen:db-types": "dotenv -e .env -- npx supabase gen types typescript --project-id A-RENSEIGNER > src/types/database.ts",
+    "gen:db-types": "dotenv -e .env -- npx supabase gen types typescript --project-id yvuutsniduqqinkowqkc > src/types/database.ts",
     "prepare": "git config core.hooksPath .githooks || echo 'ATTENTION: porte pre-push NON activee -- lancer: git config core.hooksPath .githooks'",
     "check:edge": "node scripts/check-edge-types.mjs",
     "test:edge": "node scripts/test-edge.mjs",

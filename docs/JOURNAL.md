@@ -29,5 +29,6 @@
 - Maquette du lot 1 copiée dans `mockups/maquette-planning/`.
 - Charte partagée créée à part : dépôt TEMPLATE-EPSS, paquet `@it-unify/ui-epss` (jetons des 14 modules). Portage de la coque confié à une session cloud (brief dans `docs/`).
 - ADR-001 (proposé), relu contre le carnet de conception : un projet Supabase par module, contrat de lecture `api_v1`, clés `aurion_individu_id` et UUID d'affectation, pas de copie chez le lecteur (historique daté côté Planning), « Mon planning » en paquet React monté dans GDC, un seul import Aurion.
-- Bloque : projet Supabase non créé (attend l'acceptation d'ADR-001).
-- Suite : projet Supabase, puis consommer `ui-epss` et l'écran « Mon planning ».
+- Projet Supabase `yvuutsniduqqinkowqkc` créé (projet unique du lot 1) ; ref reportée, `config.toml` ajouté, secret `SUPABASE_DB_PASSWORD` posé.
+- Bloque : secret `SUPABASE_ACCESS_TOKEN` pour le workflow de migration.
+- Suite : prouver `db-push.yml` en mode plan, puis consommer `ui-epss` et l'écran « Mon planning ».

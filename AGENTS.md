@@ -16,7 +16,7 @@ parc vivent dans le `docs/adr/` de ce dépôt-là, pas ici.
 
 Outil Planning de l'ERP EPSS — lot 1 : consultation des séances importées d'Aurion.
 
-Projet Supabase : `A-RENSEIGNER`.
+Projet Supabase : `yvuutsniduqqinkowqkc` (projet unique du lot 1, https://yvuutsniduqqinkowqkc.supabase.co).
 
 ## 2. La pile
 
@@ -56,10 +56,10 @@ Un push sur `main` qui touche `supabase/migrations/**` applique en **prod**.
 SQL DDL dans le tableau de bord. Le port DB s'ouvre depuis le runner GitHub :
 aucun partage de connexion n'est nécessaire.
 
-⚠️ Pas encore opérationnel : les refs du bloc `env` valent `A-RENSEIGNER-*`
-(le workflow échoue exprès) et les secrets `SUPABASE_ACCESS_TOKEN`,
-`SUPABASE_DB_PASSWORD`, `SUPABASE_DB_PASSWORD_PREPROD` ne sont pas posés
-(`docs/BACKLOG.md`).
+Projet unique pour le lot 1 : `prod` et `preprod` visent tous deux `yvuutsniduqqinkowqkc`,
+avec le secret `SUPABASE_DB_PASSWORD` (posé le 2026-11-19).
+⚠️ Pas encore opérationnel : le secret `SUPABASE_ACCESS_TOKEN` (jeton
+personnel Supabase) n'est pas posé (`docs/BACKLOG.md`).
 
 ## 4 bis. 🔴 Après tout `drop`+`create` de fonction SQL, relire les droits
 
