@@ -106,6 +106,14 @@ document.**
 
 ## 7. L'étape suivante
 
+> ⏸ **Boucle autonome en pause jusqu'au 24/11/2026** (décision de
+> l'utilisateur, quota hebdomadaire à 89 % le 20/11). Reprise : relire
+> `AGENTS.md` §11, puis la file du lot 1 dans `docs/BACKLOG.md` (tâche 3 :
+> client Aurion partagé). En attente de l'utilisateur : questions Q5 à Q15
+> (`docs/QUESTIONS.md`) ; précision proposée au §11 (« droits **existants**
+> sur `service_role` ») que le système de permissions a refusé à l'agent de
+> poser seul.
+
 1. ✅ Chemin de migration prouvé le 2026-11-19 (runs `44564723167` plan et
    `44564704213` push : `link` réussi, « Remote database is up to date »).
 2. ✅ Charte consommée (vendoring, 2026-11-20). Prochaine synchronisation :

@@ -19,6 +19,14 @@
 
 ## 2026-11-20
 
+### Clôture : pause de la boucle autonome jusqu'au 24/11
+**Tâches** : —
+
+- Fait aujourd'hui : charte vendorisée et branchée, schéma du lot 1 et RPC d'import en prod (10 PR dans APP-PLANNING, 1 dans TEMPLATE-EPSS), cadre d'autonomie, relevé des jetons.
+- Pause décidée par l'utilisateur : quota hebdomadaire à 89 % (réinitialisation le 24/11).
+- En attente de l'utilisateur : questions Q5 à Q15 ; précision du §11 sur les droits de `service_role`.
+- Reprise : tâche 3 de la file, client Aurion partagé.
+
 ### RPC d'import `importer_seances` (file du lot 1, tâche 2)
 **Tâches** : —
 
