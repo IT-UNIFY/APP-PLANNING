@@ -31,9 +31,15 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Charte ERP EPSS : ui-epss vendorisé, coque et menu du lot 1 (PR #2, #3) | — | 08:09 | 08:26 | 41 | 86 | 361 577 | 15 129 451 | 33 543 | 0 |
 | Merge de la PR #3, choix de la suite (modèle de données) | — | 09:11 | 09:18 | 9 | 22 | 6 128 | 3 714 128 | 3 948 | 0 |
-| Modèle de données (lead-dev, arbitrages), schéma du lot 1 (PR #4, #5, #6), cadre d'autonomie | — | 10:30 | 12:13 | 251 | 542 | 1 325 602 | 62 376 373 | 310 972 | 232 269 |
+| Modèle de données, schéma du lot 1 (PR #4 à #6), cadre d'autonomie (PR #7), tâche 1 (PR #8), tâche 2 RPC d'import (PR #9) | — | 10:30 | 12:39 | 324 | 700 | 1 832 851 | 87 804 223 | 435 121 | 331 072 |
+| Tâche 2 : merge et apply de la RPC, contrôle MCP, clôture (PR #9, #10) | — | 13:18 | 13:22 | 6 | 16 | 8 320 | 3 682 298 | 4 734 | 0 |
 
-> Séance encore ouverte à 12:13 : refaire le relevé en fin de journée.
+> Le script découpe par séance, pas par tâche : la séance 10:30–12:39 couvre
+> cinq tâches du TIMELOG. Un découpage par heure de merge reste à ajouter au
+> script (`--coupures`), pour que chaque tâche FixTracker reçoive sa part.
+> Quota du plan au 2026-11-20 à 13:22 : 89 % de la semaine (réinitialisation le
+> 24/11) ; la boucle autonome est en pause jusque-là (décision de
+> l'utilisateur).
 
 ## 2026-11-19
 

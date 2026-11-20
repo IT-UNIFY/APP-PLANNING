@@ -28,18 +28,22 @@
 > parente. Les libellés reprennent ceux de `JOURNAL.md`, pour que les deux se
 > réconcilient.
 
-## 2026-11-20 — Total : 1 h 40
+## 2026-11-20 — Total : 2 h 35
 
 | Tâche | Tâche_ID | Début | Fin | Durée |
 | --- | --- | --- | --- | --- |
 | Charte ERP EPSS : ui-epss vendorisé, coque et menu du lot 1 (PR #2, #3) | — | 08:09 | 08:26 | 0 h 15 |
 | Merge de la PR #3, choix de la suite (modèle de données) | — | 09:11 | 09:18 | 0 h 05 |
-| Modèle de données (lead-dev, arbitrages) et schéma du lot 1 : migrations, répétition, apply en prod (PR #4, #5, #6) | — | 10:30 | 11:48 | 1 h 20 |
+| Modèle de données (lead-dev, arbitrages) et schéma du lot 1 : migrations, répétition, apply en prod (PR #4, #5, #6) | — | 10:30 | 12:09 | 1 h 40 |
+| Cadre d'autonomie et relevé des jetons (PR #7) | — | 12:09 | 12:14 | 0 h 05 |
+| File du lot 1, tâche 1 : rôles sombres du Planning, ui-epss 0.1.0 (TEMPLATE-EPSS#3, PR #8) | — | 12:14 | 12:18 | 0 h 05 |
+| File du lot 1, tâche 2 : RPC d'import `importer_seances` (PR #9, #10) | — | 12:18 | 12:39 | 0 h 20 |
+| File du lot 1, tâche 2 : merge et apply de la RPC, contrôle MCP, clôture (PR #9, #10) | — | 13:18 | 13:22 | 0 h 05 |
 
-> Rollup du journal brut (32 événements, 3 séances). Séance encore ouverte à
-> 11:52 : refaire le rollup en fin de journée. Le temps des sous-agents en
-> arrière-plan entre deux échanges n'est pas capté (écart > 30 min = nouvelle
-> séance) : ces durées sont un plancher.
+> Rollup du journal brut : 4 séances, 53 événements, 2 h 37. La séance
+> 10:30–12:39 est découpée aux **heures de merge** des PR (événements réels,
+> `git log --merges`), pas à des heures estimées. Le temps des sous-agents en
+> arrière-plan entre deux échanges n'est pas capté : plancher.
 
 ## 2026-11-19 — Total : ≈ 1 h 20
 
