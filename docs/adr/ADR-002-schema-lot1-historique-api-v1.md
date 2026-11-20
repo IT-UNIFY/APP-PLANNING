@@ -132,6 +132,25 @@ l'assertion ignore les fonctions qui renvoient `trigger` ou `event_trigger`,
 que personne ne peut appeler hors d'un déclencheur. La version corrigée a été
 jouée en lecture seule sur la base réelle avant d'être poussée.
 
+### D8 — L'import passe par une seule RPC, `importer_seances` (2026-11-20)
+
+Ajout du 2026-11-20 (migration `20261120120000`), conséquence de la note de
+D2 : `public.importer_seances(p_lignes jsonb, p_declenchement, p_lance_par)
+returns uuid`, `security invoker`, exécutable par `service_role` seulement.
+En une transaction : ligne `imports_aurion`, `planning.import_id`, mise à jour
+des référentiels, des séances, des liens avec les groupes et des
+affectations, retraits, anomalies, compteurs lus dans l'historique écrit par
+cet import.
+
+- Un seul import à la fois : verrou consultatif essayé sans attendre, refus
+  en `55P03`. L'index unique « un seul en cours » ne suffit pas : la ligne
+  `en_cours` n'est visible d'aucune autre session tant que la transaction
+  n'est pas validée.
+- Aucune table ni aucun type créé par la fonction : rien à traiter pour le
+  déclencheur d'événement `ensure_rls` du projet (voir D7).
+- Les règles fonctionnelles non tranchées sont **provisoires** et marquées
+  dans le SQL : questions Q6 à Q14 de `docs/QUESTIONS.md`.
+
 ## Conséquences
 
 - **Positives** : la preuve vit dans la base et non dans le code de l'import ;

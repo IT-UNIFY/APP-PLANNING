@@ -19,6 +19,14 @@
 
 ## 2026-11-20
 
+### RPC d'import `importer_seances` (file du lot 1, tâche 2)
+**Tâches** : —
+
+- Migration additive `20261120120000` : une seule RPC pour tout l'import (ADR-002 D8), un seul import à la fois (verrou consultatif), compteurs lus dans l'historique.
+- 49 tests pgTAP (`05_import`) ; 159 en tout, verts sur deux images locales. 5 000 lignes importées en 0,76 s, réimport identique en 0,48 s sans aucune version écrite.
+- Neuf règles fonctionnelles prises en provisoire : `docs/QUESTIONS.md` Q6 à Q14.
+- Suite : tâche 3, client Aurion partagé.
+
 ### Charte : rôles sombres du Planning et `ui-epss` 0.1.0 (file du lot 1, tâche 1)
 **Tâches** : —
 

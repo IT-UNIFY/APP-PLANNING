@@ -11,7 +11,7 @@ l'utilisateur ou de l'EPSS, hors du dépôt.
 
 1. ✅ **Charte, dettes courtes** (2026-11-20) : rôles sombres du module
    Planning (provisoires, Q5), étiquette `v0.1.0`, resynchronisation.
-2. **RPC d'import** `importer_seances` (migration additive) : une seule
+2. ✅ **RPC d'import** `importer_seances` (2026-11-20, ADR-002 D8 ; règles provisoires Q6 à Q14) (migration additive) : une seule
    transaction qui pose `planning.import_id`, insère ou met à jour séances,
    affectations, groupes, salles, intervenants, compte nouvelles / modifiées /
    retirées et écrit les anomalies. Tests pgTAP.
