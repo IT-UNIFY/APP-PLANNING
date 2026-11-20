@@ -29,7 +29,10 @@
 - Revue `code-reviewer` : aucun bloquant ; corrections faites (droits positifs de `service_role` vérifiés, test « pas superutilisateur », `updated_at` non antidatable, date de retrait protégée). 110 tests.
 - Migrations renommées du 23/11 au 20/11 : une migration créée avant le 23 se serait placée avant des migrations appliquées.
 - Répétition sur le runner depuis la branche (run `44719340434`) : Postgres 17.12 du projet, 8 migrations, 110 tests pgTAP verts, dry-run vert.
-- Suite : merge (= apply en prod), puis contrôle MCP en lecture seule.
+- PR #4 mergée : l'apply s'arrête après la 7e migration. L'assertion « anon n'exécute rien » repère `public.rls_auto_enable()`, fonction de Supabase (déclencheur `ensure_rls`) absente de l'image de répétition. Elle renvoie `event_trigger` : pas appelable.
+- PR #5 : l'assertion ignore les fonctions de déclencheur ; version jouée en lecture seule sur la base réelle avant le push ; répétition verte ; apply de la 8e migration vert.
+- Contrôle MCP en lecture seule : 8 migrations, 15 tables en RLS, 8 vues `api_v1`, conseils de sécurité tous attendus.
+- Suite : Edge Function d'import Aurion (une seule RPC qui pose `planning.import_id`), puis écran « Interventions ».
 
 ### Charte ERP EPSS branchée dans le Planning
 **Tâches** : —

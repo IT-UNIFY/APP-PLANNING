@@ -69,17 +69,15 @@ document.**
 
 ## 5. Migrations appliquées · fonctions déployées · secrets attendus
 
-- Migrations appliquées : aucune. Huit migrations du lot 1 sont écrites sur
-  la branche `feat/schema-lot1` (ADR-002), avec les tests pgTAP de
-  `supabase/tests/database/`. **Répétition prouvée le 2026-11-20** (run
-  `44719340434`, depuis la branche) : image `supabase/postgres:17.12.0.000`
-  (celle du projet), 8 migrations appliquées, `Files=4, Tests=110, Result:
-  PASS`, dry-run vert. Répétition ≈ 1 min ; run complet 1 min 23.
-  **Apply du 2026-11-20 (run `44720952788`) : 7 migrations sur 8 appliquées**
-  (`list_migrations`). La 8e (assertions, lecture seule) a échoué sur une
-  fonction de Supabase, `rls_auto_enable()` (ADR-002 D7). Correction sur la
-  branche `fix/assertions-fonctions-declencheur`, vérifiée en lecture seule
-  sur la base réelle.
+- Migrations appliquées : **les 8 du lot 1** (`20261120090000` à
+  `20261120090700`, ADR-002), le 2026-11-20. Runs `44720952788` (1 à 7 ; la
+  8e arrêtée sur `rls_auto_enable()`, fonction de Supabase) puis
+  `44722665259` (8e, après correction, PR #5). Contrôle MCP en lecture
+  seule : `list_migrations` = 8 ; 15 tables, toutes en RLS ; 8 vues
+  `api_v1` ; `get_advisors(security)` ne signale que l'attendu
+  (`m365_tenants` sans politique : aucun accès client ; `m365_tenant_for_email`
+  ouverte à `anon` : écran de connexion ; `a_role` pour `authenticated` :
+  RLS) et `rls_auto_enable()`, fonction de Supabase non appelable.
 - Fonctions déployées : aucune.
 - Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN` et
   `SUPABASE_DB_PASSWORD` (✅ posés tous les deux) ; Edge Functions
@@ -109,9 +107,7 @@ document.**
    `44564704213` push : `link` réussi, « Remote database is up to date »).
 2. ✅ Charte consommée (vendoring, 2026-11-20). Prochaine synchronisation :
    `npm run ui-epss:sync -- <ref>` depuis un clone voisin de TEMPLATE-EPSS.
-3. Schéma du lot 1 (ADR-002) : répétition verte depuis la branche ; reste à
-   merger la PR (= apply en prod, précédé d'une nouvelle répétition), puis
-   contrôler par MCP en lecture seule (`list_tables`, droits, `get_advisors`).
+3. ✅ Schéma du lot 1 appliqué en prod le 2026-11-20 (ADR-002, PR #4 et #5).
 4. Ensuite : Edge Function d'import Aurion (identifiants en base, requête
    écrite par l'EPSS), puis l'écran « Interventions », puis « Mon planning »
    (`mockups/maquette-planning/project/L1-*.dc.html`).
