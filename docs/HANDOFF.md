@@ -74,8 +74,12 @@ document.**
   `supabase/tests/database/`. **Répétition prouvée le 2026-11-20** (run
   `44719340434`, depuis la branche) : image `supabase/postgres:17.12.0.000`
   (celle du projet), 8 migrations appliquées, `Files=4, Tests=110, Result:
-  PASS`, dry-run vert. Répétition ≈ 1 min ; run complet 1 min 23. Pas encore
-  appliquées en prod : le merge le fera.
+  PASS`, dry-run vert. Répétition ≈ 1 min ; run complet 1 min 23.
+  **Apply du 2026-11-20 (run `44720952788`) : 7 migrations sur 8 appliquées**
+  (`list_migrations`). La 8e (assertions, lecture seule) a échoué sur une
+  fonction de Supabase, `rls_auto_enable()` (ADR-002 D7). Correction sur la
+  branche `fix/assertions-fonctions-declencheur`, vérifiée en lecture seule
+  sur la base réelle.
 - Fonctions déployées : aucune.
 - Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN` et
   `SUPABASE_DB_PASSWORD` (✅ posés tous les deux) ; Edge Functions

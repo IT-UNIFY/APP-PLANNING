@@ -41,10 +41,21 @@ begin
   -- 2. `anon` n'exécute aucune fonction de `public`, sauf l'aiguillage
   --    M365 qui sert l'écran de connexion AVANT toute session. Les
   --    fonctions d'extension sont exclues : elles ne sont pas à nous.
+  --
+  --    Les fonctions qui renvoient `trigger` ou `event_trigger` sont exclues
+  --    aussi : Postgres refuse de les appeler hors d'un déclencheur, donc ni
+  --    PostgREST ni un client ne peut les exécuter, quel que soit le droit
+  --    `execute`. Mesuré le 2026-11-20 au premier apply (run 44720952788) :
+  --    le projet hébergé porte `public.rls_auto_enable()`, fonction de
+  --    Supabase (propriétaire `postgres`, déclencheur d'événement
+  --    `ensure_rls`, qui active la RLS des nouvelles tables), exécutable par
+  --    `anon`. Elle n'existe pas dans l'image de la répétition : c'est elle
+  --    qui a arrêté cette assertion en prod, alors que la répétition passait.
   select string_agg(p.oid::regprocedure::text, ', ' order by p.oid::regprocedure::text) into v_liste
     from pg_proc p
     join pg_namespace n on n.oid = p.pronamespace
    where n.nspname = 'public'
+     and p.prorettype not in ('trigger'::regtype, 'event_trigger'::regtype)
      and p.oid <> 'public.m365_tenant_for_email(text)'::regprocedure
      and not exists (
        select 1 from pg_depend d
