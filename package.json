@@ -13,7 +13,7 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify": "npm run lint && npm run typecheck && npm run socle:verifier && npm test && npm run check:edge && npm run test:edge && npm run build",
+    "verify": "npm run lint && npm run typecheck && npm run socle:verifier && npm run ui-epss:verifier && npm test && npm run check:edge && npm run test:edge && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "gen:db-types": "dotenv -e .env -- npx supabase gen types typescript --project-id yvuutsniduqqinkowqkc > src/types/database.ts",
@@ -23,9 +23,12 @@
     "socle:verifier": "node scripts/vendorer-socle.mjs",
     "socle:sync": "node scripts/vendorer-socle.mjs --synchroniser",
     "socle:amont": "node scripts/vendorer-socle.mjs --comparer-amont",
-    "deploy:edge": "node scripts/deploy-edge.mjs"
+    "deploy:edge": "node scripts/deploy-edge.mjs",
+    "ui-epss:verifier": "node scripts/vendorer-ui-epss.mjs",
+    "ui-epss:sync": "node scripts/vendorer-ui-epss.mjs --synchroniser --depuis ../TEMPLATE-EPSS --ref"
   },
   "dependencies": {
+    "@it-unify/ui-epss": "file:vendor/ui-epss",
     "@supabase/supabase-js": "^2.112.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

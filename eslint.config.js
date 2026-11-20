@@ -10,7 +10,9 @@ export default tseslint.config(
     ignores: ['dist', '.claude/worktrees/**', 'supabase/.temp/**',
       // Code GÉNÉRÉ par scripts/vendorer-socle.mjs : le corriger ici serait
       // écrasé, et `npm run verify` refuse toute édition locale.
-      'supabase/functions/_shared/socle/**'],
+      'supabase/functions/_shared/socle/**',
+      // Paquet CONSTRUIT vendorisé par scripts/vendorer-ui-epss.mjs : même règle.
+      'vendor/**'],
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

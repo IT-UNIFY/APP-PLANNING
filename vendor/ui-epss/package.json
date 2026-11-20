@@ -1,0 +1,33 @@
+{
+  "name": "@it-unify/ui-epss",
+  "version": "0.0.1",
+  "description": "Charte ERP EPSS partagée : jetons (palette des modules), preset Tailwind v3 et thème Tailwind v4, coque d'application (bandeau, menu, menu des paramètres) et composants de base. Consommée par APP-GDC, APP-PLANNING et les autres modules de l'ERP EPSS.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "exports": {
+    "./tokens.css": "./styles/tokens-erp.css",
+    "./theme.css": "./styles/theme.css",
+    "./tokens.json": "./tokens/erp-epss.tokens.json",
+    "./tailwind-preset": {
+      "types": "./tailwind-preset.d.ts",
+      "default": "./tailwind-preset.js"
+    },
+    "./modules": {
+      "types": "./dist/modules.d.ts",
+      "default": "./dist/modules.js"
+    },
+    "./coque": {
+      "types": "./dist/coque/index.d.ts",
+      "default": "./dist/coque/index.js"
+    },
+    "./composants": {
+      "types": "./dist/composants/index.d.ts",
+      "default": "./dist/composants/index.js"
+    }
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "react-router-dom": "^7"
+  }
+}

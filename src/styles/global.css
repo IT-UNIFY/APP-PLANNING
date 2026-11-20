@@ -2,11 +2,34 @@
    `tailwind.config.js` : le thème se déclare ici, avec `@theme`. */
 @import 'tailwindcss';
 
+/* Charte ERP EPSS, vendorisée depuis IT-UNIFY/TEMPLATE-EPSS
+   (`vendor/ui-epss/`, script `scripts/vendorer-ui-epss.mjs`).
+   - `tokens.css` : les jetons `--erp-*` ; le module courant vient de
+     `data-module="planning"` sur <html> (`index.html`).
+   - `theme.css` : les mêmes noms de classes que le preset Tailwind v3 de GDC
+     (`bg-module-action`, `text-encre`, `text-titre-page`…).
+   - `@source` : Tailwind doit lire les classes du JS construit du paquet,
+     sinon les composants de la coque s'affichent sans style. */
+@import '@it-unify/ui-epss/tokens.css';
+@import '@it-unify/ui-epss/theme.css';
+@source '../../vendor/ui-epss/dist';
+
 /* Mode sombre piloté par la classe `dark` posée sur <html> par l'amorce de
    `index.html`, et non par la seule media query : l'utilisateur doit pouvoir
-   choisir autre chose que la préférence de son système. */
+   choisir autre chose que la préférence de son système. Les jetons de la
+   charte suivent la même classe. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Couleurs et polices du projet à déclarer ici. */
+  /* Couleurs et polices : celles de la charte (`theme.css` ci-dessus).
+     N'ajouter ici que ce qui est propre au Planning. */
+}
+
+html {
+  /* Une ancre ne doit pas finir sous le bandeau fixe de la coque. */
+  scroll-padding-top: calc(var(--bandeau-h, 72px) + 1rem);
+}
+
+body {
+  margin: 0;
 }

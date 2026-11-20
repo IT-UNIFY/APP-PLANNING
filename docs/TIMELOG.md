@@ -28,17 +28,16 @@
 > parente. Les libellés reprennent ceux de `JOURNAL.md`, pour que les deux se
 > réconcilient.
 
-## 2026-11-19 — Total : ≈ 0 h 30
+## 2026-11-19 — Total : ≈ 1 h 20
 
 | Tâche | Tâche_ID | Début | Fin | Durée |
 | --- | --- | --- | --- | --- |
-| Cadrage, copie de la maquette du lot 1 | — | ≈ 16:19 | ≈ 16:25 | ≈ 0 h 05 |
-| Charte partagée : dépôt TEMPLATE-EPSS, jetons `ui-epss` | — | ≈ 16:25 | ≈ 16:35 | ≈ 0 h 10 |
-| Instanciation du projet depuis APP-TEMPLATE | — | ≈ 16:35 | ≈ 16:50 | ≈ 0 h 15 |
+| Cadrage, maquette, dépôt TEMPLATE-EPSS et jetons `ui-epss` | — | ≈ 16:19 | 16:43 | ≈ 0 h 25 |
+| Instanciation, ADR-001, projet Supabase, handoff GDC | — | 16:43 | 17:40 | 0 h 55 |
 
-> ≈ : la capture n'était pas active (hooks chargés au démarrage de session,
-> avant l'instanciation). Bornes reconstruites depuis les horodatages des
-> fichiers et commandes ; plancher, pas du temps exact.
+> ≈ : avant 16:43, la capture n'était pas active (hooks chargés au démarrage
+> de la séance). Début reconstruit depuis l'horodatage des fichiers ; plancher.
+> De 16:43 à 17:40 : rollup du journal brut (30 événements).
 
 <!-- La colonne Tâche_ID porte l'UUID de la tâche FixTracker entre backticks,
      ou — (tiret cadratin) si la séance n'est rattachable à aucune tâche unique

@@ -11,7 +11,9 @@
 - **ADR-001 à accepter** : mesurer le coût d'un projet Supabase de plus (offre et nombre de projets de l'organisation). Le projet du lot 1 existe déjà (décision de l'utilisateur, 2026-11-19).
 - **ADR-001, modèle des affectations** : « proposé, à valider » dans le carnet de conception ; à faire valider avant la première migration (D2, D5, D6 en dépendent).
 - **ADR-001 D7** : extraire le client Aurion de GDC dans TEMPLATE-EPSS avant d'écrire l'import du Planning.
-- **Charte `@it-unify/ui-epss` pas encore consommée** : PR de la coque ouverte ([TEMPLATE-EPSS#1](https://github.com/IT-UNIFY/TEMPLATE-EPSS/pull/1), à relire), puis publication de 0.1.0.
+- **Rôles sombres du module Planning** absents de `ui-epss` : en thème sombre, l'en-tête de page reste rose clair. À ajouter dans TEMPLATE-EPSS (`tokens/sombre.json`), puis resynchroniser.
+- **`ui-epss` vendorisé en `0.0.1` depuis `main` (`7be09f9`)** : poser une étiquette `v0.1.0` dans TEMPLATE-EPSS et resynchroniser sur elle, pour qu'une version nomme un contenu.
+- **Connexion et rôles** : la coque tourne sans `utilisateur` ni déconnexion, et tout le menu est visible. À brancher avec `m365-auth` et les rôles du lot 1 (administrateur, lecteur des interventions).
 
 ## Instabilités de tests constatées
 

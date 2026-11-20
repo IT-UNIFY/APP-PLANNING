@@ -60,7 +60,7 @@ document.**
 | --- | --- | --- |
 | Socle (amorce) | 🚧 | squelette instancié ; `npm run verify` vert (lint, typecheck, socle, tests, Deno, build) ; jamais lancé contre un Supabase réel |
 | Modules socle : outillage-agent, m365-auth, edge-kit | 🚧 | câblés ; prérequis hors bande non posés (`docs/BACKLOG.md`) |
-| Charte ERP EPSS (`@it-unify/ui-epss`) | ⬜ | pas encore consommée ici |
+| Charte ERP EPSS (`@it-unify/ui-epss`) | ✅ | vendorisée (TEMPLATE-EPSS `7be09f9`, v0.0.1) ; coque montée, menu du lot 1, 3 pages-enveloppes ; 5 tests de rendu ; vue dans le navigateur à 1440 px et 375 px (clair), sans erreur console. Thème sombre : rôles du module Planning absents (rose clair sur fond sombre) |
 | Écrans du lot 1 | ⬜ | maquette seule (`mockups/maquette-planning/`) |
 
 <!-- ✅ livré · 🚧 en cours · ⬜ non démarré.
@@ -97,8 +97,8 @@ document.**
 
 1. ✅ Chemin de migration prouvé le 2026-11-19 (runs `44564723167` plan et
    `44564704213` push : `link` réussi, « Remote database is up to date »).
-2. Quand la PR de la coque est mergée dans TEMPLATE-EPSS et `ui-epss` publié :
-   l'installer, poser `data-module="planning"` sur `<html>`, monter la coque.
+2. ✅ Charte consommée (vendoring, 2026-11-20). Prochaine synchronisation :
+   `npm run ui-epss:sync -- <ref>` depuis un clone voisin de TEMPLATE-EPSS.
 3. Premier écran du lot 1 : « Mon planning de l'intervenant »
    (`mockups/maquette-planning/project/L1-MonPlanning.dc.html`).
 

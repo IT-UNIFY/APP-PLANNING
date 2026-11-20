@@ -278,6 +278,13 @@ pour le relecteur.
 
 ## 9. Ce qui ne doit pas être réécrit ici
 
+La charte ERP EPSS (coque, jetons, composants de base) vient de
+`@it-unify/ui-epss` (IT-UNIFY/TEMPLATE-EPSS), **vendorisée** dans
+`vendor/ui-epss/` par `scripts/vendorer-ui-epss.mjs` et déclarée en dépendance
+`file:`. Pourquoi : aucun jeton `read:packages` au build, image Docker
+comprise. `npm run verify` refuse toute retouche de `vendor/ui-epss/` : un
+correctif se fait dans TEMPLATE-EPSS, puis `npm run ui-epss:sync -- <ref>`.
+
 Le socle commun du parc vient de paquets versionnés, pas d'une copie :
 
 - `@it-unify/m365-auth` — SSO Microsoft 365, aller et retour ;

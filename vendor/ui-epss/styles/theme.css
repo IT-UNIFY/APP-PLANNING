@@ -1,0 +1,70 @@
+/* =============================================================
+   Charte « ERP EPSS » pour Tailwind v4 — FICHIER GÉNÉRÉ, ne pas éditer.
+   Source : tailwind-preset.js (mêmes noms de classes qu'en v3).
+   Régénérer : npm run tokens.
+
+   Usage (consommateur, CSS d'entrée) :
+     @import "tailwindcss";
+     @import "@it-unify/ui-epss/tokens.css";
+     @import "@it-unify/ui-epss/theme.css";
+     @source "../node_modules/@it-unify/ui-epss/dist";
+   ============================================================= */
+
+/* Thème sombre par la classe `.dark`, comme le preset v3. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-encre: rgb(var(--erp-encre-rgb));
+  --color-gris-texte: rgb(var(--erp-gris-texte-rgb));
+  --color-gris-discret: rgb(var(--erp-gris-discret-rgb));
+  --color-contour-champ: rgb(var(--erp-contour-champ-rgb));
+  --color-filet: rgb(var(--erp-filet-rgb));
+  --color-fond: rgb(var(--erp-fond-rgb));
+  --color-carte: rgb(var(--erp-carte-rgb));
+  --color-module-principale: rgb(var(--erp-module-principale-rgb));
+  --color-module-accent: rgb(var(--erp-module-accent-rgb));
+  --color-module-action: rgb(var(--erp-module-action-rgb));
+  --color-module-action-survol: rgb(var(--erp-module-action-survol-rgb));
+  --color-module-fond-clair: rgb(var(--erp-module-fond-clair-rgb));
+  --color-module-foncee: rgb(var(--erp-module-foncee-rgb));
+  --color-etat-erreur: rgb(var(--erp-etat-erreur-rgb));
+  --color-etat-erreur-fond: rgb(var(--erp-etat-erreur-fond-rgb));
+  --color-etat-erreur-filet: rgb(var(--erp-etat-erreur-filet-rgb));
+  --color-etat-avertissement: rgb(var(--erp-etat-avertissement-rgb));
+  --color-etat-avertissement-fond: rgb(var(--erp-etat-avertissement-fond-rgb));
+  --color-etat-avertissement-filet: rgb(var(--erp-etat-avertissement-filet-rgb));
+  --color-etat-succes: rgb(var(--erp-etat-succes-rgb));
+  --color-etat-succes-fond: rgb(var(--erp-etat-succes-fond-rgb));
+  --color-etat-succes-filet: rgb(var(--erp-etat-succes-filet-rgb));
+  --color-etat-info: rgb(var(--erp-etat-info-rgb));
+  --color-etat-info-fond: rgb(var(--erp-etat-info-fond-rgb));
+  --color-etat-info-filet: rgb(var(--erp-etat-info-filet-rgb));
+  --font-erp: var(--erp-font-sans);
+  --text-titre-page: var(--erp-fs-titre-page);
+  --text-titre-page--line-height: var(--erp-lh-titre-page);
+  --text-titre-page--font-weight: 800;
+  --text-titre-page--letter-spacing: -0.5px;
+  --text-titre-section: var(--erp-fs-titre-section);
+  --text-titre-section--line-height: var(--erp-lh-titre-section);
+  --text-titre-section--font-weight: 700;
+  --text-titre-carte: var(--erp-fs-titre-carte);
+  --text-titre-carte--line-height: var(--erp-lh-titre-carte);
+  --text-titre-carte--font-weight: 700;
+  --text-texte: var(--erp-fs-texte);
+  --text-texte--line-height: var(--erp-lh-texte);
+  --text-texte--font-weight: 400;
+  --text-texte-petit: var(--erp-fs-texte-petit);
+  --text-texte-petit--line-height: var(--erp-lh-texte-petit);
+  --text-texte-petit--font-weight: 400;
+  --text-libelle: var(--erp-fs-libelle);
+  --text-libelle--line-height: var(--erp-lh-libelle);
+  --text-libelle--font-weight: 700;
+  --text-libelle--letter-spacing: 0.6px;
+  --text-bouton: var(--erp-fs-bouton);
+  --text-bouton--line-height: var(--erp-lh-bouton);
+  --text-bouton--font-weight: 600;
+  --radius-champ: var(--erp-radius-sm);
+  --radius-bouton: var(--erp-radius-md);
+  --radius-carte: var(--erp-radius-lg);
+  --radius-logo: var(--erp-radius-logo);
+}
