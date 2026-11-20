@@ -71,8 +71,11 @@ document.**
 
 - Migrations appliquées : aucune. Huit migrations du lot 1 sont écrites sur
   la branche `feat/schema-lot1` (ADR-002), avec les tests pgTAP de
-  `supabase/tests/database/`. Elles sont vérifiées sur un Postgres 16 local,
-  mais pas encore sur la base jetable du runner ni appliquées.
+  `supabase/tests/database/`. **Répétition prouvée le 2026-11-20** (run
+  `44719340434`, depuis la branche) : image `supabase/postgres:17.12.0.000`
+  (celle du projet), 8 migrations appliquées, `Files=4, Tests=110, Result:
+  PASS`, dry-run vert. Répétition ≈ 1 min ; run complet 1 min 23. Pas encore
+  appliquées en prod : le merge le fera.
 - Fonctions déployées : aucune.
 - Secrets attendus : GitHub Actions `SUPABASE_ACCESS_TOKEN` et
   `SUPABASE_DB_PASSWORD` (✅ posés tous les deux) ; Edge Functions
@@ -102,9 +105,9 @@ document.**
    `44564704213` push : `link` réussi, « Remote database is up to date »).
 2. ✅ Charte consommée (vendoring, 2026-11-20). Prochaine synchronisation :
    `npm run ui-epss:sync -- <ref>` depuis un clone voisin de TEMPLATE-EPSS.
-3. Schéma du lot 1 (ADR-002) : pousser `feat/schema-lot1`, lancer
-   `gh workflow run db-push.yml --ref feat/schema-lot1 -f mode=plan -f project=preprod`
-   pour la répétition sur base jetable, puis merger (= apply en prod).
+3. Schéma du lot 1 (ADR-002) : répétition verte depuis la branche ; reste à
+   merger la PR (= apply en prod, précédé d'une nouvelle répétition), puis
+   contrôler par MCP en lecture seule (`list_tables`, droits, `get_advisors`).
 4. Ensuite : Edge Function d'import Aurion (identifiants en base, requête
    écrite par l'EPSS), puis l'écran « Interventions », puis « Mon planning »
    (`mockups/maquette-planning/project/L1-*.dc.html`).

@@ -26,7 +26,10 @@
 - `database-engineer` : 8 migrations (socle M365 et audit, rôles, référentiels, imports, interventions et affectations, historique par trigger en ajout seul, `api_v1` + `lecteur_gdc`, assertions de droits) et des tests pgTAP ; vérifiés sur un Postgres 16 local, rejeu compris, avec des sabotages détectés.
 - `backend-dev` : répétition dans `db-push.yml` (`supabase db start` + `supabase test db`) avant tout dry-run ou apply.
 - ADR-002 écrit ; ADR-001 corrigé (droits par colonne de `lecteur_gdc`, affectations validées).
-- Suite : répétition sur le runner depuis la branche, revue, puis merge (= apply en prod).
+- Revue `code-reviewer` : aucun bloquant ; corrections faites (droits positifs de `service_role` vérifiés, test « pas superutilisateur », `updated_at` non antidatable, date de retrait protégée). 110 tests.
+- Migrations renommées du 23/11 au 20/11 : une migration créée avant le 23 se serait placée avant des migrations appliquées.
+- Répétition sur le runner depuis la branche (run `44719340434`) : Postgres 17.12 du projet, 8 migrations, 110 tests pgTAP verts, dry-run vert.
+- Suite : merge (= apply en prod), puis contrôle MCP en lecture seule.
 
 ### Charte ERP EPSS branchée dans le Planning
 **Tâches** : —
