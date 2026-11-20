@@ -1,5 +1,5 @@
 {
-  "//": "Thème sombre : DÉRIVÉ, la maquette n'en a pas. Repris d'APP-GDC (pre-prod-test, src/styles/tokens-erp.css, ADR-047). Seul le module Intervenant a ses rôles sombres ; les autres modules restent à dériver (dette, voir docs/HANDOFF.md).",
+  "//": "Thème sombre : DÉRIVÉ, la maquette n'en a pas. Socle et Intervenant repris d'APP-GDC (pre-prod-test, src/styles/tokens-erp.css, ADR-047). Planning : dérivé le 2026-11-20, PROVISOIRE (APP-PLANNING docs/QUESTIONS.md Q5), contrastes AA vérifiés par tests/tokens.test.ts. Les autres modules restent à dériver.",
   "socle": {
     "encre": "#E8ECF1",
     "gris-texte": "#AEB7C2",
@@ -29,6 +29,14 @@
       "action-survol": "#985403",
       "fond-clair": "#2E1F10",
       "foncee": "#E8A866"
+    },
+    "planning": {
+      "principale": "#B0194A",
+      "accent": "#E0708A",
+      "action": "#B0194A",
+      "action-survol": "#A3123F",
+      "fond-clair": "#3A1621",
+      "foncee": "#F4A3B5"
     }
   }
 }

@@ -60,7 +60,7 @@ document.**
 | --- | --- | --- |
 | Socle (amorce) | 🚧 | squelette instancié ; `npm run verify` vert (lint, typecheck, socle, tests, Deno, build) ; jamais lancé contre un Supabase réel |
 | Modules socle : outillage-agent, m365-auth, edge-kit | 🚧 | câblés ; prérequis hors bande non posés (`docs/BACKLOG.md`) |
-| Charte ERP EPSS (`@it-unify/ui-epss`) | ✅ | vendorisée (TEMPLATE-EPSS `7be09f9`, v0.0.1) ; coque montée, menu du lot 1, 3 pages-enveloppes ; 5 tests de rendu ; vue dans le navigateur à 1440 px et 375 px (clair), sans erreur console. Thème sombre : rôles du module Planning absents (rose clair sur fond sombre) |
+| Charte ERP EPSS (`@it-unify/ui-epss`) | ✅ | vendorisée depuis l'étiquette `v0.1.0` (TEMPLATE-EPSS `3debc0d`) ; coque montée, menu du lot 1, 3 pages-enveloppes ; 5 tests de rendu ; vue dans le navigateur en clair (1440 et 375 px) et en sombre (rôles sombres du Planning, provisoires : Q5) |
 | Écrans du lot 1 | ⬜ | maquette seule (`mockups/maquette-planning/`) |
 
 <!-- ✅ livré · 🚧 en cours · ⬜ non démarré.

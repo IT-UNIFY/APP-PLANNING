@@ -1,9 +1,9 @@
 {
   "//": "Généré par scripts/vendorer-ui-epss.mjs. Ne pas éditer : npm run verify compare chaque fichier à son empreinte.",
   "source": "IT-UNIFY/TEMPLATE-EPSS",
-  "ref": "main",
-  "commit": "7be09f934df85b9d5ff0ce1e124b4fceb79e4734",
-  "version": "0.0.1",
+  "ref": "v0.1.0",
+  "commit": "3debc0d2ce0a217ba40631a78542d83522bd05ae",
+  "version": "0.1.0",
   "fichiers": {
     "dist/cn.d.ts": "90477f9d8420c739a56f645b6546e75acdfcd3b17095c458252ba61fcba2d2dc",
     "dist/commun/cn-DiKpUNfh.js": "fec2783566eb5ca00d363777165f9e9f769d714a0182061e78359a7c650deb5f",
@@ -32,14 +32,14 @@
     "dist/coque/useHauteurBandeau.d.ts": "8bc6e320abd9330c7d49de1cec0b406bed87bc99f2afda0948af92a8b77cf2da",
     "dist/coque/useMenuReplie.d.ts": "859daaa164e2cd85c3e2c496b6c87a14f29773b0f7d8df3022b95251b2468760",
     "dist/coque/usePanneauMenu.d.ts": "dc26a138940484ab0b0d713f56ea9577994749052f6ee43d2b80ec82e542f1ab",
-    "dist/modules.d.ts": "77f5f36dc8b375c8c89b8a530e95b46b031a7f851880d58ec205e148c48fe493",
-    "dist/modules.js": "c4c01eea7f8fd80907f5a9e7d2b159910765044418b5c4ba5a9aeab8af00af6e",
-    "package.json": "ed1f6a9326384d12d94970f14713d78d7474a666bf134d7fd2d473dfb21ecd6f",
+    "dist/modules.d.ts": "2a1c7ab53b8a3e34c5e6b981aca7e4fdce85339c59131e56dbd5a0375fe18abe",
+    "dist/modules.js": "ebc65c3c38491550f93aefe9e58a2550b19169ba6efa418b2c8142d01927e3d1",
+    "package.json": "f488b861738c346d7135329cf909623b72f8dba739cd2bcc89760174c49766ff",
     "styles/theme.css": "de8c3f9d52f975c37365b8bf97339e1cfc4978025be1dc35d2b04c63a9215a37",
-    "styles/tokens-erp.css": "4b35091af5131d7c99d0d0b081e0f56e012c7285f36eb0b09ff8bdc7f8979fff",
+    "styles/tokens-erp.css": "bbb2aadc76723ace75652639891b70836dee1e2a31695c75e5f6dff09c29f463",
     "tailwind-preset.d.ts": "a45501461a88aee85f3ffa526e23a1be740fb9ccb7ee5a1d4e106e29607d72b6",
     "tailwind-preset.js": "a6fb373f3fd66a05d05c328bc40c6b8746461b65d6482e8562be28b5f0169af9",
     "tokens/erp-epss.tokens.json": "712b607fd4e6d3778082b15e67ed1078e8f18924a9aacbd45eec2f284a896418",
-    "tokens/sombre.json": "12cd0acd569361c52553d502deb4ba4bd8e6d079f0df2e9dc311fed55d08cb91"
+    "tokens/sombre.json": "9092d754ff041cf4792c1e5e970a0ef68879c42785ab0a86ae21eab1cb88b58b"
   }
 }

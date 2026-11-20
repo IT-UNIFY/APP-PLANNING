@@ -9,8 +9,8 @@
 L'agent prend la première tâche non bloquée. ⛔ = attend une action de
 l'utilisateur ou de l'EPSS, hors du dépôt.
 
-1. **Charte, dettes courtes** (TEMPLATE-EPSS) : rôles sombres du module
-   Planning, étiquette `v0.1.0`, resynchronisation de `vendor/ui-epss/`.
+1. ✅ **Charte, dettes courtes** (2026-11-20) : rôles sombres du module
+   Planning (provisoires, Q5), étiquette `v0.1.0`, resynchronisation.
 2. **RPC d'import** `importer_seances` (migration additive) : une seule
    transaction qui pose `planning.import_id`, insère ou met à jour séances,
    affectations, groupes, salles, intervenants, compte nouvelles / modifiées /
@@ -45,8 +45,6 @@ l'utilisateur ou de l'EPSS, hors du dépôt.
 - **ADR-001 à accepter** : mesurer le coût d'un projet Supabase de plus (offre et nombre de projets de l'organisation). Le projet du lot 1 existe déjà (décision de l'utilisateur, 2026-11-19).
 - **ADR-001, modèle des affectations** : « proposé, à valider » dans le carnet de conception ; à faire valider avant la première migration (D2, D5, D6 en dépendent).
 - **ADR-001 D7** : extraire le client Aurion de GDC dans TEMPLATE-EPSS avant d'écrire l'import du Planning.
-- **Rôles sombres du module Planning** absents de `ui-epss` : en thème sombre, l'en-tête de page reste rose clair. À ajouter dans TEMPLATE-EPSS (`tokens/sombre.json`), puis resynchroniser.
-- **`ui-epss` vendorisé en `0.0.1` depuis `main` (`7be09f9`)** : poser une étiquette `v0.1.0` dans TEMPLATE-EPSS et resynchroniser sur elle, pour qu'une version nomme un contenu.
 - **Historique des groupes d'une séance** : un changement de `intervention_groupes` ne laisse aucune trace (ADR-002, limites). À traiter si le groupe entre dans une preuve.
 - **Écriture du secret M365 en Vault** : la RPC `m365_tenant_secret` lit le secret, mais rien ne le pose ni ne met `secret_is_set` à vrai. Il faut un outil (Edge Function ou procédure) avant d'activer la connexion.
 - **Exposer `api_v1` dans l'API du projet** (réglage distant, hors migration) quand l'Edge Function de lecture pour GDC arrive.

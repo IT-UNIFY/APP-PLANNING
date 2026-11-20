@@ -235,3 +235,12 @@
   --erp-module-foncee-rgb: 232 168 102; /* #E8A866 */
 }
 
+.dark[data-module="planning"], .dark [data-module="planning"] {
+  --erp-module-principale-rgb: 176 25 74; /* #B0194A */
+  --erp-module-accent-rgb: 224 112 138; /* #E0708A */
+  --erp-module-action-rgb: 176 25 74; /* #B0194A */
+  --erp-module-action-survol-rgb: 163 18 63; /* #A3123F */
+  --erp-module-fond-clair-rgb: 58 22 33; /* #3A1621 */
+  --erp-module-foncee-rgb: 244 163 181; /* #F4A3B5 */
+}
+
