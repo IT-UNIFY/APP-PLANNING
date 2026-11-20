@@ -33,8 +33,8 @@
 | Tâche | Tâche_ID | Début | Fin | Durée |
 | --- | --- | --- | --- | --- |
 | Charte ERP EPSS : ui-epss vendorisé, coque et menu du lot 1 (PR #2, #3) | — | 08:09 | 08:26 | 0 h 15 |
-| Plan du modèle de données et arbitrages (lead-dev) | — | 09:11 | 09:18 | 0 h 05 |
-| Schéma du lot 1 : migrations, répétition, apply en prod (PR #4, #5) | — | 10:30 | 11:48 | 1 h 20 |
+| Merge de la PR #3, choix de la suite (modèle de données) | — | 09:11 | 09:18 | 0 h 05 |
+| Modèle de données (lead-dev, arbitrages) et schéma du lot 1 : migrations, répétition, apply en prod (PR #4, #5, #6) | — | 10:30 | 11:48 | 1 h 20 |
 
 > Rollup du journal brut (32 événements, 3 séances). Séance encore ouverte à
 > 11:52 : refaire le rollup en fin de journée. Le temps des sous-agents en

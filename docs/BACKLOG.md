@@ -4,6 +4,40 @@
 > livrée, ou quand on décide de ne pas la faire — auquel cas on écrit
 > pourquoi.
 
+## File du lot 1 — ordre de travail (AGENTS.md §11)
+
+L'agent prend la première tâche non bloquée. ⛔ = attend une action de
+l'utilisateur ou de l'EPSS, hors du dépôt.
+
+1. **Charte, dettes courtes** (TEMPLATE-EPSS) : rôles sombres du module
+   Planning, étiquette `v0.1.0`, resynchronisation de `vendor/ui-epss/`.
+2. **RPC d'import** `importer_seances` (migration additive) : une seule
+   transaction qui pose `planning.import_id`, insère ou met à jour séances,
+   affectations, groupes, salles, intervenants, compte nouvelles / modifiées /
+   retirées et écrit les anomalies. Tests pgTAP.
+3. **Client Aurion partagé** (ADR-001 D7) : extraire de GDC (lecture seule) vers
+   TEMPLATE-EPSS la lecture du favori et la transformation, avec des tests sur
+   des données d'exemple.
+4. **Edge Function `import-aurion`** : appel du favori, transformation, appel de
+   la RPC ; identifiants Aurion en base selon le modèle de l'ADR-021 de GDC.
+   Testée sur des données d'exemple. ⛔ pour la tester sur le vrai Aurion :
+   requête écrite par l'EPSS (favori) et identifiants du compte technique.
+5. **Écran « Interventions »** : liste (filtres, tri, colonnes, une ligne par
+   intervenant) puis calendrier mois et semaine, d'après `L1-Interventions`.
+   Tests de composants sur des données simulées. ⛔ pour le voir avec de vraies
+   données : connexion (tâche 8).
+6. **Écran « Import Aurion »** (paramètres) : état, compteurs, anomalies,
+   historique, données reprises, d'après `L1-Import`.
+7. **Edge Function de lecture pour GDC** (`lecteur_gdc`, ADR-002 D5) et
+   exposition de `api_v1`. ⛔ réglage du projet (schémas exposés).
+8. **Connexion M365 et rôles** dans le front (garde de routes, menu selon le
+   rôle, `utilisateur` et déconnexion dans la coque). ⛔ inscription Entra,
+   secret en Vault, domaine du locataire (`docs/PREREQUIS-m365-auth.md`).
+9. **Écran « Utilisateurs et accès »** : liste, rôle, retrait tracé. ⛔ ajout
+   depuis l'annuaire M365 : droits Graph côté Entra.
+10. **Paquet « Mon planning »** (`@it-unify/planning-ecrans`, ADR-001 D4) pour
+    l'espace intervenant de GDC.
+
 ## Dettes
 
 - **Pas de préprod séparée** : un seul projet Supabase pour le lot 1. À revoir avant l'ouverture aux utilisateurs (11/01/2027).
