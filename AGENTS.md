@@ -46,11 +46,15 @@ d'APP-FIX, ADR-029 option C). Toute évolution de schéma = un fichier sous
 `supabase/migrations/**`, appliqué par ce workflow :
 
 ```bash
-gh workflow run db-push.yml -f mode=plan  -f project=preprod   # dry-run
+gh workflow run db-push.yml -f mode=plan  -f project=preprod   # répétition + dry-run
+# Avant le merge : ajouter --ref <branche> pour répéter les migrations de la branche.
 gh workflow run db-push.yml -f mode=apply -f project=preprod
 ```
 
-Un push sur `main` qui touche `supabase/migrations/**` applique en **prod**.
+Un push sur `main` qui touche `supabase/migrations/**` applique en **prod**,
+après la **répétition** : base jetable sur le runner, toutes les migrations,
+puis `supabase test db` (ADR-002 D7). Un échec arrête le run avant toute
+écriture distante.
 
 **Interdits** : `apply_migration` par MCP, `supabase db push` depuis le poste,
 SQL DDL dans le tableau de bord. Le port DB s'ouvre depuis le runner GitHub :
@@ -94,6 +98,13 @@ Deux conséquences, et la première surprend :
 - **Un `grant … to service_role` écrit à la main est redondant.** Si une
   convention dit « `service_role` jamais référencé », l'écrire la contredit
   **sans rien changer** à l'état effectif.
+  ⚠️ **Nuance mesurée le 2026-11-20 (ADR-002)** : c'est vrai seulement si les
+  privilèges par défaut existent. Les migrations du lot 1 accordent
+  explicitement à `service_role` les droits dont l'import et le SSO ont besoin,
+  et la migration d'assertions les vérifie : le schéma ne dépend plus des
+  privilèges par défaut du projet. `delete` et `truncate` sont retirés
+  nommément à `service_role` sur `interventions`, `affectations` et
+  `user_roles` (pas de suppression physique).
 
 > **Réflexe à graver** : après tout `drop`+`create`, **relire**
 > `information_schema.routine_privileges` et comparer à l'état d'avant. Une

@@ -11,8 +11,14 @@ name: Supabase db push
 #     (chemin nominal de release) ;
 #   * déclenchement manuel → `mode` × `project`, cf. ci-dessous.
 #
+# Sauf en `mode=repair`, chaque run **répète d'abord** toutes les migrations
+# sur une base jetable démarrée sur le runner, puis lance les tests pgTAP
+# (étapes « Répétition », décision du 2026-11-20). Un échec arrête le run
+# avant toute écriture sur le projet distant.
+#
 # ── Défauts sûrs ─────────────────────────────────────────────────────
-# `mode` vaut **`plan`** par défaut (dry-run, aucune écriture) et `project`
+# `mode` vaut **`plan`** par défaut (répétition + dry-run, aucune écriture
+# distante) et `project`
 # vaut **`preprod`** : viser la prod à la main demande de le choisir
 # explicitement. Le ref git est libre — on peut planifier depuis `pre-prod`
 # sans avoir mergé dans `main`.
@@ -46,7 +52,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'plan = dry-run seul, aucune écriture | repair = réaligne la table d’historique | apply = applique les migrations'
+        description: 'plan = répétition sur base jetable + dry-run, aucune écriture distante | repair = réaligne la table d’historique | apply = applique les migrations'
         type: choice
         required: true
         default: plan
@@ -110,7 +116,11 @@ jobs:
   push:
     name: Migrations
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 15 et non plus 10 depuis la répétition (2026-11-20) : elle tire plusieurs
+    # images Docker avant l'apply. Un plafond trop serré couperait le run PENDANT
+    # le `db push` distant. Le plafond n'est pas facturé : seule la durée réelle
+    # l'est.
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -137,6 +147,78 @@ jobs:
             exit 1
           fi
           supabase link --project-ref "$SUPABASE_PROJECT_REF"
+
+      # ── Répétition sur base jetable (décision du 2026-11-20) ──
+      #
+      # POURQUOI. Ce dépôt n'a qu'UN projet Supabase : `prod` et `preprod`
+      # visent le même ref. Sans cette étape, le `plan` se limite à
+      # `db push --dry-run`, qui LISTE les fichiers à appliquer sans exécuter
+      # leur SQL. Le SQL d'une migration tournerait donc pour la première fois
+      # en prod. Ici, il tourne d'abord sur un Postgres jetable du runner, et
+      # les tests pgTAP (`supabase/tests/`) passent dessus. Un échec arrête le
+      # run AVANT le dry-run et AVANT l'apply, donc avant toute écriture sur le
+      # projet distant — y compris pour l'apply déclenché par un push sur `main`.
+      #
+      # POURQUOI APRÈS « Link ». `supabase link` ne fait que des LECTURES à
+      # distance, et il écrit dans `supabase/.temp/` les versions exactes du
+      # projet : Postgres, GoTrue, Storage, et la cible de migration Storage.
+      # `db start` relit ces fichiers et démarre les MÊMES images que la prod
+      # (CLI 2.108.0, `pkg/config/config.go` et `internal/link/link.go`). Avant
+      # le link, il prendrait l'image par défaut du CLI pour `major_version = 17`.
+      #
+      # POURQUOI `db start` ET PAS `start`. `supabase db start` démarre Postgres
+      # seul. Sur une base neuve, il joue aussi les migrations internes d'Auth,
+      # de Storage et de Realtime (conteneurs one-shot, sans démarrer ces
+      # services), puis TOUTES les migrations de `supabase/migrations/` dans
+      # l'ordre, puis le seed (`[db.seed]` ; `seed.sql` absent = simple WARN).
+      # Il n'y a donc pas de `migration up --local` séparé : il ne trouverait
+      # rien à appliquer. `supabase test db` n'a besoin que de Postgres : il
+      # active pgTAP, lance `pg_prove` dans un conteneur sur le réseau Docker de
+      # la base, puis retire pgTAP. Aucun service HTTP (API, Studio, Kong) n'est
+      # démarré. Source lue : CLI v2.108.0, `internal/db/start/start.go`,
+      # `internal/migration/apply/apply.go`, `internal/db/test/test.go`.
+      #
+      # pg-delta : `db start` met en cache le catalogue après les migrations
+      # quand pg-delta est actif — même piège que `db push` (voir le bloc `env`).
+      # La variable `SUPABASE_EXPERIMENTAL_PGDELTA_ENABLED=false` du workflow le
+      # coupe ici aussi. `supabase/config.toml` ne change pas.
+      #
+      # CE QUE ÇA COÛTE. Le tirage des images (Postgres, GoTrue, Storage,
+      # Realtime, pg_prove) et le démarrage de la base : estimé à 2–3 min par
+      # run, À MESURER au premier run. Pas de job en plus : les étapes du même
+      # job ne sont pas facturées à part, seul le job l'est (minute entamée).
+      # Pas de `supabase stop` : le runner est détruit à la fin du job.
+      #
+      # Sautée en `mode=repair` : ce mode n'exécute aucun DDL, il réaligne
+      # seulement la table d'historique. Sur un push, `inputs.mode` est vide :
+      # la condition est vraie, la répétition tourne.
+      - name: Répétition — migrations sur base jetable
+        if: ${{ inputs.mode != 'repair' }}
+        run: |
+          echo "::group::supabase db start (Postgres seul + migrations du dépôt)"
+          if ! supabase db start; then
+            echo "::endgroup::"
+            echo "::error::répétition : une migration de supabase/migrations/ échoue sur la base jetable (ou la base n'a pas démarré) — voir le groupe ci-dessus. Rien n'a été écrit sur le projet distant."
+            exit 1
+          fi
+          echo "::endgroup::"
+          echo "::group::migration list --local (contrôle : tout est appliqué)"
+          supabase migration list --local
+          echo "::endgroup::"
+
+      - name: Répétition — tests pgTAP sur base jetable
+        if: ${{ inputs.mode != 'repair' }}
+        run: |
+          # Sans fichier de test, `pg_prove` n'a rien à exécuter : on le dit
+          # en avertissement au lieu de laisser croire que des tests sont passés.
+          if ! find supabase/tests -type f \( -name '*.sql' -o -name '*.pg' \) 2>/dev/null | grep -q .; then
+            echo "::warning::répétition : aucun test pgTAP sous supabase/tests/ — seules les migrations ont été répétées."
+            exit 0
+          fi
+          if ! supabase test db; then
+            echo "::error::répétition : au moins un test pgTAP de supabase/tests/ échoue sur la base jetable — voir la sortie ci-dessus. Rien n'a été écrit sur le projet distant."
+            exit 1
+          fi
 
       # ── Réparation de l'historique de migrations (ADR-029) ──
       #

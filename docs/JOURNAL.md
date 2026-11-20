@@ -19,6 +19,15 @@
 
 ## 2026-11-20
 
+### Schéma du lot 1 (ADR-002)
+**Tâches** : —
+
+- Plan du modèle par `lead-dev` ; l'utilisateur valide le modèle des affectations, les statuts du carnet (avec la valeur brute d'Aurion), la lecture par GDC via une Edge Function (`lecteur_gdc` sans connexion) et la répétition sur base jetable.
+- `database-engineer` : 8 migrations (socle M365 et audit, rôles, référentiels, imports, interventions et affectations, historique par trigger en ajout seul, `api_v1` + `lecteur_gdc`, assertions de droits) et des tests pgTAP ; vérifiés sur un Postgres 16 local, rejeu compris, avec des sabotages détectés.
+- `backend-dev` : répétition dans `db-push.yml` (`supabase db start` + `supabase test db`) avant tout dry-run ou apply.
+- ADR-002 écrit ; ADR-001 corrigé (droits par colonne de `lecteur_gdc`, affectations validées).
+- Suite : répétition sur le runner depuis la branche, revue, puis merge (= apply en prod).
+
 ### Charte ERP EPSS branchée dans le Planning
 **Tâches** : —
 
