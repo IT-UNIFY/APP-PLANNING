@@ -121,6 +121,17 @@ modification. **Une seule exception est admise et nommée** :
 `m365_tenant_for_email`, que la page de connexion appelle avant toute session
 (`docs/PREREQUIS-m365-auth.md` §3).
 
+⚠️ **Limite de la répétition, mesurée au premier apply (2026-11-20, run
+`44720952788`).** La base jetable a la même image que le projet, mais pas ses
+objets propres. Le projet hébergé porte `public.rls_auto_enable()`, une
+fonction de Supabase (déclencheur d'événement `ensure_rls`, qui active la RLS
+des nouvelles tables), exécutable par `anon`. La répétition est passée,
+l'assertion « anon n'exécute rien » a échoué en prod, et l'apply s'est arrêté
+après la 7e migration : le garde-fou a joué son rôle. Correction :
+l'assertion ignore les fonctions qui renvoient `trigger` ou `event_trigger`,
+que personne ne peut appeler hors d'un déclencheur. La version corrigée a été
+jouée en lecture seule sur la base réelle avant d'être poussée.
+
 ## Conséquences
 
 - **Positives** : la preuve vit dans la base et non dans le code de l'import ;
