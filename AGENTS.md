@@ -60,7 +60,9 @@ Projet unique pour le lot 1 : `prod` et `preprod` visent tous deux `yvuutsniduqq
 avec le secret `SUPABASE_DB_PASSWORD` (posé le 2026-11-19).
 Le secret `SUPABASE_ACCESS_TOKEN` est posé aussi (2026-11-19).
 ⚠️ GitHub ne lance à la main (`workflow_dispatch`) qu'un workflow présent sur
-`main` : le premier `mode=plan` se fait après le merge de la PR qui l'apporte.
+`main`. Chemin prouvé le 2026-11-19 : run `plan` vert, « Remote database is up
+to date ». ⚠️ Le filtre `paths` voit aussi `supabase/migrations/.gitkeep` :
+tout push sur `main` qui touche ce dossier lance un run `apply`.
 
 ## 4 bis. 🔴 Après tout `drop`+`create` de fonction SQL, relire les droits
 

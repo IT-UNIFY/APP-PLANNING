@@ -31,4 +31,7 @@
 - ADR-001 (proposé), relu contre le carnet de conception : un projet Supabase par module, contrat de lecture `api_v1`, clés `aurion_individu_id` et UUID d'affectation, pas de copie chez le lecteur (historique daté côté Planning), « Mon planning » en paquet React monté dans GDC, un seul import Aurion.
 - Projet Supabase `yvuutsniduqqinkowqkc` créé (projet unique du lot 1) ; ref reportée, `config.toml` ajouté, secret `SUPABASE_DB_PASSWORD` posé.
 - Secret `SUPABASE_ACCESS_TOKEN` posé, jeton vérifié par l'API Supabase. Le workflow de migration se prouve après le merge (GitHub ne lance à la main qu'un workflow présent sur `main`).
-- Suite : prouver `db-push.yml` en mode plan, puis consommer `ui-epss` et l'écran « Mon planning ».
+- PR #1 mergée. `db-push.yml` prouvé : run `plan` vert et run `push` vert, « Remote database is up to date ».
+- Coque `ui-epss` livrée par la session cloud : TEMPLATE-EPSS#1, à relire.
+- Handoff pour la session GDC : `docs/handoffs/2026-11-19-session-gdc-template-epss.md`.
+- Suite : relire TEMPLATE-EPSS#1, publier 0.1.0, consommer `ui-epss`, puis l'écran « Mon planning ».
