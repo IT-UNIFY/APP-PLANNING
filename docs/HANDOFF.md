@@ -69,8 +69,11 @@ document.**
 
 ## 5. Migrations appliquées · fonctions déployées · secrets attendus
 
-- Migrations appliquées : **les 8 du lot 1** (`20261120090000` à
-  `20261120090700`, ADR-002), le 2026-11-20. Runs `44720952788` (1 à 7 ; la
+- Migrations appliquées : **9**. Les 8 du schéma du lot 1 (`20261120090000`
+  à `20261120090700`, ADR-002), puis la RPC d'import `importer_seances`
+  (`20261120120000`, ADR-002 D8, PR #9, run `44734727296`), le 2026-11-20.
+  Contrôle MCP de la RPC : invoker, `search_path` vide, `execute` pour
+  `service_role` seulement. Runs `44720952788` (1 à 7 ; la
   8e arrêtée sur `rls_auto_enable()`, fonction de Supabase) puis
   `44722665259` (8e, après correction, PR #5). Contrôle MCP en lecture
   seule : `list_migrations` = 8 ; 15 tables, toutes en RLS ; 8 vues

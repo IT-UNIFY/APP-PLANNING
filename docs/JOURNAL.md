@@ -25,6 +25,8 @@
 - Migration additive `20261120120000` : une seule RPC pour tout l'import (ADR-002 D8), un seul import à la fois (verrou consultatif), compteurs lus dans l'historique.
 - 49 tests pgTAP (`05_import`) ; 159 en tout, verts sur deux images locales. 5 000 lignes importées en 0,76 s, réimport identique en 0,48 s sans aucune version écrite.
 - Neuf règles fonctionnelles prises en provisoire : `docs/QUESTIONS.md` Q6 à Q14.
+- Revue `code-reviewer` : aucun bloquant ; tests renforcés (67 dans `05_import`, 177 en tout). Répétition verte depuis la branche, merge accordé par l'utilisateur (droit `execute` à `service_role` : cas d'arrêt du §11), apply vert, contrôle MCP conforme.
+- Le système de permissions a refusé que l'agent assouplisse seul la règle « droits sur `service_role` » du §11 : la précision reste à valider par l'utilisateur.
 - Suite : tâche 3, client Aurion partagé.
 
 ### Charte : rôles sombres du Planning et `ui-epss` 0.1.0 (file du lot 1, tâche 1)
