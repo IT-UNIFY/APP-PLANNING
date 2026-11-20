@@ -95,11 +95,8 @@ document.**
 
 ## 7. L'étape suivante
 
-1. Après le merge de la PR #1, lancer
-   `gh workflow run db-push.yml -f mode=plan -f project=preprod` pour prouver
-   le chemin de migration (aucune migration encore : le run doit finir vert
-   sans rien appliquer). Les deux secrets sont posés ; le jeton a été vérifié
-   par l'API Supabase, pas encore par le workflow.
+1. ✅ Chemin de migration prouvé le 2026-11-19 (runs `44564723167` plan et
+   `44564704213` push : `link` réussi, « Remote database is up to date »).
 2. Quand la PR de la coque est mergée dans TEMPLATE-EPSS et `ui-epss` publié :
    l'installer, poser `data-module="planning"` sur `<html>`, monter la coque.
 3. Premier écran du lot 1 : « Mon planning de l'intervenant »

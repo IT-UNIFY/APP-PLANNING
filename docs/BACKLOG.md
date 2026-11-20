@@ -6,13 +6,12 @@
 
 ## Dettes
 
-- **Prouver `db-push.yml`** : les deux secrets sont posés et le jeton est valide (API Supabase, 2026-11-19), mais le workflow n'a jamais tourné. GitHub ne le lance à la main qu'une fois sur `main` : après le merge de la PR #1, `gh workflow run db-push.yml -f mode=plan -f project=preprod`.
 - **Pas de préprod séparée** : un seul projet Supabase pour le lot 1. À revoir avant l'ouverture aux utilisateurs (11/01/2027).
 - **Socle : le squelette annonce `boilerplate-kit@0.2.0`**, qui ne publie pas `src/` et ne se vendorise pas. Corrigé ici en 0.3.0 ; à remonter à APP-TEMPLATE (`template/socle.json`).
 - **ADR-001 à accepter** : mesurer le coût d'un projet Supabase de plus (offre et nombre de projets de l'organisation). Le projet du lot 1 existe déjà (décision de l'utilisateur, 2026-11-19).
 - **ADR-001, modèle des affectations** : « proposé, à valider » dans le carnet de conception ; à faire valider avant la première migration (D2, D5, D6 en dépendent).
 - **ADR-001 D7** : extraire le client Aurion de GDC dans TEMPLATE-EPSS avant d'écrire l'import du Planning.
-- **Charte `@it-unify/ui-epss` pas encore consommée** : attendre la PR de la coque (TEMPLATE-EPSS) et la publication.
+- **Charte `@it-unify/ui-epss` pas encore consommée** : PR de la coque ouverte ([TEMPLATE-EPSS#1](https://github.com/IT-UNIFY/TEMPLATE-EPSS/pull/1), à relire), puis publication de 0.1.0.
 
 ## Instabilités de tests constatées
 
