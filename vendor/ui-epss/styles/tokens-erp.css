@@ -1,0 +1,237 @@
+/* =============================================================
+   Charte « ERP EPSS » — FICHIER GÉNÉRÉ, ne pas éditer.
+   Source : tokens/erp-epss.tokens.json (maquette) + tokens/sombre.json.
+   Régénérer : npm run tokens.
+
+   Jetons en triplets RGB : Tailwind les lit par
+   `rgb(var(--erp-…-rgb) / <alpha-value>)` (preset) ; le CSS direct
+   écrit `rgb(var(--erp-encre-rgb))`.
+
+   Le module courant se choisit par `data-module="<id>"` sur un
+   ancêtre (en pratique `<html>`). Il fixe les `--erp-module-*`.
+   ============================================================= */
+
+:root {
+  --erp-encre-rgb: 27 36 48; /* #1B2430 */
+  --erp-gris-texte-rgb: 86 97 112; /* #566170 */
+  --erp-gris-discret-rgb: 100 111 125; /* #646F7D */
+  --erp-contour-champ-rgb: 133 143 158; /* #858F9E */
+  --erp-filet-rgb: 225 229 235; /* #E1E5EB */
+  --erp-fond-rgb: 246 247 249; /* #F6F7F9 */
+  --erp-carte-rgb: 255 255 255; /* #FFFFFF */
+  --erp-etat-erreur-rgb: 176 43 39; /* #B02B27 */
+  --erp-etat-erreur-fond-rgb: 255 239 237; /* #FFEFED */
+  --erp-etat-erreur-filet-rgb: 246 195 188; /* #F6C3BC */
+  --erp-etat-avertissement-rgb: 145 91 2; /* #915B02 */
+  --erp-etat-avertissement-fond-rgb: 255 241 226; /* #FFF1E2 */
+  --erp-etat-avertissement-filet-rgb: 235 203 167; /* #EBCBA7 */
+  --erp-etat-succes-rgb: 25 112 55; /* #197037 */
+  --erp-etat-succes-fond-rgb: 232 249 235; /* #E8F9EB */
+  --erp-etat-succes-filet-rgb: 182 221 189; /* #B6DDBD */
+  --erp-etat-info-rgb: 48 94 139; /* #305E8B */
+  --erp-etat-info-fond-rgb: 235 245 255; /* #EBF5FF */
+  --erp-etat-info-filet-rgb: 180 213 248; /* #B4D5F8 */
+
+  --erp-marque-parcours-rgb: 173 117 254; /* #AD75FE */
+  --erp-marque-organisation-rgb: 248 80 147; /* #F85093 */
+  --erp-marque-qualite-rgb: 70 153 254; /* #4699FE */
+  --erp-marque-veille-rgb: 7 182 85; /* #07B655 */
+
+  --erp-font-sans: Manrope, "Segoe UI", system-ui, sans-serif;
+  --erp-fs-titre-page: 32px;
+  --erp-fs-titre-section: 22px;
+  --erp-fs-titre-carte: 17px;
+  --erp-fs-texte: 15px;
+  --erp-fs-texte-petit: 13px;
+  --erp-fs-libelle: 12px;
+  --erp-fs-bouton: 14px;
+  --erp-lh-titre-page: 38px;
+  --erp-lh-titre-section: 28px;
+  --erp-lh-titre-carte: 24px;
+  --erp-lh-texte: 22px;
+  --erp-lh-texte-petit: 18px;
+  --erp-lh-libelle: 16px;
+  --erp-lh-bouton: 20px;
+  --erp-radius-sm: 6px;
+  --erp-radius-md: 10px;
+  --erp-radius-lg: 16px;
+  --erp-radius-logo: 22%;
+  --erp-space-1: 4px;
+  --erp-space-2: 8px;
+  --erp-space-4: 16px;
+  --erp-space-6: 24px;
+  --erp-space-10: 40px;
+}
+
+/* Apprenant (Aubergine) */
+[data-module="apprenant"] {
+  --erp-module-principale-rgb: 74 13 102; /* #4A0D66 */
+  --erp-module-accent-rgb: 131 78 161; /* #834EA1 */
+  --erp-module-action-rgb: 74 13 102; /* #4A0D66 */
+  --erp-module-action-survol-rgb: 56 0 80; /* #380050 */
+  --erp-module-fond-clair-rgb: 248 240 255; /* #F8F0FF */
+  --erp-module-foncee-rgb: 56 0 80; /* #380050 */
+}
+
+/* Admission (Indigo) */
+[data-module="admission"] {
+  --erp-module-principale-rgb: 58 50 175; /* #3A32AF */
+  --erp-module-accent-rgb: 93 97 217; /* #5D61D9 */
+  --erp-module-action-rgb: 58 50 175; /* #3A32AF */
+  --erp-module-action-survol-rgb: 46 28 155; /* #2E1C9B */
+  --erp-module-fond-clair-rgb: 240 243 255; /* #F0F3FF */
+  --erp-module-foncee-rgb: 46 28 155; /* #2E1C9B */
+}
+
+/* Scolarité (Violet) */
+[data-module="scolarite"] {
+  --erp-module-principale-rgb: 140 58 178; /* #8C3AB2 */
+  --erp-module-accent-rgb: 182 106 221; /* #B66ADD */
+  --erp-module-action-rgb: 140 58 178; /* #8C3AB2 */
+  --erp-module-action-survol-rgb: 122 37 158; /* #7A259E */
+  --erp-module-fond-clair-rgb: 249 239 254; /* #F9EFFE */
+  --erp-module-foncee-rgb: 122 37 158; /* #7A259E */
+}
+
+/* Stage (Lavande) */
+[data-module="stage"] {
+  --erp-module-principale-rgb: 163 114 245; /* #A372F5 */
+  --erp-module-accent-rgb: 199 174 254; /* #C7AEFE */
+  --erp-module-action-rgb: 139 89 217; /* #8B59D9 */
+  --erp-module-action-survol-rgb: 122 70 197; /* #7A46C5 */
+  --erp-module-fond-clair-rgb: 245 241 254; /* #F5F1FE */
+  --erp-module-foncee-rgb: 105 50 177; /* #6932B1 */
+}
+
+/* CRM (Bordeaux) */
+[data-module="crm"] {
+  --erp-module-principale-rgb: 106 15 44; /* #6A0F2C */
+  --erp-module-accent-rgb: 160 72 91; /* #A0485B */
+  --erp-module-action-rgb: 106 15 44; /* #6A0F2C */
+  --erp-module-action-survol-rgb: 84 0 30; /* #54001E */
+  --erp-module-fond-clair-rgb: 254 239 241; /* #FEEFF1 */
+  --erp-module-foncee-rgb: 84 0 30; /* #54001E */
+}
+
+/* Planning (Framboise) */
+[data-module="planning"] {
+  --erp-module-principale-rgb: 163 18 63; /* #A3123F */
+  --erp-module-accent-rgb: 208 77 103; /* #D04D67 */
+  --erp-module-action-rgb: 163 18 63; /* #A3123F */
+  --erp-module-action-survol-rgb: 138 0 49; /* #8A0031 */
+  --erp-module-fond-clair-rgb: 254 239 241; /* #FEEFF1 */
+  --erp-module-foncee-rgb: 138 0 49; /* #8A0031 */
+}
+
+/* Intervenant (Cuivre) */
+[data-module="intervenant"] {
+  --erp-module-principale-rgb: 152 84 3; /* #985403 */
+  --erp-module-accent-rgb: 195 127 67; /* #C37F43 */
+  --erp-module-action-rgb: 152 84 3; /* #985403 */
+  --erp-module-action-survol-rgb: 128 70 2; /* #804602 */
+  --erp-module-fond-clair-rgb: 254 241 230; /* #FEF1E6 */
+  --erp-module-foncee-rgb: 124 68 1; /* #7C4401 */
+}
+
+/* Facturation (Orange) */
+[data-module="facturation"] {
+  --erp-module-principale-rgb: 227 107 1; /* #E36B01 */
+  --erp-module-accent-rgb: 255 165 114; /* #FFA572 */
+  --erp-module-action-rgb: 188 88 5; /* #BC5805 */
+  --erp-module-action-survol-rgb: 162 75 4; /* #A24B04 */
+  --erp-module-fond-clair-rgb: 254 240 233; /* #FEF0E9 */
+  --erp-module-foncee-rgb: 133 60 2; /* #853C02 */
+}
+
+/* Documents (Bleu marine) */
+[data-module="documents"] {
+  --erp-module-principale-rgb: 0 61 115; /* #003D73 */
+  --erp-module-accent-rgb: 57 107 162; /* #396BA2 */
+  --erp-module-action-rgb: 0 61 115; /* #003D73 */
+  --erp-module-action-survol-rgb: 0 46 89; /* #002E59 */
+  --erp-module-fond-clair-rgb: 236 244 254; /* #ECF4FE */
+  --erp-module-foncee-rgb: 0 46 89; /* #002E59 */
+}
+
+/* Qualité (Bleu acier) */
+[data-module="qualite"] {
+  --erp-module-principale-rgb: 5 100 142; /* #05648E */
+  --erp-module-accent-rgb: 65 142 185; /* #418EB9 */
+  --erp-module-action-rgb: 5 100 142; /* #05648E */
+  --erp-module-action-survol-rgb: 2 82 118; /* #025276 */
+  --erp-module-fond-clair-rgb: 233 246 254; /* #E9F6FE */
+  --erp-module-foncee-rgb: 2 82 118; /* #025276 */
+}
+
+/* Enquêtes (Bleu vif) */
+[data-module="enquetes"] {
+  --erp-module-principale-rgb: 33 137 249; /* #2189F9 */
+  --erp-module-accent-rgb: 129 185 254; /* #81B9FE */
+  --erp-module-action-rgb: 3 115 220; /* #0373DC */
+  --erp-module-action-survol-rgb: 3 98 189; /* #0362BD */
+  --erp-module-fond-clair-rgb: 236 244 254; /* #ECF4FE */
+  --erp-module-foncee-rgb: 1 80 157; /* #01509D */
+}
+
+/* Veille (Vert mousse) */
+[data-module="veille"] {
+  --erp-module-principale-rgb: 55 81 1; /* #375101 */
+  --erp-module-accent-rgb: 93 121 54; /* #5D7936 */
+  --erp-module-action-rgb: 55 81 1; /* #375101 */
+  --erp-module-action-survol-rgb: 42 63 1; /* #2A3F01 */
+  --erp-module-fond-clair-rgb: 238 247 228; /* #EEF7E4 */
+  --erp-module-foncee-rgb: 42 63 1; /* #2A3F01 */
+}
+
+/* SI (Vert) */
+[data-module="si"] {
+  --erp-module-principale-rgb: 4 122 75; /* #047A4B */
+  --erp-module-accent-rgb: 74 164 117; /* #4AA475 */
+  --erp-module-action-rgb: 4 122 75; /* #047A4B */
+  --erp-module-action-survol-rgb: 3 102 62; /* #03663E */
+  --erp-module-fond-clair-rgb: 229 250 236; /* #E5FAEC */
+  --erp-module-foncee-rgb: 1 96 58; /* #01603A */
+}
+
+/* Projects (Vert d'eau) */
+[data-module="projects"] {
+  --erp-module-principale-rgb: 10 164 125; /* #0AA47D */
+  --erp-module-accent-rgb: 91 208 168; /* #5BD0A8 */
+  --erp-module-action-rgb: 6 133 101; /* #068565 */
+  --erp-module-action-survol-rgb: 4 113 85; /* #047155 */
+  --erp-module-fond-clair-rgb: 226 250 240; /* #E2FAF0 */
+  --erp-module-foncee-rgb: 3 94 70; /* #035E46 */
+}
+
+/* ---- Thème sombre (dérivé ; la maquette n'en a pas) ---- */
+.dark {
+  --erp-encre-rgb: 232 236 241; /* #E8ECF1 */
+  --erp-gris-texte-rgb: 174 183 194; /* #AEB7C2 */
+  --erp-gris-discret-rgb: 154 164 176; /* #9AA4B0 */
+  --erp-contour-champ-rgb: 122 133 149; /* #7A8595 */
+  --erp-filet-rgb: 46 55 67; /* #2E3743 */
+  --erp-fond-rgb: 18 22 28; /* #12161C */
+  --erp-carte-rgb: 26 32 41; /* #1A2029 */
+  --erp-etat-erreur-rgb: 255 156 148; /* #FF9C94 */
+  --erp-etat-erreur-fond-rgb: 58 23 20; /* #3A1714 */
+  --erp-etat-erreur-filet-rgb: 110 42 37; /* #6E2A25 */
+  --erp-etat-avertissement-rgb: 242 193 122; /* #F2C17A */
+  --erp-etat-avertissement-fond-rgb: 51 36 12; /* #33240C */
+  --erp-etat-avertissement-filet-rgb: 107 77 29; /* #6B4D1D */
+  --erp-etat-succes-rgb: 143 217 163; /* #8FD9A3 */
+  --erp-etat-succes-fond-rgb: 18 48 28; /* #12301C */
+  --erp-etat-succes-filet-rgb: 45 91 58; /* #2D5B3A */
+  --erp-etat-info-rgb: 156 200 245; /* #9CC8F5 */
+  --erp-etat-info-fond-rgb: 19 42 64; /* #132A40 */
+  --erp-etat-info-filet-rgb: 45 77 110; /* #2D4D6E */
+}
+
+.dark[data-module="intervenant"], .dark [data-module="intervenant"] {
+  --erp-module-principale-rgb: 168 94 6; /* #A85E06 */
+  --erp-module-accent-rgb: 217 150 90; /* #D9965A */
+  --erp-module-action-rgb: 168 94 6; /* #A85E06 */
+  --erp-module-action-survol-rgb: 152 84 3; /* #985403 */
+  --erp-module-fond-clair-rgb: 46 31 16; /* #2E1F10 */
+  --erp-module-foncee-rgb: 232 168 102; /* #E8A866 */
+}
+

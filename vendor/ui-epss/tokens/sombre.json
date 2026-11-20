@@ -1,0 +1,34 @@
+{
+  "//": "Thème sombre : DÉRIVÉ, la maquette n'en a pas. Repris d'APP-GDC (pre-prod-test, src/styles/tokens-erp.css, ADR-047). Seul le module Intervenant a ses rôles sombres ; les autres modules restent à dériver (dette, voir docs/HANDOFF.md).",
+  "socle": {
+    "encre": "#E8ECF1",
+    "gris-texte": "#AEB7C2",
+    "gris-discret": "#9AA4B0",
+    "contour-champ": "#7A8595",
+    "filet": "#2E3743",
+    "fond": "#12161C",
+    "carte": "#1A2029",
+    "etat-erreur": "#FF9C94",
+    "etat-erreur-fond": "#3A1714",
+    "etat-erreur-filet": "#6E2A25",
+    "etat-avertissement": "#F2C17A",
+    "etat-avertissement-fond": "#33240C",
+    "etat-avertissement-filet": "#6B4D1D",
+    "etat-succes": "#8FD9A3",
+    "etat-succes-fond": "#12301C",
+    "etat-succes-filet": "#2D5B3A",
+    "etat-info": "#9CC8F5",
+    "etat-info-fond": "#132A40",
+    "etat-info-filet": "#2D4D6E"
+  },
+  "modules": {
+    "intervenant": {
+      "principale": "#A85E06",
+      "accent": "#D9965A",
+      "action": "#A85E06",
+      "action-survol": "#985403",
+      "fond-clair": "#2E1F10",
+      "foncee": "#E8A866"
+    }
+  }
+}

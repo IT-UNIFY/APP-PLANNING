@@ -1,0 +1,673 @@
+{
+ "name": "ERP EPSS – Palette des modules",
+ "version": 3,
+ "color": {
+  "themes": [
+   {
+    "id": "clair",
+    "name": "Clair"
+   }
+  ],
+  "tokens": [
+   {
+    "name": "encre",
+    "value": "#1B2430",
+    "usage": "Titres et texte principal sur fond, cartes et fonds clairs de module. 15,6:1 sur blanc. Aussi bandeau « socle commun »."
+   },
+   {
+    "name": "gris-texte",
+    "value": "#566170",
+    "usage": "Texte secondaire, descriptions, métadonnées. 6,3:1 sur blanc, 5,9:1 sur fond."
+   },
+   {
+    "name": "gris-discret",
+    "value": "#646F7D",
+    "usage": "Libellés de colonnes, texte d'aide, icônes secondaires. 5,1:1 sur blanc, minimum pour du texte."
+   },
+   {
+    "name": "contour-champ",
+    "value": "#858F9E",
+    "usage": "Bordure des champs de saisie, cases et interrupteurs (3,3:1 sur blanc, seuil des contrôles)."
+   },
+   {
+    "name": "filet",
+    "value": "#E1E5EB",
+    "usage": "Séparateurs et bordures de cartes, purement décoratifs. Jamais pour un contrôle."
+   },
+   {
+    "name": "fond",
+    "value": "#F6F7F9",
+    "usage": "Fond général de l'application, commun à tous les modules."
+   },
+   {
+    "name": "carte",
+    "value": "#FFFFFF",
+    "usage": "Cartes, panneaux, en-tête. Seule zone où apparaît le logo de l'école."
+   },
+   {
+    "name": "etat-erreur",
+    "value": "#B02B27",
+    "usage": "Erreur : texte et icône du message (5.8:1 sur son fond). Toujours accompagné d'une icône et d'un libellé, jamais en aplat plein, pour ne pas se confondre avec un module."
+   },
+   {
+    "name": "etat-erreur-fond",
+    "value": "#FFEFED",
+    "usage": "Erreur : fond du bandeau ou du badge."
+   },
+   {
+    "name": "etat-erreur-filet",
+    "value": "#F6C3BC",
+    "usage": "Erreur : bordure du bandeau."
+   },
+   {
+    "name": "etat-avertissement",
+    "value": "#915B02",
+    "usage": "Avertissement : texte et icône du message (5.1:1 sur son fond). Toujours accompagné d'une icône et d'un libellé, jamais en aplat plein, pour ne pas se confondre avec un module."
+   },
+   {
+    "name": "etat-avertissement-fond",
+    "value": "#FFF1E2",
+    "usage": "Avertissement : fond du bandeau ou du badge."
+   },
+   {
+    "name": "etat-avertissement-filet",
+    "value": "#EBCBA7",
+    "usage": "Avertissement : bordure du bandeau."
+   },
+   {
+    "name": "etat-succes",
+    "value": "#197037",
+    "usage": "Succès : texte et icône du message (5.6:1 sur son fond). Toujours accompagné d'une icône et d'un libellé, jamais en aplat plein, pour ne pas se confondre avec un module."
+   },
+   {
+    "name": "etat-succes-fond",
+    "value": "#E8F9EB",
+    "usage": "Succès : fond du bandeau ou du badge."
+   },
+   {
+    "name": "etat-succes-filet",
+    "value": "#B6DDBD",
+    "usage": "Succès : bordure du bandeau."
+   },
+   {
+    "name": "etat-info",
+    "value": "#305E8B",
+    "usage": "Information : texte et icône du message (6.1:1 sur son fond). Toujours accompagné d'une icône et d'un libellé, jamais en aplat plein, pour ne pas se confondre avec un module."
+   },
+   {
+    "name": "etat-info-fond",
+    "value": "#EBF5FF",
+    "usage": "Information : fond du bandeau ou du badge."
+   },
+   {
+    "name": "etat-info-filet",
+    "value": "#B4D5F8",
+    "usage": "Information : bordure du bandeau."
+   },
+   {
+    "name": "marque-parcours",
+    "value": "#AD75FE",
+    "usage": "Couleur de famille « Parcours de l'apprenant (violet) » pour le logo général : la version la plus lumineuse de la famille, même clarté et même intensité pour les quatre. Usage graphique uniquement (logo, illustrations), jamais pour du texte ou un bouton."
+   },
+   {
+    "name": "marque-organisation",
+    "value": "#F85093",
+    "usage": "Couleur de famille « Organisation (framboise) » pour le logo général : la version la plus lumineuse de la famille, même clarté et même intensité pour les quatre. Usage graphique uniquement (logo, illustrations), jamais pour du texte ou un bouton."
+   },
+   {
+    "name": "marque-qualite",
+    "value": "#4699FE",
+    "usage": "Couleur de famille « Qualité (bleu) » pour le logo général : la version la plus lumineuse de la famille, même clarté et même intensité pour les quatre. Usage graphique uniquement (logo, illustrations), jamais pour du texte ou un bouton."
+   },
+   {
+    "name": "marque-veille",
+    "value": "#07B655",
+    "usage": "Couleur de famille « Veille et support (vert) » pour le logo général : la version la plus lumineuse de la famille, même clarté et même intensité pour les quatre. Usage graphique uniquement (logo, illustrations), jamais pour du texte ou un bouton."
+   },
+   {
+    "name": "apprenant-principale",
+    "value": "#4A0D66",
+    "usage": "Apprenant (Aubergine) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 13.6:1."
+   },
+   {
+    "name": "apprenant-accent",
+    "value": "#834EA1",
+    "usage": "Apprenant : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "apprenant-action",
+    "value": "#4A0D66",
+    "usage": "Apprenant : fond des boutons principaux, texte blanc à 13.6:1. Identique à la principale."
+   },
+   {
+    "name": "apprenant-action-survol",
+    "value": "#380050",
+    "usage": "Apprenant : bouton principal au survol et à l'appui (texte blanc 16.4:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "apprenant-fond-clair",
+    "value": "#F8F0FF",
+    "usage": "Apprenant : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "apprenant-foncee",
+    "value": "#380050",
+    "usage": "Apprenant : titres et liens sur fond clair du module ou sur blanc (14.7:1 sur le fond clair)."
+   },
+   {
+    "name": "admission-principale",
+    "value": "#3A32AF",
+    "usage": "Admission (Indigo) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 9.3:1."
+   },
+   {
+    "name": "admission-accent",
+    "value": "#5D61D9",
+    "usage": "Admission : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "admission-action",
+    "value": "#3A32AF",
+    "usage": "Admission : fond des boutons principaux, texte blanc à 9.3:1. Identique à la principale."
+   },
+   {
+    "name": "admission-action-survol",
+    "value": "#2E1C9B",
+    "usage": "Admission : bouton principal au survol et à l'appui (texte blanc 12.0:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "admission-fond-clair",
+    "value": "#F0F3FF",
+    "usage": "Admission : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "admission-foncee",
+    "value": "#2E1C9B",
+    "usage": "Admission : titres et liens sur fond clair du module ou sur blanc (10.8:1 sur le fond clair)."
+   },
+   {
+    "name": "scolarite-principale",
+    "value": "#8C3AB2",
+    "usage": "Scolarité (Violet) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 6.2:1."
+   },
+   {
+    "name": "scolarite-accent",
+    "value": "#B66ADD",
+    "usage": "Scolarité : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "scolarite-action",
+    "value": "#8C3AB2",
+    "usage": "Scolarité : fond des boutons principaux, texte blanc à 6.2:1. Identique à la principale."
+   },
+   {
+    "name": "scolarite-action-survol",
+    "value": "#7A259E",
+    "usage": "Scolarité : bouton principal au survol et à l'appui (texte blanc 8.1:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "scolarite-fond-clair",
+    "value": "#F9EFFE",
+    "usage": "Scolarité : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "scolarite-foncee",
+    "value": "#7A259E",
+    "usage": "Scolarité : titres et liens sur fond clair du module ou sur blanc (7.3:1 sur le fond clair)."
+   },
+   {
+    "name": "stage-principale",
+    "value": "#A372F5",
+    "usage": "Stage (Lavande) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 3.3:1."
+   },
+   {
+    "name": "stage-accent",
+    "value": "#C7AEFE",
+    "usage": "Stage : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "stage-action",
+    "value": "#8B59D9",
+    "usage": "Stage : fond des boutons principaux, texte blanc à 4.6:1. Plus sombre que la principale, qui ne passe pas 4,5:1 avec du texte blanc."
+   },
+   {
+    "name": "stage-action-survol",
+    "value": "#7A46C5",
+    "usage": "Stage : bouton principal au survol et à l'appui (texte blanc 6.0:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "stage-fond-clair",
+    "value": "#F5F1FE",
+    "usage": "Stage : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "stage-foncee",
+    "value": "#6932B1",
+    "usage": "Stage : titres et liens sur fond clair du module ou sur blanc (7.0:1 sur le fond clair)."
+   },
+   {
+    "name": "crm-principale",
+    "value": "#6A0F2C",
+    "usage": "CRM (Bordeaux) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 12.2:1."
+   },
+   {
+    "name": "crm-accent",
+    "value": "#A0485B",
+    "usage": "CRM : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "crm-action",
+    "value": "#6A0F2C",
+    "usage": "CRM : fond des boutons principaux, texte blanc à 12.2:1. Identique à la principale."
+   },
+   {
+    "name": "crm-action-survol",
+    "value": "#54001E",
+    "usage": "CRM : bouton principal au survol et à l'appui (texte blanc 15.0:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "crm-fond-clair",
+    "value": "#FEEFF1",
+    "usage": "CRM : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "crm-foncee",
+    "value": "#54001E",
+    "usage": "CRM : titres et liens sur fond clair du module ou sur blanc (13.5:1 sur le fond clair)."
+   },
+   {
+    "name": "planning-principale",
+    "value": "#A3123F",
+    "usage": "Planning (Framboise) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 7.7:1."
+   },
+   {
+    "name": "planning-accent",
+    "value": "#D04D67",
+    "usage": "Planning : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "planning-action",
+    "value": "#A3123F",
+    "usage": "Planning : fond des boutons principaux, texte blanc à 7.7:1. Identique à la principale."
+   },
+   {
+    "name": "planning-action-survol",
+    "value": "#8A0031",
+    "usage": "Planning : bouton principal au survol et à l'appui (texte blanc 9.9:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "planning-fond-clair",
+    "value": "#FEEFF1",
+    "usage": "Planning : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "planning-foncee",
+    "value": "#8A0031",
+    "usage": "Planning : titres et liens sur fond clair du module ou sur blanc (8.9:1 sur le fond clair)."
+   },
+   {
+    "name": "intervenant-principale",
+    "value": "#985403",
+    "usage": "Intervenant (Cuivre) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 5.8:1."
+   },
+   {
+    "name": "intervenant-accent",
+    "value": "#C37F43",
+    "usage": "Intervenant : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "intervenant-action",
+    "value": "#985403",
+    "usage": "Intervenant : fond des boutons principaux, texte blanc à 5.8:1. Identique à la principale."
+   },
+   {
+    "name": "intervenant-action-survol",
+    "value": "#804602",
+    "usage": "Intervenant : bouton principal au survol et à l'appui (texte blanc 7.5:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "intervenant-fond-clair",
+    "value": "#FEF1E6",
+    "usage": "Intervenant : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "intervenant-foncee",
+    "value": "#7C4401",
+    "usage": "Intervenant : titres et liens sur fond clair du module ou sur blanc (7.1:1 sur le fond clair)."
+   },
+   {
+    "name": "facturation-principale",
+    "value": "#E36B01",
+    "usage": "Facturation (Orange) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 3.3:1."
+   },
+   {
+    "name": "facturation-accent",
+    "value": "#FFA572",
+    "usage": "Facturation : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "facturation-action",
+    "value": "#BC5805",
+    "usage": "Facturation : fond des boutons principaux, texte blanc à 4.6:1. Plus sombre que la principale, qui ne passe pas 4,5:1 avec du texte blanc."
+   },
+   {
+    "name": "facturation-action-survol",
+    "value": "#A24B04",
+    "usage": "Facturation : bouton principal au survol et à l'appui (texte blanc 5.9:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "facturation-fond-clair",
+    "value": "#FEF0E9",
+    "usage": "Facturation : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "facturation-foncee",
+    "value": "#853C02",
+    "usage": "Facturation : titres et liens sur fond clair du module ou sur blanc (7.1:1 sur le fond clair)."
+   },
+   {
+    "name": "documents-principale",
+    "value": "#003D73",
+    "usage": "Documents (Bleu marine) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 11.0:1."
+   },
+   {
+    "name": "documents-accent",
+    "value": "#396BA2",
+    "usage": "Documents : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "documents-action",
+    "value": "#003D73",
+    "usage": "Documents : fond des boutons principaux, texte blanc à 11.0:1. Identique à la principale."
+   },
+   {
+    "name": "documents-action-survol",
+    "value": "#002E59",
+    "usage": "Documents : bouton principal au survol et à l'appui (texte blanc 13.7:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "documents-fond-clair",
+    "value": "#ECF4FE",
+    "usage": "Documents : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "documents-foncee",
+    "value": "#002E59",
+    "usage": "Documents : titres et liens sur fond clair du module ou sur blanc (12.3:1 sur le fond clair)."
+   },
+   {
+    "name": "qualite-principale",
+    "value": "#05648E",
+    "usage": "Qualité (Bleu acier) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 6.5:1."
+   },
+   {
+    "name": "qualite-accent",
+    "value": "#418EB9",
+    "usage": "Qualité : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "qualite-action",
+    "value": "#05648E",
+    "usage": "Qualité : fond des boutons principaux, texte blanc à 6.5:1. Identique à la principale."
+   },
+   {
+    "name": "qualite-action-survol",
+    "value": "#025276",
+    "usage": "Qualité : bouton principal au survol et à l'appui (texte blanc 8.5:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "qualite-fond-clair",
+    "value": "#E9F6FE",
+    "usage": "Qualité : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "qualite-foncee",
+    "value": "#025276",
+    "usage": "Qualité : titres et liens sur fond clair du module ou sur blanc (7.7:1 sur le fond clair)."
+   },
+   {
+    "name": "enquetes-principale",
+    "value": "#2189F9",
+    "usage": "Enquêtes (Bleu vif) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 3.5:1."
+   },
+   {
+    "name": "enquetes-accent",
+    "value": "#81B9FE",
+    "usage": "Enquêtes : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "enquetes-action",
+    "value": "#0373DC",
+    "usage": "Enquêtes : fond des boutons principaux, texte blanc à 4.7:1. Plus sombre que la principale, qui ne passe pas 4,5:1 avec du texte blanc."
+   },
+   {
+    "name": "enquetes-action-survol",
+    "value": "#0362BD",
+    "usage": "Enquêtes : bouton principal au survol et à l'appui (texte blanc 6.0:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "enquetes-fond-clair",
+    "value": "#ECF4FE",
+    "usage": "Enquêtes : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "enquetes-foncee",
+    "value": "#01509D",
+    "usage": "Enquêtes : titres et liens sur fond clair du module ou sur blanc (7.2:1 sur le fond clair)."
+   },
+   {
+    "name": "veille-principale",
+    "value": "#375101",
+    "usage": "Veille (Vert mousse) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 9.0:1."
+   },
+   {
+    "name": "veille-accent",
+    "value": "#5D7936",
+    "usage": "Veille : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "veille-action",
+    "value": "#375101",
+    "usage": "Veille : fond des boutons principaux, texte blanc à 9.0:1. Identique à la principale."
+   },
+   {
+    "name": "veille-action-survol",
+    "value": "#2A3F01",
+    "usage": "Veille : bouton principal au survol et à l'appui (texte blanc 11.6:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "veille-fond-clair",
+    "value": "#EEF7E4",
+    "usage": "Veille : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "veille-foncee",
+    "value": "#2A3F01",
+    "usage": "Veille : titres et liens sur fond clair du module ou sur blanc (10.5:1 sur le fond clair)."
+   },
+   {
+    "name": "si-principale",
+    "value": "#047A4B",
+    "usage": "SI (Vert) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 5.4:1."
+   },
+   {
+    "name": "si-accent",
+    "value": "#4AA475",
+    "usage": "SI : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "si-action",
+    "value": "#047A4B",
+    "usage": "SI : fond des boutons principaux, texte blanc à 5.4:1. Identique à la principale."
+   },
+   {
+    "name": "si-action-survol",
+    "value": "#03663E",
+    "usage": "SI : bouton principal au survol et à l'appui (texte blanc 7.1:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "si-fond-clair",
+    "value": "#E5FAEC",
+    "usage": "SI : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "si-foncee",
+    "value": "#01603A",
+    "usage": "SI : titres et liens sur fond clair du module ou sur blanc (7.0:1 sur le fond clair)."
+   },
+   {
+    "name": "projects-principale",
+    "value": "#0AA47D",
+    "usage": "Projects (Vert d'eau) : fond du logo, pastille de navigation, éléments graphiques. Pictogramme blanc à 3.2:1."
+   },
+   {
+    "name": "projects-accent",
+    "value": "#5BD0A8",
+    "usage": "Projects : forme ronde du logo, illustrations, indicateur d'onglet actif. Décoratif : jamais de texte blanc dessus."
+   },
+   {
+    "name": "projects-action",
+    "value": "#068565",
+    "usage": "Projects : fond des boutons principaux, texte blanc à 4.6:1. Plus sombre que la principale, qui ne passe pas 4,5:1 avec du texte blanc."
+   },
+   {
+    "name": "projects-action-survol",
+    "value": "#047155",
+    "usage": "Projects : bouton principal au survol et à l'appui (texte blanc 6.0:1). Remplace l'ancien survol en accent, trop clair."
+   },
+   {
+    "name": "projects-fond-clair",
+    "value": "#E2FAF0",
+    "usage": "Projects : bandeau d'en-tête du module, ligne sélectionnée, badge neutre du module."
+   },
+   {
+    "name": "projects-foncee",
+    "value": "#035E46",
+    "usage": "Projects : titres et liens sur fond clair du module ou sur blanc (7.1:1 sur le fond clair)."
+   }
+  ]
+ },
+ "type": {
+  "fonts": [],
+  "families": {
+   "sans": "Manrope, \"Segoe UI\", system-ui, sans-serif"
+  },
+  "groups": [
+   {
+    "name": "Titres",
+    "family": "sans",
+    "styles": [
+     {
+      "name": "titre-page",
+      "fontSize": "32px",
+      "lineHeight": "38px",
+      "fontWeight": 800,
+      "letterSpacing": "-0.5px",
+      "usage": "Titre d'écran, une fois par page."
+     },
+     {
+      "name": "titre-section",
+      "fontSize": "22px",
+      "lineHeight": "28px",
+      "fontWeight": 700,
+      "usage": "Titre de bloc ou de carte principale."
+     },
+     {
+      "name": "titre-carte",
+      "fontSize": "17px",
+      "lineHeight": "24px",
+      "fontWeight": 700,
+      "usage": "Nom de module, titre de carte."
+     }
+    ]
+   },
+   {
+    "name": "Texte",
+    "family": "sans",
+    "styles": [
+     {
+      "name": "texte",
+      "fontSize": "15px",
+      "lineHeight": "22px",
+      "fontWeight": 400,
+      "usage": "Texte courant."
+     },
+     {
+      "name": "texte-petit",
+      "fontSize": "13px",
+      "lineHeight": "18px",
+      "fontWeight": 400,
+      "usage": "Descriptions, métadonnées, en gris-texte."
+     },
+     {
+      "name": "libelle",
+      "fontSize": "12px",
+      "lineHeight": "16px",
+      "fontWeight": 700,
+      "letterSpacing": "0.6px",
+      "usage": "Libellés de famille en capitales, en gris-discret."
+     },
+     {
+      "name": "bouton",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 600,
+      "usage": "Texte des boutons."
+     }
+    ]
+   }
+  ]
+ },
+ "spacing": {
+  "tokens": [
+   {
+    "name": "space-1",
+    "value": "4px",
+    "usage": "Écart icône-texte."
+   },
+   {
+    "name": "space-2",
+    "value": "8px",
+    "usage": "Écart entre éléments liés."
+   },
+   {
+    "name": "space-4",
+    "value": "16px",
+    "usage": "Marge interne des boutons et des lignes."
+   },
+   {
+    "name": "space-6",
+    "value": "24px",
+    "usage": "Marge interne des cartes."
+   },
+   {
+    "name": "space-10",
+    "value": "40px",
+    "usage": "Marge de page, écart entre sections."
+   }
+  ]
+ },
+ "radius": {
+  "tokens": [
+   {
+    "name": "radius-sm",
+    "value": "6px",
+    "usage": "Badges, champs."
+   },
+   {
+    "name": "radius-md",
+    "value": "10px",
+    "usage": "Boutons."
+   },
+   {
+    "name": "radius-lg",
+    "value": "16px",
+    "usage": "Cartes et panneaux."
+   },
+   {
+    "name": "radius-logo",
+    "value": "22%",
+    "usage": "Carré arrondi des logos de module (14px pour un logo de 64px)."
+   }
+  ]
+ }
+}

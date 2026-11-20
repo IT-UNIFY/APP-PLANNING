@@ -11,7 +11,9 @@ WORKDIR /app
 RUN apk add --no-cache git
 
 # Dépendances d'abord, pour un meilleur cache de couches.
+# `vendor/ui-epss` est une dépendance `file:` : il doit être là AVANT `npm ci`.
 COPY package.json package-lock.json ./
+COPY vendor ./vendor
 RUN npm ci
 
 # Vite lit les variables VITE_* AU MOMENT DU BUILD et les inline dans le

@@ -17,6 +17,18 @@
 > Invoquer le skill `journal-entry` pour scaffolder le squelette avec l'ancre
 > déjà résolue depuis le contexte de session.
 
+## 2026-11-20
+
+### Charte ERP EPSS branchée dans le Planning
+**Tâches** : —
+
+- TEMPLATE-EPSS#1 (coque et composants, écrite par la session cloud) déjà mergée ; `verify` relancé sur sa branche : 156 tests verts.
+- Décision : `ui-epss` est **vendorisé** (comme le socle), pas installé depuis GitHub Packages : aucun jeton au build ni dans l'image Docker.
+- `scripts/vendorer-ui-epss.mjs` : synchronisation depuis un clone de TEMPLATE-EPSS (`git archive` + build), contrôle hors ligne des empreintes dans `verify`.
+- Coque montée avec `data-module="planning"`, menu du lot 1 (Interventions, Paramètres), menu des paramètres, pages-enveloppes ; 5 tests de rendu.
+- Bloque : rien. Dette : rôles sombres du module Planning, étiquette `v0.1.0`, connexion et rôles.
+- Suite : contenu de l'écran « Interventions » (calendrier et liste), qui demande d'abord le modèle de données (ADR-001, affectations à valider).
+
 ## 2026-11-19
 
 ### 1 — Instanciation du projet depuis APP-TEMPLATE
