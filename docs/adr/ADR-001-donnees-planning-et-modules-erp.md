@@ -210,8 +210,10 @@ En échange, le Planning garantit la preuve :
 **Points d'attention**
 
 - Les vues `api_v1` s'exécutent avec les droits du lecteur
-  (`security_invoker = true`). Le rôle technique ne reçoit aucun droit sur
-  `public`.
+  (`security_invoker = true`). ⚠️ Corrigé le 2026-11-20 (ADR-002 D4) : la
+  première rédaction disait que le rôle technique ne reçoit aucun droit sur
+  `public`. C'est incompatible avec `security_invoker` : le rôle reçoit
+  `select` sur les seules colonnes exposées, plus une politique RLS dédiée.
 - `api_v1` n'expose aucune donnée personnelle dont le lecteur n'a pas besoin.
 - La table d'historique de D6 grossit sans fin : à surveiller, pas à purger
   (c'est une preuve).
@@ -220,9 +222,8 @@ En échange, le Planning garantit la preuve :
 
 1. **Coût** : vérifier l'offre Supabase de l'organisation et le nombre de
    projets déjà utilisés, puis noter le coût mensuel ajouté.
-2. **Affectations** : le modèle est « proposé, à valider » dans le carnet. Il
-   doit être validé avant la première migration, car D2, D5 et D6 en
-   dépendent.
+2. ✅ **Affectations** : modèle validé par l'utilisateur le 2026-11-20
+   (ADR-002 D1), avant la première migration.
 3. **Questions ouvertes du carnet qui touchent cet ADR** : où vit la
    confirmation de l'intervention (Planning ou outil Intervenant), et où se
    tient la hiérarchie des groupes. Aucune ne bloque le lot 1 : il importe les

@@ -13,6 +13,9 @@
 - **ADR-001 D7** : extraire le client Aurion de GDC dans TEMPLATE-EPSS avant d'écrire l'import du Planning.
 - **Rôles sombres du module Planning** absents de `ui-epss` : en thème sombre, l'en-tête de page reste rose clair. À ajouter dans TEMPLATE-EPSS (`tokens/sombre.json`), puis resynchroniser.
 - **`ui-epss` vendorisé en `0.0.1` depuis `main` (`7be09f9`)** : poser une étiquette `v0.1.0` dans TEMPLATE-EPSS et resynchroniser sur elle, pour qu'une version nomme un contenu.
+- **Historique des groupes d'une séance** : un changement de `intervention_groupes` ne laisse aucune trace (ADR-002, limites). À traiter si le groupe entre dans une preuve.
+- **Écriture du secret M365 en Vault** : la RPC `m365_tenant_secret` lit le secret, mais rien ne le pose ni ne met `secret_is_set` à vrai. Il faut un outil (Edge Function ou procédure) avant d'activer la connexion.
+- **Exposer `api_v1` dans l'API du projet** (réglage distant, hors migration) quand l'Edge Function de lecture pour GDC arrive.
 - **Connexion et rôles** : la coque tourne sans `utilisateur` ni déconnexion, et tout le menu est visible. À brancher avec `m365-auth` et les rôles du lot 1 (administrateur, lecteur des interventions).
 
 ## Instabilités de tests constatées

@@ -7,6 +7,7 @@ pas ici — et ce projet la référence.
 | ADR | Titre | Statut |
 | --- | --- | --- |
 | [ADR-001](ADR-001-donnees-planning-et-modules-erp.md) | Données du Planning : une base propre, une API de lecture pour les autres modules | proposé |
+| [ADR-002](ADR-002-schema-lot1-historique-api-v1.md) | Schéma du lot 1 : historique par trigger, `api_v1`, `lecteur_gdc` | accepté |
 
 ## Convention
 
