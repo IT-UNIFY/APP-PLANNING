@@ -315,3 +315,50 @@ non trivial : plusieurs couches, décision d'architecture, question ouverte, ou
 infrastructure partagée. Aller direct pour une édition d'un seul fichier avec
 une consigne claire, une correction de libellé, une question ciblée, ou une
 action locale réversible.
+
+## 11. Travail en autonomie (décidé le 2026-11-20)
+
+L'agent travaille seul dans la session, tâche après tâche, en suivant la
+**file du lot 1** de `docs/BACKLOG.md`. Ce qui suit dit ce qu'il fait sans
+demander, ce qui l'arrête, et comment il rend compte. Pourquoi c'est écrit :
+une autorisation donnée en conversation ne survit pas à la session ; ce
+paragraphe, si.
+
+**Périmètre** : ce dépôt et `IT-UNIFY/TEMPLATE-EPSS` (charte partagée). APP-GDC
+et les autres dépôts du parc : lecture seule.
+
+| Action | Sans demander si… | Sinon |
+| --- | --- | --- |
+| Code et tests | branche → `npm run verify` vert → revue `code-reviewer` sans bloquant → PR → **merge** | s'arrêter et demander |
+| Docs seules | branche → `npm run verify` vert → PR → **merge** (pas de revue d'agent : rien ne s'exécute) | — |
+| Migration de schéma (merge = apply en prod) | **additive** (`create`, `add column`, nouvelle vue ou fonction), répétition verte depuis la branche (`--ref`), revue sans bloquant → merge, puis contrôle MCP en lecture seule | voir « ce qui arrête » |
+| Question fonctionnelle non tranchée | la noter dans `docs/QUESTIONS.md` avec une recommandation, prendre le choix **le plus réversible**, le marquer « provisoire » dans le code et l'ADR, continuer | — |
+
+**Ce qui arrête l'agent et lui fait demander** :
+
+- une migration **destructive** ou risquée : `drop`, `alter … type`,
+  suppression ou réécriture de données, changement de droits sur l'auth, le
+  secret M365, `anon` ou `service_role` ;
+- un apply qui échoue, ou une répétition qui échoue sans cause évidente après
+  une tentative de correction ;
+- un `npm run verify` rouge après deux tentatives de correction ;
+- un bloquant de revue qui demande une décision ;
+- tout ce qui sort du dépôt : secrets à créer ou à faire tourner, réglages du
+  projet Supabase ou d'Entra, publication d'un paquet, message envoyé à
+  quelqu'un, écriture dans APP-GDC ;
+- une question fonctionnelle dont **aucun** choix n'est réversible.
+
+Dans ce cas, l'agent passe à la tâche suivante de la file qui n'en dépend pas.
+S'il n'y en a plus, il s'arrête et résume.
+
+**Rendre compte** :
+
+- chaque PR dit ce qui change, pourquoi, ce qui a été vérifié et par quel
+  moyen, et ce qui reste ;
+- chaque incrément suit la Definition of Done (§8) : JOURNAL, HANDOFF, TIMELOG,
+  BACKLOG ;
+- fin de journée (vers 17 h 45) : rollup du TIMELOG **et du relevé des
+  jetons** (`docs/CONSOMMATION.md`, `node scripts/releve-jetons.mjs`), HANDOFF
+  à jour, et un résumé en quelques lignes (PR mergées, questions ouvertes,
+  prochaine tâche). Les deux relevés partagent leurs libellés de tâche : ils
+  alimenteront FixTracker, tâche par tâche, quand le projet y sera créé.
