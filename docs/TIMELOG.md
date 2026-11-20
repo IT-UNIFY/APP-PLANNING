@@ -28,6 +28,19 @@
 > parente. Les libellés reprennent ceux de `JOURNAL.md`, pour que les deux se
 > réconcilient.
 
+## 2026-11-20 — Total : 1 h 40
+
+| Tâche | Tâche_ID | Début | Fin | Durée |
+| --- | --- | --- | --- | --- |
+| Charte ERP EPSS : ui-epss vendorisé, coque et menu du lot 1 (PR #2, #3) | — | 08:09 | 08:26 | 0 h 15 |
+| Plan du modèle de données et arbitrages (lead-dev) | — | 09:11 | 09:18 | 0 h 05 |
+| Schéma du lot 1 : migrations, répétition, apply en prod (PR #4, #5) | — | 10:30 | 11:48 | 1 h 20 |
+
+> Rollup du journal brut (32 événements, 3 séances). Séance encore ouverte à
+> 11:52 : refaire le rollup en fin de journée. Le temps des sous-agents en
+> arrière-plan entre deux échanges n'est pas capté (écart > 30 min = nouvelle
+> séance) : ces durées sont un plancher.
+
 ## 2026-11-19 — Total : ≈ 1 h 20
 
 | Tâche | Tâche_ID | Début | Fin | Durée |
