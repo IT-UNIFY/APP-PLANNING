@@ -19,6 +19,14 @@
 
 ## 2026-11-20
 
+### Charte : rôles sombres du Planning et `ui-epss` 0.1.0 (file du lot 1, tâche 1)
+**Tâches** : —
+
+- Premier tour de la boucle autonome (`AGENTS.md` §11).
+- TEMPLATE-EPSS#3 : rôles sombres du module Planning, dérivés de la framboise, **provisoires** (`docs/QUESTIONS.md` Q5) ; test AA du thème sombre ; version 0.1.0, étiquette `v0.1.0`.
+- `vendor/ui-epss/` resynchronisé sur `v0.1.0` ; vérifié dans le navigateur en sombre.
+- Suite : tâche 2, RPC d'import `importer_seances`.
+
 ### Schéma du lot 1 (ADR-002)
 **Tâches** : —
 

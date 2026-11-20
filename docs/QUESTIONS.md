@@ -10,6 +10,7 @@
 
 | # | Date | Question | Recommandation | Choix provisoire | Coût d'un changement | Où |
 | --- | --- | --- | --- | --- | --- | --- |
+| Q5 | 2026-11-20 | Couleurs du module Planning en thème sombre : la maquette n'a pas de thème sombre. | Faire valider par la personne qui tient la charte ERP (maquette « Palette des modules ») | Dérivées de la framboise : action `#B0194A`, survol `#A3123F`, accent `#E0708A`, fond clair `#3A1621`, foncée `#F4A3B5` ; AA vérifié par test (blanc sur action 6,8:1, foncée sur fond clair 8,2:1) | Faible : une valeur dans `tokens/sombre.json` de TEMPLATE-EPSS, puis resynchronisation | TEMPLATE-EPSS `tokens/sombre.json` |
 
 ## Tranchées
 
